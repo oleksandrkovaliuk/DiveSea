@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=Poppins:wght@400;500;600&family=Public+Sans:wght@600&display=swap");
+:root {
+  --font-Inter: "Inter", sans-serif;
+  --font-Manrope: "Manrope", sans-serif;
+  --font-Poppins: "Poppins", sans-serif;
+  --font-PublicSans: "Public Sans", sans-serif;
+}
+#root{
+    max-width:1440px;
+    margin:auto;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+img{
+    width:100%;
+    display:block;
+}

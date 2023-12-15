@@ -1,0 +1,10 @@
+.header_wrap{
+    width:100%;
+    background-color:red;
+    padding:40px;
+}
+.main_text{
+    font-family: var(--font-Inter);
+    font-weight: 400;
+    font-size:40px;
+}
