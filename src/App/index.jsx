@@ -1,14 +1,6 @@
 import React, { Fragment } from "react";
-import { Header } from "../Header";
-import { MainPage } from "../Sections/mainPage";
+import { Home } from "../pages/home";
 
 export const App = () => {
-  return (
-    <Fragment>
-      <div className="main-page">
-      <Header />
-      <MainPage />
-      </div>
-    </Fragment>
-  );
+  return <Home />;
 };

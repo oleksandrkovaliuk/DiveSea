@@ -1,0 +1,97 @@
+.mainpage_wrap {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  justify-content: space-between;
+  gap: 48px;
+  padding-left: 98px;
+  .left_information {
+    max-width: 567px;
+    margin-right: auto;
+    .main_text {
+      color: var(--text-grayblack);
+
+      font-family: var(--font-Poppins);
+      font-size: 75px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%; 
+      letter-spacing: -3px;
+      text-transform: capitalize;
+      margin-bottom:16px;
+
+    }
+    .discription,
+    .discription span {
+      color: var(--text-gray);
+
+      text-align: justify;
+      font-family: var(--font-Inter);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px; 
+    }
+    .discription{
+        margin-bottom:45px;
+    }
+    .discription span {
+      color: var(--text-grayblack);
+      font-weight: 600;
+    }
+  }
+  .explore_more {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    margin-bottom:82px;
+    button {
+      // padding: 18px 30px;
+      // border-radius: 12px;
+      // border: none;
+      // background-color: var(--color-black);
+      // color: var(--color-white);
+      // font-family: var(--font-Poppins);
+      // font-size: 16.271px;
+      // font-style: normal;
+      // font-weight: 500;
+      // line-height: normal;
+      // letter-spacing: 0.163px;
+      // text-transform: uppercase;
+    }
+     .create_nft {
+      padding-inline: 21px;
+      background-color: transparent;
+      border: 1.5px solid var(--color-black);
+      color: var(--color-black);
+    }
+  }
+  .achivments {
+    display: flex;
+    gap: 65px;
+    
+    .achive {
+      max-width: 118px;
+    }
+    .achive_text {
+      color: var(--text-grayblack);
+      text-align: center;
+      font-family: var(--font-PublicSans);
+      font-size: 36.771px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 45.964px; 
+    }
+    .achive_discription {
+      color: var(--text-lightestgray);
+
+      text-align: center;
+      font-family: var(--font-Inter);
+      font-size: 12.257px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18.386px; 
+      text-align: left;
+    }
+  }
+}

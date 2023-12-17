@@ -1,9 +1,21 @@
 import React from "react";
-import m from "./mainpage.module.scss";
-import { Switcher } from "../LeftRightSwitcher";
-export const MainPage = () => {
+import m from "./firstSection.module.scss";
+import { Switcher } from "../../../../components/leftRightSwitcher";
+import { Button } from "../../../../components/button/button";
+import { Header } from "../../../../components/header";
+
+export const FirstSection = () => {
+  const exploreMoreAction = () => {
+    console.log("exploreMoreAction click");
+  };
+
+  const createNFTAction = () => {
+    console.log("createNFTAction click");
+  };
   return (
     <div className={m.mainpage_wrap}>
+      <Header />
+
       <div className={m.left_information}>
         <h2 className={m.main_text}>Discover And Create NFTs</h2>
         <p className={m.discription}>
@@ -11,8 +23,11 @@ export const MainPage = () => {
           Thousands Of NFTs And Get a<span> $20 bonus.</span>
         </p>
         <div className={m.explore_more}>
-          <button>Explore More</button>
-          <button className={m.create_nft}>create NFT</button>
+          <Button filled action={exploreMoreAction}>
+            Explore More
+          </Button>
+
+          <Button action={createNFTAction}>create NFT</Button>
         </div>
         <div className={m.achivments}>
           <div className={m.achive}>

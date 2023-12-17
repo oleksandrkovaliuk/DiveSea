@@ -4,31 +4,36 @@
   justify-content: space-between;
   padding-inline: 93px 96px;
   padding-top: 46px;
-  margin-bottom:111px;
+  margin-bottom: 111px;
   .logo_nav_wrap {
     display: flex;
     align-items: center;
     gap: 57px;
   }
-  .logo_nav_wrap .logo {
-    cursor: pointer;
+  .logo_nav_wrap {
+    .logo {
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 53px;
+    }
+
+    .head_nav {
+      color: #606060;
+
+      font-family: var(--font-Inter);
+      font-size: 17.829px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 26.743px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
   }
-  .logo_nav_wrap ul {
-    list-style: none;
-    display: flex;
-    gap: 53px;
-  }
-  ul .head_nav {
-    color: #606060;
-  
-    font-family: var(--font-Inter);
-    font-size: 17.829px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26.743px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
+
   .search_connectWallet {
     display: flex;
     gap: 30px;
@@ -47,7 +52,7 @@
     width: 100%;
     border: unset;
     cursor: pointer;
-  
+
     color: #c2c3cb;
     font-family: var(--font-Poppins);
     font-size: 15.711px;
@@ -64,7 +69,7 @@
   .searching .search_input:active + .search_label,
   .searching .search_input:focus + .search_label,
   .searching .search_input:not(:placeholder-shown) + .search_label {
-    display:none;
+    display: none;
   }
   .searching .search_label {
     display: flex;
@@ -73,7 +78,7 @@
     position: absolute;
     top: 18px;
     left: 22px;
-  
+
     color: #c2c3cb;
     font-family: var(--font-Poppins);
     font-size: 15.711px;
@@ -91,7 +96,7 @@
     background-color: var(--text-grayblack);
     border-radius: 16px;
     border: unset;
-  
+
     color: #fff;
     font-family: var(--font-Inter);
     font-size: 16.172px;
