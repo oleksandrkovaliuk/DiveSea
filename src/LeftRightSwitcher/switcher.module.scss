@@ -1,0 +1,45 @@
+.switcher{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width:166px;
+    width:100%;
+    border-radius: 17px;
+    background-color: var(--color-neutrals8);
+    box-shadow: 0px 43.117px 34.494px -25.87px rgba(15, 15, 15, 0.12);
+    position:relative;
+    button{
+        background: none;
+        border:unset;
+        padding-block:21px 19px;
+        display:flex;
+    }
+    button:hover svg path{
+        fill:#23262F;
+    }
+    .left_arrow{
+        padding-left:22px;
+        padding-right:34px;
+    }
+    .right_arrow{
+        padding-right:22px;
+        padding-left:34px;
+    }
+    svg{
+        flex-shrink: 0;
+    }
+    svg path{
+        fill:#929292;
+    }
+    ::after{
+        content:'';
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        width:2px;
+        height:25px;
+        background-color:var(--color-neutrals6);
+        border-radius: 2px;
+    }
+}

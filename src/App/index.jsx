@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Header } from "../Header";
-import { SectionOne } from "../Sections/SeactionOne";
-import { SeactionTwo } from "../Sections/SeactionTwo";
+import { MainPage } from "../Sections/mainPage";
 
 export const App = () => {
   return (
-    <>
+    <Fragment>
+      <div className="main-page">
       <Header />
-      <SectionOne />
-      <SeactionTwo />
-    </>
+      <MainPage />
+      </div>
+    </Fragment>
   );
 };

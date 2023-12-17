@@ -9,7 +9,9 @@
   --color-black: #000;
   --color-white: #fff;
   --color-gray94: #949494;
-  -color-neutrals77: #777e90;
+  --color-neutrals77: #777e90;
+  --color-neutrals8:#FCFCFD;
+  --color-neutrals6:#E6E8EC;
   --background-gray: #ededed;
   --background-white:#F9F9F9;
   --color-grayscale: #1a202c;
@@ -20,7 +22,7 @@
   --text-lightgray: #c5c5c5;
   --text-disbluegray: #64748b;
   --text-d4gray: #d4d4d4;
-  -text-b9gray: #b9b9b9;
+  --text-b9gray: #b9b9b9;
   --color-red: #e23333;
   --color-green: #10c352;
 }
@@ -37,4 +39,11 @@
 img {
   width: 100%;
   display: block;
+}
+button , svg , li{
+  cursor: pointer;
+}
+.main-page{
+  background-color: #F9F9F9;
+  padding-bottom:143px;
 }
