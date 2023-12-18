@@ -1,0 +1,105 @@
+.recent_view {
+  padding: 26px 24px 21px;
+  max-width: 365px;
+  border-radius: 16px;
+  border: 1px solid #edf2f7;
+  background-color: var(--color-white);
+  box-shadow: 10px 10px 50px 0px rgba(20, 20, 22, 0.1);
+  position:absolute;
+  width:100%;
+  &.pos{
+    right:99px;
+    bottom:-120px;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 27px;
+    .main_text {
+      color: #1a202c;
+      font-family: var(--font-Poppins);
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 135%;
+      letter-spacing: 0.2px;
+    }
+  }
+  .user_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:not(:last-child){
+        margin-bottom: 23px;
+    }
+    .user_info {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+        img{
+          border-radius: 41.791px;
+          position: relative;
+          width:35px;
+          height:35px;
+          ::before {
+            content: "1";
+            position: absolute;
+            width: 20px;
+            height: 19px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--color-white);
+            border-radius: 50%;
+            color: var(--text-grayblack);
+            text-align: center;
+            font-family: var(--font-Poppins);
+            font-size: 10.168px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            letter-spacing: 0.085px;
+          }
+      }
+      .text {
+        text-align: left;
+        .name {
+          color: var(--text-grayblack);
+
+          font-family: var(--font-Poppins);
+          font-size: 15.364px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 140%;
+          margin-bottom: 7px;
+        }
+        .nick {
+          color: var(--text-disbluegray);
+
+          font-family: var(--font-Poppins);
+          font-size: 12.483px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%;
+        }
+      }
+    }
+    .user_accomplish {
+      text-align: right;
+      .bid {
+        margin-bottom: 7px !important;
+      }
+      span {
+        color: var(--color-red);
+        font-family: var(--font-Poppins);
+        font-size: 13.443px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+      }
+      .win{
+        color:var(--color-green)
+      }
+    }
+  }
+}

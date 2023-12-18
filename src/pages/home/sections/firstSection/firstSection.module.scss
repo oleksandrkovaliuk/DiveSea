@@ -1,10 +1,14 @@
-.mainpage_wrap {
-  display: flex;
-  align-items: flex-start;
-  text-align: left;
-  justify-content: space-between;
-  gap: 48px;
-  padding-left: 98px;
+.homepage_wrap {
+  background-color:var(--background-white);
+  padding-bottom:143px;
+  .firstsection_wrap{
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: space-between;
+    gap: 48px;
+    padding-left: 98px;
+  }
   .left_information {
     max-width: 567px;
     margin-right: auto;
@@ -45,19 +49,8 @@
     align-items: center;
     gap: 23px;
     margin-bottom:82px;
-    button {
-      // padding: 18px 30px;
-      // border-radius: 12px;
-      // border: none;
-      // background-color: var(--color-black);
-      // color: var(--color-white);
-      // font-family: var(--font-Poppins);
-      // font-size: 16.271px;
-      // font-style: normal;
-      // font-weight: 500;
-      // line-height: normal;
-      // letter-spacing: 0.163px;
-      // text-transform: uppercase;
+    button{
+      height:60px!important;
     }
      .create_nft {
       padding-inline: 21px;

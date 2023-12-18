@@ -1,7 +1,10 @@
 import React from "react";
-import { Header } from "../../components/header";
 import { FirstSection } from "./sections/firstSection/firstSection";
+import { SecondSection } from "./sections/secondSection/secondSection";
 
 export const Home = () => {
-  return <FirstSection />;
+  return <>
+  <FirstSection />
+  <SecondSection />
+  </>;
 };

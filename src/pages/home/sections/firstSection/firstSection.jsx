@@ -3,19 +3,11 @@ import m from "./firstSection.module.scss";
 import { Switcher } from "../../../../components/leftRightSwitcher";
 import { Button } from "../../../../components/button/button";
 import { Header } from "../../../../components/header";
-
 export const FirstSection = () => {
-  const exploreMoreAction = () => {
-    console.log("exploreMoreAction click");
-  };
-
-  const createNFTAction = () => {
-    console.log("createNFTAction click");
-  };
   return (
-    <div className={m.mainpage_wrap}>
+    <div className={m.homepage_wrap}>
       <Header />
-
+      <div className={m.firstsection_wrap}>
       <div className={m.left_information}>
         <h2 className={m.main_text}>Discover And Create NFTs</h2>
         <p className={m.discription}>
@@ -23,11 +15,11 @@ export const FirstSection = () => {
           Thousands Of NFTs And Get a<span> $20 bonus.</span>
         </p>
         <div className={m.explore_more}>
-          <Button filled action={exploreMoreAction}>
+          <Button filled>
             Explore More
           </Button>
 
-          <Button action={createNFTAction}>create NFT</Button>
+          <Button>create NFT</Button>
         </div>
         <div className={m.achivments}>
           <div className={m.achive}>
@@ -45,6 +37,7 @@ export const FirstSection = () => {
         </div>
       </div>
       <Switcher />
+      </div>
     </div>
   );
 };

@@ -56,8 +56,7 @@ export const Header = () => {
             Search Art Work / Creator
           </label>
         </div>
-        {/* <button className={s.connect_wallet}></button> */}
-        <Button filled>Connect Wallet</Button>
+        <Button filled >Connect Wallet</Button>
       </div>
     </div>
   );

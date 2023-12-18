@@ -1,5 +1,4 @@
 .button {
-  height: 60px;
   color: #000;
   font-size: 16px;
   min-width: 120px;
@@ -13,6 +12,12 @@
   background-color: transparent;
   font-family: var(--font-Poppins);
 
+  &.bigger{
+    padding-block:18px;
+  }
+  &.reg{
+    padding-block:16px;
+  }
   &.fullSize {
     width: 100%;
   }

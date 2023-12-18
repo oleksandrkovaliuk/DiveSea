@@ -1,0 +1,21 @@
+.bid {
+  display: flex;
+  gap: 2px;
+  .value {
+    color: var(--text-grayblack);
+
+    font-family: var(--font-Poppins);
+    font-size: 16.468px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+  }
+  &.bold {
+    margin-bottom:7px;
+    .value {
+      font-size: 15.364px;
+      font-weight: 600;
+      line-height: 140%;
+    }
+  }
+}

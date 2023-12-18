@@ -1,0 +1,115 @@
+.card_wrap {
+  padding-block: 10px 20px;
+  padding-inline: 12px;
+  background-color: var(--color-white);
+  border-radius: 23.479px;
+  box-shadow: 38.817px 11.763px 58.813px 0px rgba(199, 199, 199, 0.6);
+  &.big {
+    max-width: 281px;
+    min-width: 281px;
+  }
+  &.smaller {
+    max-width: 215px;
+    padding: 13px;
+    .imgs {
+      img {
+        width: 100%;
+        max-height: 164px;
+        margin: auto;
+      }
+      .timer {
+        display: none;
+      }
+    }
+    .card_disc {
+      padding: unset;
+    }
+  }
+  .imgs {
+    position: relative;
+    margin-bottom: 16px;
+    img {
+      border-radius: 23.479px;
+      flex-shrink: 0;
+      max-height: 252px;
+    }
+    .timer {
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      padding: 9px 14px;
+      border-radius: 9.41px;
+      border: 1.176px solid rgba(28, 29, 32, 0.08);
+      background: rgba(28, 29, 32, 0.35);
+      box-shadow: 0px 4.705px 14.115px 0px rgba(28, 29, 32, 0.08);
+      backdrop-filter: blur(2.352520704269409px);
+
+      color: var(--color-white);
+      font-family: var(--font-Poppins);
+      font-size: 14.115px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 21.173px */
+      letter-spacing: 0.118px;
+    }
+  }
+  .card_disc {
+    padding-inline: 6px;
+    .sub_title {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      color: var(--text-grayblack);
+
+      font-family: var(--font-Poppins);
+      font-size: 14.001px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22.002px;
+    }
+    .title {
+      color: var(--text-grayblack);
+      font-family: var(--font-Poppins);
+      font-size: 21.173px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+      margin-bottom: 14px;
+    }
+    .currentBid_placeBid {
+      display: flex;
+      justify-content: space-between;
+      .likes {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        span {
+          color: #888;
+          text-align: center;
+          font-family: var(--font-Poppins);
+          font-size: 12.868px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 18.588px;
+        }
+      }
+      .currentBid {
+        text-align: left;
+        button {
+          height: 51px !important;
+        }
+        .currentBid_text {
+          color: var(--text-bluegray);
+
+          font-family: var(--font-Poppins);
+          font-size: 14.115px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%;
+          letter-spacing: 0.118px;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
