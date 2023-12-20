@@ -10,13 +10,12 @@
   border: 1px solid #000;
   text-transform: uppercase;
   background-color: transparent;
-  font-family: var(--font-Poppins);
 
-  &.bigger{
-    padding-block:18px;
+  &.bigger {
+    padding-block: 18px;
   }
-  &.reg{
-    padding-block:16px;
+  &.reg {
+    padding-block: 16px;
   }
   &.fullSize {
     width: 100%;

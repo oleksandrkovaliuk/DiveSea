@@ -8,9 +8,10 @@
     max-width: 281px;
     min-width: 281px;
   }
-  &.smaller {
+  &.small {
     max-width: 215px;
     padding: 13px;
+    width: 100%;
     .imgs {
       img {
         width: 100%;

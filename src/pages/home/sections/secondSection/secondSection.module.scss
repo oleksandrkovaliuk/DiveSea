@@ -2,7 +2,15 @@
   background-color: #f1f1f1;
   padding-block: 70px 90px;
   position: relative;
-  margin-bottom:200px;
+  margin-bottom: 200px;
+  .big_card {
+    overflow: auto;
+    flex-grow:1;
+    div{
+      display:flex;
+      overflow: auto;
+    }
+  }
   .main_text {
     color: var(--text-lightgray);
     width: 100%;

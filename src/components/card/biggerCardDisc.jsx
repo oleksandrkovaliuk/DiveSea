@@ -1,17 +1,22 @@
 import React from "react";
 import s from "./card.module.scss";
-import { Button } from "../button/button";
-import { EthValue } from "../value/ethereum";
+import { Button } from "../button";
+import { EthValue } from "../value";
+import { Card } from "./card";
 
-export const BiggerCard = () => {
-    return (<div className={s.card_disc}>
-        <h2 className={s.title}>Sun-Glass</h2>
+export const BigCardChild = ({ cardInfo }) => {
+  return cardInfo.map((card) => (
+    <Card key={card.card} big img={card.img}>
+      <div className={s.card_disc}>
+        <h2 className={s.title}>{card.title}</h2>
         <div className={s.currentBid_placeBid}>
-            <div className={s.currentBid}>
-                <h3 className={s.currentBid_text}>Current bid</h3>
-              <EthValue value={1.75}/>
-            </div>
-            <Button filled>PLACE BID</Button>
+          <div className={s.currentBid}>
+            <h3 className={s.currentBid_text}>Current bid</h3>
+            <EthValue value={card.value} />
+          </div>
+          <Button filled>PLACE BID</Button>
         </div>
-    </div>);
-}
+      </div>
+    </Card>
+  ));
+};

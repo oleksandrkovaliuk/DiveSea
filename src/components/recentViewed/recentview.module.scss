@@ -5,11 +5,11 @@
   border: 1px solid #edf2f7;
   background-color: var(--color-white);
   box-shadow: 10px 10px 50px 0px rgba(20, 20, 22, 0.1);
-  position:absolute;
-  width:100%;
-  &.pos{
-    right:99px;
-    bottom:-120px;
+  position: absolute;
+  width: 100%;
+  &.pos {
+    right: 99px;
+    bottom: -120px;
   }
   .title {
     display: flex;
@@ -30,36 +30,36 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    &:not(:last-child){
-        margin-bottom: 23px;
+    &:not(:last-child) {
+      margin-bottom: 23px;
     }
     .user_info {
       display: flex;
       gap: 15px;
       align-items: center;
-        img{
-          border-radius: 41.791px;
-          position: relative;
-          width:35px;
-          height:35px;
-          ::before {
-            content: "1";
-            position: absolute;
-            width: 20px;
-            height: 19px;
-            bottom: 0;
-            right: 0;
-            background-color: var(--color-white);
-            border-radius: 50%;
-            color: var(--text-grayblack);
-            text-align: center;
-            font-family: var(--font-Poppins);
-            font-size: 10.168px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 150%;
-            letter-spacing: 0.085px;
-          }
+      img {
+        border-radius: 41.791px;
+        position: relative;
+        width: 35px;
+        height: 35px;
+        ::before {
+          content: "1";
+          position: absolute;
+          width: 20px;
+          height: 19px;
+          bottom: 0;
+          right: 0;
+          background-color: var(--color-white);
+          border-radius: 50%;
+          color: var(--text-grayblack);
+          text-align: center;
+          font-family: var(--font-Poppins);
+          font-size: 10.168px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%;
+          letter-spacing: 0.085px;
+        }
       }
       .text {
         text-align: left;
@@ -97,8 +97,8 @@
         font-weight: 400;
         line-height: 150%;
       }
-      .win{
-        color:var(--color-green)
+      .win {
+        color: var(--color-green);
       }
     }
   }

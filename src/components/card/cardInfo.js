@@ -1,0 +1,42 @@
+export const CardInfo = [
+  {
+    card: 1,
+    title: "Sun-glass",
+    subtitle: "Sasuke",
+    value: 1.75,
+    img: process.env.PUBLIC_URL + "/images/product1.png",
+    like: 200,
+  },
+  {
+    card: 2,
+    title: "NuEvay",
+    subtitle: "Nano",
+    value: 1.25,
+    img: process.env.PUBLIC_URL + "/images/product2.png",
+    like: 300,
+  },
+  {
+    card: 3,
+    title: "Rocks",
+    subtitle: "Tony",
+    value: 3.05,
+    img: process.env.PUBLIC_URL + "/images/product3.png",
+    like: 250,
+  },
+  {
+    card: 4,
+    title: "White",
+    subtitle: "Quava",
+    value: 0.25,
+    img: process.env.PUBLIC_URL + "/images/product4.png",
+    like: 20,
+  },
+  {
+    card: 5,
+    title: "Planet",
+    subtitle: "Alexo",
+    value: 7.25,
+    img: process.env.PUBLIC_URL + "/images/product5.png",
+    like: 1025,
+  },
+];
