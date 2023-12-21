@@ -11,9 +11,17 @@
     line-height: 150%;
   }
   &.bold {
-    margin-bottom: 7px;
     .value {
       font-size: 15.364px;
+      font-weight: 600;
+      line-height: 140%;
+    }
+  }
+  &.full {
+    justify-content: center;
+    align-items: center;
+    .value {
+      font-size: 17.433px;
       font-weight: 600;
       line-height: 140%;
     }

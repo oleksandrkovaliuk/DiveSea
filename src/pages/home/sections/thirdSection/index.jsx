@@ -1,0 +1,1 @@
+export { ThirdSection } from "./thirdsection";

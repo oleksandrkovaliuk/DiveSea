@@ -1,0 +1,16 @@
+.top_colection {
+  background-color: var(--background-white);
+  padding-block: 236px 100px;
+  padding-inline: 100px 96px;
+  .main_text {
+    color: var(--text-grayblack);
+
+    font-family: var(--font-Poppins);
+    font-size: 45.04px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44.751px;
+    text-align: center;
+    margin-bottom: 90px;
+  }
+}
