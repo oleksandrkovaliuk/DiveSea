@@ -4,11 +4,13 @@ import { ThreeDots } from "../../icons/threedots";
 import classNames from "classnames";
 import v from "./recentview.module.scss";
 
-export const Viewed = ({ pos, lose }) => {
+export const Viewed = ({ pos, lose , full}) => {
   const classes = classNames(v.recent_view, {
     [v.pos]: pos,
     [v.lose]: lose,
+    [v.full]:full
   });
+    const [counter] = React.useState(1);
   return (
     <div className={classes}>
       <div className={v.title}>
@@ -17,10 +19,13 @@ export const Viewed = ({ pos, lose }) => {
       </div>
       <div className={v.user_wrap}>
         <div className={v.user_info}>
+          <div className={v.img}>
           <img
             src={process.env.PUBLIC_URL + "/images/avatar1.jpeg"}
+            data-counter={counter}
             alt="avatar1"
           ></img>
+          </div>
           <div className={v.text}>
             <h2 className={v.name}>Alex Ca.</h2>
             <h3 className={v.nick}>Alexy</h3>
@@ -36,6 +41,7 @@ export const Viewed = ({ pos, lose }) => {
           <div className={v.img}>
             <img
               src={process.env.PUBLIC_URL + "/images/avatar2.jpeg"}
+              data-counter={counter + 1}
               alt="avatar2"
             ></img>
           </div>

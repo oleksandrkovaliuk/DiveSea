@@ -37,18 +37,25 @@
       display: flex;
       gap: 15px;
       align-items: center;
-      img {
-        border-radius: 41.791px;
+      position: relative;
+      .img{
         position: relative;
-        width: 35px;
-        height: 35px;
-        ::before {
-          content: "1";
+        img {
+          border-radius: 41.791px;
+          width: 35px;
+          height: 35px;
+          border:1px solid var(--color-white);
+        }
+        &::after {
           position: absolute;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          content:"1";
           width: 20px;
           height: 19px;
-          bottom: 0;
-          right: 0;
+          bottom: -5px;
+          right: -5px;
           background-color: var(--color-white);
           border-radius: 50%;
           color: var(--text-grayblack);
