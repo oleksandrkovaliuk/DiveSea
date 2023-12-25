@@ -18,13 +18,13 @@ export const Table = ({ data }) => {
             </div>
           </td>
           <td>
-            <EthValue full value={tr.volume} />
+            <EthValue idEditable full value={tr.volume} />
           </td>
           <td>
             <span className={t.profitNumbers_profit}>{tr.profit}</span>
           </td>
           <td>
-            <EthValue full value={tr.floorprice} />
+            <EthValue idEditable full value={tr.floorprice} />
           </td>
           <td>
             <span className={t.profitNumbers}>{tr.owners}</span>
