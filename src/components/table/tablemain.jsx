@@ -3,11 +3,11 @@ import t from "./table.module.scss";
 import { EthValue } from "../value";
 import { TableHeaders } from "./tableheader";
 
-export const Table = ({ tinfo }) => {
+export const Table = ({ data }) => {
   return (
     <table className={t.table}>
       <TableHeaders />
-      {tinfo.map((tr) => (
+      {data.map((tr) => (
     <tr className={t.userField}>
       <td className={t.user_fio}>
         <img src={tr.img} alt="userAvatar"></img>
