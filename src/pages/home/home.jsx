@@ -4,9 +4,11 @@ import { SecondSection } from "./sections/secondSection";
 import { ThirdSection } from "./sections/thirdSection";
 
 export const Home = () => {
-  return <>
-  <FirstSection />
-  <SecondSection />
-  <ThirdSection />
-  </>;
+  return (
+    <>
+      <FirstSection />
+      <SecondSection />
+      <ThirdSection />
+    </>
+  );
 };
