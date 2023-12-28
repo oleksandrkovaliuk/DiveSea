@@ -1,6 +1,6 @@
 import React from "react";
 import { SmallCardChild } from "./smallerCardDisc";
-import { CardInfo } from "./cardInfo";
+import { cardInfo } from "./cardInfo";
 export const SmallCard = () => {
-  return <SmallCardChild cardInfo={CardInfo} />;
+  return <SmallCardChild cardInfo={cardInfo} />;
 };

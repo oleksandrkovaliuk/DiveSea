@@ -1,0 +1,28 @@
+.marketplace {
+  padding: 70px;
+  background-color: var(--background-white);
+  .main_text {
+    color: var(--text-grayblack);
+
+    font-family: var(--font-Poppins);
+    font-size: 32.003px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19.142px;
+    text-align: center;
+    margin-bottom: 46px;
+  }
+  .markeplace_nav{
+    display:flex;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:71px;
+  }
+  .productWrap{
+    gap:40px;
+    flex-wrap: wrap;
+    display:flex;
+    justify-content: center;
+  }
+}

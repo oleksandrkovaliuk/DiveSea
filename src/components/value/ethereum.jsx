@@ -12,11 +12,7 @@ export const EthValue = ({ value, bold, full, idEditable }) => {
   return (
     <div className={classes}>
       <Ethereum />
-      {idEditable ? (
-        <input type="text" className={s.value} defaultValue={value} />
-      ) : (
         <h4 className={s.value}>{value}</h4>
-      )}
     </div>
   );
 };

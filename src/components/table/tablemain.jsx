@@ -3,12 +3,15 @@ import t from "./table.module.scss";
 import { EthValue } from "../value";
 import { TableHeaders } from "./tableheader";
 
-export const Table = ({ data }) => {
+export const Table = ({ data , limit }) => {
+  let sliced = data 
+  if(limit){
+    sliced = data.slice(0,4);
+  }
   return (
-    <table className={t.table}>
+    <table limit className={t.table}>
       <TableHeaders />
-
-      {data.map((tr) => (
+      {sliced.map((tr) => (
         <tr key={tr.id} className={t.userField}>
           <td className={t.user_fio}>
             <img src={tr.img} alt="userAvatar"></img>

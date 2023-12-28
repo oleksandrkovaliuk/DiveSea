@@ -5,6 +5,7 @@ import s from "./secondSection.module.scss";
 import { Viewed } from "../../../../components/recentViewed";
 import { BigCard } from "../../../../components/card/bigCardComponent";
 
+
 export const SecondSection = () => {
   return (
     <div className={s.weakly_top}>

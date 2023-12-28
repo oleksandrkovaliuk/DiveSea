@@ -4,7 +4,7 @@ import { Button } from "../button";
 import { EthValue } from "../value";
 import { Card } from "./card";
 
-export const BigCardChild = ({ cardInfo }) => {
+export const BigCardChild = ({ cardInfo}) => {
   return cardInfo.map((card) => (
     <Card key={card.card} big img={card.img}>
       <div className={s.card_disc}>
