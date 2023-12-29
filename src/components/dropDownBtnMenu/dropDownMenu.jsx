@@ -1,17 +1,16 @@
 import React from "react";
 import d from "./dropdownmenu.module.scss";
-import classNames from "classnames";
 
-export const DropMenu = ({ hide, data, categoryKind }) => {
-  const classes = classNames(d.dropmenu_wrap, {
-    [d.hide]: hide,
-  });
+export const DropMenu = ({ data, categoryKind }) => {
 
+  const uniqValue = new Set(data.map((item) => item[categoryKind]));
+
+  const uniqValueArr = Array.from(uniqValue)
   return (
-    <div className={classes}>
+    <div className={d.dropmenu_wrap}>
       <ul className={d.list_menu}>
-        {data.map((item) => {
-          return <li>{item[categoryKind]}</li>;
+        {uniqValueArr.map((value) => {
+          return  <li>{value}</li>
         })}
       </ul>
     </div>
