@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import d from "./dropdownmenu.module.scss";
 
-export const DropMenu = ({ data, categoryKind, onClick }) => {
-  const uniqValue = new Set(data.map((item) => item[categoryKind]));
+export const DropMenu = ({
+  data,
+  left,
+  top,
+  selectFilter,
+  closeDropDownMenu,
+}) => {
+  const [menuHeight, setMenuHeight] = useState(0);
 
-  const uniqValueArr = Array.from(uniqValue);
-  const clickHandler = () => {
-    if (onClick) {
-      onClick();
-    }
+  const style = {
+    left: `${left}px`,
+    top: `calc(${top}px - ${menuHeight}px`,
   };
+
+  useEffect(() => {
+    const h = document
+      .querySelector("#dropDown")
+      ?.getBoundingClientRect()?.height;
+
+    setMenuHeight(h);
+    const body = document.body;
+
+    body.classList.add("disable-scroll-page");
+
+    return () => {
+      body.classList.remove("disable-scroll-page");
+    };
+  }, []);
+
   return (
-    <div className={d.dropmenu_wrap}>
-      <ul className={d.list_menu}>
-        {uniqValueArr.map((value) => {
-          return <li onClick={clickHandler}>{value}</li>;
-        })}
-      </ul>
-    </div>
+    <>
+      <div className={d.backBlock} onClick={closeDropDownMenu} />
+      <div id="dropDown" className={d.dropmenu_wrap} style={style}>
+        <ul className={d.list_menu}>
+          {data.map((value) => {
+            return (
+              <li key={value}>
+                <button onClick={() => selectFilter(value)}>{value}</button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </>
   );
 };

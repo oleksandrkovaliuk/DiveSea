@@ -1,6 +1,6 @@
 export const cardInfo = [
   {
-    card: 1,
+    id: 1,
     title: "Sun-glass",
     subtitle: "Sasuke",
     value: 1.75,
@@ -9,7 +9,7 @@ export const cardInfo = [
     categoryName:"Sun"
   },
   {
-    card: 2,
+    id: 2,
     title: "NuEvay",
     subtitle: "Nano",
     value: 1.25,
@@ -18,7 +18,7 @@ export const cardInfo = [
     categoryName:"NuEvay"
   },
   {
-    card: 3,
+    id: 3,
     title: "Rocks",
     subtitle: "Tony",
     value: 3.05,
@@ -29,7 +29,7 @@ export const cardInfo = [
     
   },
   {
-    card: 4,
+    id: 4,
     title: "White",
     subtitle: "Quava",
     value: 0.25,
@@ -39,7 +39,7 @@ export const cardInfo = [
     categoryName:"White"
   },
   {
-    card: 5,
+    id: 5,
     title: "Planet",
     subtitle: "Alexo",
     value: 7.25,
@@ -49,7 +49,7 @@ export const cardInfo = [
     categoryName:"Planet"
   },
   {
-    card: 6,
+    id: 6,
     title: "Sun-glass",
     subtitle: "Sasuke",
     value: 1.75,
@@ -59,7 +59,7 @@ export const cardInfo = [
     categoryName:"Sun"
   },
   {
-    card: 7,
+    id: 7,
     title: "NuEvay",
     subtitle: "Nano",
     value: 1.25,
@@ -68,7 +68,7 @@ export const cardInfo = [
     categoryName:"NuEvay"
   },
   {
-    card: 8,
+    id: 8,
     title: "Rocks",
     subtitle: "Tony",
     value: 3.05,
@@ -78,7 +78,7 @@ export const cardInfo = [
     categoryName:"Rocks"
   },
   {
-    card: 9,
+    id: 9,
     title: "White",
     subtitle: "Quava",
     value: 0.25,
@@ -88,7 +88,7 @@ export const cardInfo = [
     categoryName:"White"
   },
   {
-    card: 10,
+    id: 10,
     title: "Planet",
     subtitle: "Alexo",
     value: 7.25,
@@ -98,7 +98,7 @@ export const cardInfo = [
     categoryName:"Planet"
   },
   {
-    card: 11,
+    id: 11,
     title: "Sun-glass",
     subtitle: "Sasuke",
     value: 1.75,
@@ -109,7 +109,7 @@ export const cardInfo = [
     categoryName:"Sun"
   },
   {
-    card: 12,
+    id: 12,
     title: "NuEvay",
     subtitle: "Nano",
     value: 1.25,
@@ -119,7 +119,7 @@ export const cardInfo = [
     categoryName:"NuEvay"
   },
   {
-    card: 13,
+    id: 13,
     title: "Rocks",
     subtitle: "Tony",
     value: 3.05,
@@ -129,7 +129,7 @@ export const cardInfo = [
     categoryName:"Rocks"
   },
   {
-    card: 14,
+    id: 14,
     title: "White",
     subtitle: "Quava",
     value: 0.25,
@@ -138,7 +138,7 @@ export const cardInfo = [
     categoryName:"White"
   },
   {
-    card: 15,
+    id: 15,
     title: "Planet",
     subtitle: "Alexo",
     value: 7.25,

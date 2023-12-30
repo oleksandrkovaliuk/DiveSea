@@ -4,76 +4,92 @@ import { Category } from "../../../../icons/category";
 import { Collection } from "../../../../icons/collection";
 import { Price } from "../../../../icons/price";
 import f from "./fourthSection.module.scss";
-import { BigCard } from "../../../../components/card/bigCardComponent";
+import { BigCard } from "../../../../components/card/BigCard";
 import { DropMenu } from "../../../../components/dropDownBtnMenu";
 import { cardInfo } from "../../../../components/card/cardInfo";
 
 export const FourthSection = () => {
-  const [filter, setFilter] = useState("all");
-  const [categoryMenuOpen, setCategoryMenu] = useState(false);
-  const [collectionMenuOpen, setCollectionMenu] = useState(false);
-  const handleFilter = (filter) => {
-    if (filter === "category") {
-      setCategoryMenu(!categoryMenuOpen);
-      setCollectionMenu(false);
-    } else if (filter === "collection") {
-      setCollectionMenu(!collectionMenuOpen);
-      setCategoryMenu(false);
-    } else {
-      setCollectionMenu(false);
-      setCategoryMenu(false);
+  const [filteredData, setFilteredData] = useState(cardInfo);
+
+  const [dropMenuPosition, setDropMenudPosition] = useState(null);
+  const [dropdownContent, setDropDownContent] = useState(null);
+
+  const handleOpenDropdownFilter = (event, categoryKind) => {
+    if (categoryKind === "categoryName") {
+      setDropDownContent(
+        Array.from(new Set(cardInfo.map((item) => item[categoryKind])))
+      );
     }
-    setFilter(filter);
-  };
-  const MenuListSetter = () => {
-    if (filter === "category") {
-      return "categoryName";
-    } else if (filter === "collection") {
-      return "categoryName";
-    } else {
-      return;
+
+    if (categoryKind === "collectionName") {
+      console.log("collectionName");
     }
+
+    if (categoryKind === "priceType") {
+      console.log("priceType");
+    }
+
+    const btn = event.target.getBoundingClientRect();
+    const left = btn.left;
+    const top = btn.top;
+
+    setDropMenudPosition({ left, top });
   };
+
+  const handleSelectSubFilterItem = (filterItem) => {
+    const data = cardInfo.filter((item) => item.title === filterItem);
+    setFilteredData(data);
+    setDropMenudPosition(null);
+  };
+
+  const handleCloseDropDownMenu = () => setDropMenudPosition(null);
+
   return (
     <div className={f.marketplace}>
       <h2 className={f.main_text}>Explore Marketplace</h2>
+      {dropMenuPosition?.left && dropdownContent?.length && (
+        <DropMenu
+          data={dropdownContent}
+          top={dropMenuPosition.top}
+          left={dropMenuPosition.left}
+          selectFilter={handleSelectSubFilterItem}
+          closeDropDownMenu={handleCloseDropDownMenu}
+        />
+      )}
       <div className={f.markeplace_nav}>
-        <Button onClick={() => handleFilter("all")} category>
+        <Button onClick={() => setFilteredData(cardInfo)} category>
           All
         </Button>
         <Button
-          focus={categoryMenuOpen ? true : undefined}
-          onClick={() => {
-            handleFilter("category");
+          onClick={(event) => {
+            handleOpenDropdownFilter(event, "categoryName");
           }}
           category
         >
-          {categoryMenuOpen && (
-            <DropMenu anim data={cardInfo} categoryKind={MenuListSetter()} />
-          )}
           <Category />
           Category
         </Button>
         <Button
-          focus={collectionMenuOpen ? true : undefined}
-          onClick={() => {
-            handleFilter("collection");
+          onClick={(event) => {
+            handleOpenDropdownFilter(event, "collectionName");
           }}
           category
         >
-          {collectionMenuOpen && (
-            <DropMenu anim data={cardInfo} categoryKind={MenuListSetter()} />
-          )}
           <Collection />
           Collection
         </Button>
-        <Button onClick={() => handleFilter("sun")} category>
+        <Button
+          onClick={(event) => handleOpenDropdownFilter(event, "priceType")}
+          category
+        >
           <Price />
           Price
         </Button>
       </div>
       <div className={f.productWrap}>
-        <BigCard limit filter={filter} />
+        {filteredData?.map((card) => (
+          <BigCard key={card.id} card={card} />
+        ))}
       </div>
     </div>
   );
