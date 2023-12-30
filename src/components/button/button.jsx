@@ -13,9 +13,9 @@ export const Button = ({
     [styles.fullSize]: fullSize,
     [styles.category]: category,
   });
-  const handleClick = () => {
+  const handleClick = (event) => {
     if (onClick) {
-      onClick();
+      onClick(event);
     }
   };
   return (
