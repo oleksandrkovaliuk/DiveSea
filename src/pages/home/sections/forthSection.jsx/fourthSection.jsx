@@ -12,18 +12,27 @@ export const FourthSection = () => {
   const [filter, setFilter] = useState("all");
   const [categoryMenuOpen, setCategoryMenu] = useState(false);
   const [collectionMenuOpen, setCollectionMenu] = useState(false);
-    const handleFilter = (filter) => {
+  const handleFilter = (filter) => {
     if (filter === "category") {
       setCategoryMenu(!categoryMenuOpen);
-      setCollectionMenu(false)
-    }else if(filter === 'collection'){
-      setCollectionMenu(!collectionMenuOpen)
-      setCategoryMenu(false)
-    }else{
-      setCollectionMenu(false)
-      setCategoryMenu(false)
+      setCollectionMenu(false);
+    } else if (filter === "collection") {
+      setCollectionMenu(!collectionMenuOpen);
+      setCategoryMenu(false);
+    } else {
+      setCollectionMenu(false);
+      setCategoryMenu(false);
     }
     setFilter(filter);
+  };
+  const MenuListSetter = () => {
+    if (filter === "category") {
+      return "categoryName";
+    } else if (filter === "collection") {
+      return "categoryName";
+    } else {
+      return;
+    }
   };
   return (
     <div className={f.marketplace}>
@@ -33,36 +42,32 @@ export const FourthSection = () => {
           All
         </Button>
         <Button
+          focus={categoryMenuOpen ? true : undefined}
           onClick={() => {
             handleFilter("category");
           }}
           category
         >
           {categoryMenuOpen && (
-            <DropMenu
-              data={cardInfo}
-              categoryKind={"categoryName"}
-            />
+            <DropMenu anim data={cardInfo} categoryKind={MenuListSetter()} />
           )}
           <Category />
           Category
         </Button>
         <Button
+          focus={collectionMenuOpen ? true : undefined}
           onClick={() => {
             handleFilter("collection");
           }}
           category
         >
           {collectionMenuOpen && (
-            <DropMenu
-              data={cardInfo}
-              categoryKind={"categoryName"}
-            />
+            <DropMenu anim data={cardInfo} categoryKind={MenuListSetter()} />
           )}
           <Collection />
           Collection
         </Button>
-        <Button onClick={() => handleFilter("price")} category>
+        <Button onClick={() => handleFilter("sun")} category>
           <Price />
           Price
         </Button>
