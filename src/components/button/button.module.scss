@@ -1,7 +1,7 @@
 .button {
   color: #000;
   font-size: 16px;
-  font-family:var(--font-Poppins);
+  font-family: var(--font-Poppins);
   min-width: 120px;
   font-weight: 500;
   transition: 0.3s;
@@ -12,17 +12,17 @@
   text-transform: uppercase;
   background-color: transparent;
   position: relative;
-  &.category{
-    padding:13px;
-    display:flex;
+  &.category {
+    padding: 13px;
+    display: flex;
     align-items: center;
-    gap:6px;
-    min-width:51px;
+    gap: 6px;
+    min-width: 51px;
     justify-content: center;
     border: 2px solid #000;
   }
-  &.category:hover svg path{
-    fill:var(--color-white);
+  &.category:hover svg path {
+    fill: var(--color-white);
   }
   &.bigger {
     padding-block: 18px;
@@ -47,5 +47,12 @@
       color: #000;
       background-color: #fff;
     }
+  }
+  &.focus {
+    color: #fff;
+    background-color: #000;
+  }
+  &.focus svg path{
+    fill: var(--color-white);
   }
 }
