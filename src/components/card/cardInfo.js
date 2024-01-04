@@ -6,7 +6,8 @@ export const cardInfo = [
     value: 1.75,
     img: process.env.PUBLIC_URL + "/images/product1.png",
     like: 200,
-    categoryName:"Sun"
+    categoryName: "Sun-glass",
+    collectionType: "Popular",
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ export const cardInfo = [
     value: 1.25,
     img: process.env.PUBLIC_URL + "/images/product2.png",
     like: 300,
-    categoryName:"NuEvay"
+    categoryName: "NuEvay",
+    collectionType: "Recommended",
   },
   {
     id: 3,
@@ -25,8 +27,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product3.png",
     like: 250,
     category: true,
-    categoryName:"Rocks"
-    
+    categoryName: "Rocks",
+    collectionType: "My collection",
   },
   {
     id: 4,
@@ -36,7 +38,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product4.png",
     like: 20,
     category: true,
-    categoryName:"White"
+    categoryName: "White",
+    collectionType: "Popular",
   },
   {
     id: 5,
@@ -46,7 +49,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product5.png",
     like: 1025,
     category: true,
-    categoryName:"Planet"
+    categoryName: "Planet",
+    collectionType: "Recommended",
   },
   {
     id: 6,
@@ -56,7 +60,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product1.png",
     like: 200,
     category: true,
-    categoryName:"Sun"
+    categoryName: "Sun-glass",
+    collectionType: "My collection",
   },
   {
     id: 7,
@@ -65,7 +70,8 @@ export const cardInfo = [
     value: 1.25,
     img: process.env.PUBLIC_URL + "/images/product2.png",
     like: 300,
-    categoryName:"NuEvay"
+    categoryName: "NuEvay",
+    collectionType: "Popular",
   },
   {
     id: 8,
@@ -75,7 +81,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product3.png",
     like: 250,
     inCollection: true,
-    categoryName:"Rocks"
+    categoryName: "Rocks",
+    collectionType: "Recommended",
   },
   {
     id: 9,
@@ -85,7 +92,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product4.png",
     like: 20,
     inCollection: true,
-    categoryName:"White"
+    categoryName: "White",
+    collectionType: "My collection",
   },
   {
     id: 10,
@@ -95,7 +103,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product5.png",
     like: 1025,
     category: true,
-    categoryName:"Planet"
+    categoryName: "Planet",
+    collectionType: "Popular",
   },
   {
     id: 11,
@@ -106,7 +115,8 @@ export const cardInfo = [
     like: 200,
     inCollection: true,
     category: true,
-    categoryName:"Sun"
+    categoryName: "Sun-glass",
+    collectionType: "Recommended",
   },
   {
     id: 12,
@@ -116,7 +126,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product2.png",
     like: 300,
     category: true,
-    categoryName:"NuEvay"
+    categoryName: "NuEvay",
+    collectionType: "My collection",
   },
   {
     id: 13,
@@ -126,7 +137,8 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product3.png",
     like: 250,
     inCollection: true,
-    categoryName:"Rocks"
+    categoryName: "Rocks",
+    collectionType: "Popular",
   },
   {
     id: 14,
@@ -135,7 +147,8 @@ export const cardInfo = [
     value: 0.25,
     img: process.env.PUBLIC_URL + "/images/product4.png",
     like: 20,
-    categoryName:"White"
+    categoryName: "White",
+    collectionType: "Recommended",
   },
   {
     id: 15,
@@ -145,6 +158,169 @@ export const cardInfo = [
     img: process.env.PUBLIC_URL + "/images/product5.png",
     like: 1025,
     inCollection: true,
-    categoryName:"Planet"
-  }
+    categoryName: "Planet",
+    collectionType: "My collection",
+  },
+  {
+    id: 16,
+    title: "Sun-glass",
+    subtitle: "Sasuke",
+    value: 1.75,
+    img: process.env.PUBLIC_URL + "/images/product1.png",
+    like: 200,
+    categoryName: "Sun-glass",
+    collectionType: "Popular",
+  },
+  {
+    id: 17,
+    title: "NuEvay",
+    subtitle: "Nano",
+    value: 1.25,
+    img: process.env.PUBLIC_URL + "/images/product2.png",
+    like: 300,
+    categoryName: "NuEvay",
+    collectionType: "Recommended",
+  },
+  {
+    id: 18,
+    title: "Rocks",
+    subtitle: "Tony",
+    value: 3.05,
+    img: process.env.PUBLIC_URL + "/images/product3.png",
+    like: 250,
+    category: true,
+    categoryName: "Rocks",
+    collectionType: "My collection",
+  },
+  {
+    id: 19,
+    title: "White",
+    subtitle: "Quava",
+    value: 0.25,
+    img: process.env.PUBLIC_URL + "/images/product4.png",
+    like: 20,
+    category: true,
+    categoryName: "White",
+    collectionType: "Popular",
+  },
+  {
+    id: 20,
+    title: "Planet",
+    subtitle: "Alexo",
+    value: 7.25,
+    img: process.env.PUBLIC_URL + "/images/product5.png",
+    like: 1025,
+    category: true,
+    categoryName: "Planet",
+    collectionType: "Recommended",
+  },
+  {
+    id: 21,
+    title: "Sun-glass",
+    subtitle: "Sasuke",
+    value: 1.75,
+    img: process.env.PUBLIC_URL + "/images/product1.png",
+    like: 200,
+    category: true,
+    categoryName: "Sun-glass",
+    collectionType: "My collection",
+  },
+  {
+    id: 22,
+    title: "NuEvay",
+    subtitle: "Nano",
+    value: 1.25,
+    img: process.env.PUBLIC_URL + "/images/product2.png",
+    like: 300,
+    categoryName: "NuEvay",
+    collectionType: "Popular",
+  },
+  {
+    id: 23,
+    title: "Rocks",
+    subtitle: "Tony",
+    value: 3.05,
+    img: process.env.PUBLIC_URL + "/images/product3.png",
+    like: 250,
+    inCollection: true,
+    categoryName: "Rocks",
+    collectionType: "Recommended",
+  },
+  {
+    id: 24,
+    title: "White",
+    subtitle: "Quava",
+    value: 0.25,
+    img: process.env.PUBLIC_URL + "/images/product4.png",
+    like: 20,
+    inCollection: true,
+    categoryName: "White",
+    collectionType: "My collection",
+  },
+  {
+    id: 25,
+    title: "Planet",
+    subtitle: "Alexo",
+    value: 7.25,
+    img: process.env.PUBLIC_URL + "/images/product5.png",
+    like: 1025,
+    category: true,
+    categoryName: "Planet",
+    collectionType: "Popular",
+  },
+  {
+    id: 26,
+    title: "Sun-glass",
+    subtitle: "Sasuke",
+    value: 1.75,
+    img: process.env.PUBLIC_URL + "/images/product1.png",
+    like: 200,
+    inCollection: true,
+    category: true,
+    categoryName: "Sun-glass",
+    collectionType: "Recommended",
+  },
+  {
+    id: 27,
+    title: "NuEvay",
+    subtitle: "Nano",
+    value: 1.25,
+    img: process.env.PUBLIC_URL + "/images/product2.png",
+    like: 300,
+    category: true,
+    categoryName: "NuEvay",
+    collectionType: "My collection",
+  },
+  {
+    id: 28,
+    title: "Rocks",
+    subtitle: "Tony",
+    value: 3.05,
+    img: process.env.PUBLIC_URL + "/images/product3.png",
+    like: 250,
+    inCollection: true,
+    categoryName: "Rocks",
+    collectionType: "Popular",
+  },
+  {
+    id: 29,
+    title: "White",
+    subtitle: "Quava",
+    value: 0.25,
+    img: process.env.PUBLIC_URL + "/images/product4.png",
+    like: 20,
+    categoryName: "White",
+    collectionType: "Recommended",
+  },
+  {
+    id: 30,
+    title: "Planet",
+    subtitle: "Alexo",
+    value: 7.25,
+    img: process.env.PUBLIC_URL + "/images/product5.png",
+    like: 1025,
+    inCollection: true,
+    categoryName: "Planet",
+    collectionType: "My collection",
+  },
 ];

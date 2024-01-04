@@ -1,0 +1,31 @@
+.svg {
+  transition: all 0.5s;
+  position: relative;
+  &::before {
+    content: "";
+    background-color: white;
+    position: absolute;
+    left: 29%;
+    top: 46%;
+    width: 13px;
+    height: 1px;
+    z-index: 1090;
+  }
+  &::after {
+    content: "";
+    background-color: white;
+    position: absolute;
+    left: 47%;
+    top: 29%;
+    width: 1.2px;
+    height: 13px;
+    z-index: 1090;
+    transition: 0.3s ease-in;
+  }
+  &.setActive{
+    &::after{
+        rotate:-90deg;
+
+    }
+  }
+}

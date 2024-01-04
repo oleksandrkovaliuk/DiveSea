@@ -6,6 +6,7 @@ export const Button = ({
   fullSize,
   category,
   children,
+  exploreMore,
   onClick,
   focus,
 }) => {
@@ -14,6 +15,7 @@ export const Button = ({
     [styles.fullSize]: fullSize,
     [styles.category]: category,
     [styles.focus]: focus,
+    [styles.exploreMore]: exploreMore,
   });
   const handleClick = (event) => {
     if (onClick) {

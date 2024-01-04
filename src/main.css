@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=Poppins:wght@400;500;600;700&family=Public+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600&family=Manrope:wght@600&family=Poppins:wght@400;500;600;700&family=Public+Sans:wght@600&display=swap");
 :root {
   --font-Inter: "Inter", sans-serif;
   --font-Manrope: "Manrope", sans-serif;
@@ -10,10 +10,10 @@
   --color-white: #fff;
   --color-gray94: #949494;
   --color-neutrals77: #777e90;
-  --color-neutrals8:#FCFCFD;
-  --color-neutrals6:#E6E8EC;
+  --color-neutrals8: #fcfcfd;
+  --color-neutrals6: #e6e8ec;
   --background-gray: #ededed;
-  --background-white:#F9F9F9;
+  --background-white: #f9f9f9;
   --color-grayscale: #1a202c;
   --text-bluegray: #94a3b8;
   --text-gray: #676767;
@@ -26,9 +26,17 @@
   --color-red: #e23333;
   --color-green: #10c352;
 }
-#root {
+body {
   max-width: 1440px;
   margin: auto;
+  background-color: var(--background-white);
+}
+body::-webkit-scrollbar {
+  width: 0;
+}
+.disable-scroll-page {
+  overflow: hidden;
+  height: 100%;
 }
 * {
   margin: 0;
@@ -36,19 +44,16 @@
   box-sizing: border-box;
 }
 
-.disable-scroll-page {
-  height: 100%;
-  overflow: hidden;
-}
-
 img {
   width: 100%;
   display: block;
 }
-button , svg , li{
+button,
+svg,
+li {
   cursor: pointer;
 }
-.main-page{
-  background-color: #F9F9F9;
-  padding-bottom:143px;
+.main-page {
+  background-color: #f9f9f9;
+  padding-bottom: 143px;
 }

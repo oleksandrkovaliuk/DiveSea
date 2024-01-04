@@ -1,6 +1,6 @@
 .marketplace {
-  padding: 70px;
-  background-color: var(--background-white);
+  padding-inline: 70px 70px;
+  margin-bottom:120px;
   .main_text {
     color: var(--text-grayblack);
 
@@ -25,5 +25,7 @@
     flex-wrap: wrap;
     display:flex;
     justify-content: center;
+    padding-bottom:70px;
+    border-bottom:1px solid #CBCBCB;
   }
 }

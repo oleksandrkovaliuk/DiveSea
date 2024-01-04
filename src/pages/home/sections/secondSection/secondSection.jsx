@@ -16,7 +16,7 @@ export const SecondSection = () => {
         ))}
       </div>
       <Switcher />
-      <Viewed pos lose />
+      <Viewed pos/>
     </div>
   );
 };

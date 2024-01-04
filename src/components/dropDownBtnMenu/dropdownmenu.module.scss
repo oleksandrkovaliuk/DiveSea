@@ -1,10 +1,11 @@
-.backBlock {
+.back_block {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: #0000000f;
+  z-index:1;
 }
 .dropmenu_wrap {
   position: fixed;
@@ -14,16 +15,27 @@
 
   border-radius: 10px;
   padding: 15px;
-  // width: 100%;
-  max-width: 152px;
-  border-bottom-left-radius: unset;
-  border-bottom-right-radius: unset;
-  border-bottom: unset;
+  width: 100%;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+  border-top: unset;
   transition: 0.3s;
+  z-index:1;
   .list_menu {
     list-style: none;
     li {
-      color: var(--color-white);
+      button {
+        border: none;
+        background-color: unset;
+        color: var(--color-white);
+        font-size: 16px;
+        font-family: var(--font-Poppins);
+        padding-inline:2px;
+        &:hover {
+          background-color: var(--background-white);
+          color:#000;
+        }
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 .bid {
   display: flex;
   gap: 2px;
+  margin-bottom:7px;
   .value {
     color: var(--text-grayblack);
 
@@ -11,10 +12,15 @@
     line-height: 150%;
   }
   &.bold {
+    align-items: center;
     .value {
-      font-size: 15.364px;
+      font-size: 15px;
       font-weight: 600;
-      line-height: 140%;
+      line-height: 100%;
+    }
+    svg{
+      width:15px;
+      height:15px;
     }
   }
   &.full {
