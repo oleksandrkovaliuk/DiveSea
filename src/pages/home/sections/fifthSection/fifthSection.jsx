@@ -52,12 +52,13 @@ export const FifthSection = () => {
     const btn = event.currentTarget;
     const parentDiv = btn.parentElement;
     const p = parentDiv.nextElementSibling;
-    if (answer === true) {
-      p.classList.remove(`${f.answer}`);
-      setAnswer(false);
-    } else {
+    console.log(answer);
+    if (!answer) {
       p.classList.add(`${f.answer}`);
       setAnswer(true);
+    } else {
+      p.classList.remove(`${f.answer}`);
+      setAnswer(false);
     }
   };
   useEffect(() => {
@@ -194,10 +195,10 @@ export const FifthSection = () => {
                 <div className={f.question_btn}>
                   <span className={f.question}>What is Nft?</span>
                   <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={!answer ? true : false} />
+                    <Plus setActive={answer ? true : false} />
                   </button>
                 </div>
-                <p className={f.answer}>
+                <p>
                   A non-fungible token is a unique digital identifier that is
                   recorded on a blockchain, and is used to certify ownership and
                   authenticity. It cannot be copied, substituted, or subdivided.
@@ -210,10 +211,10 @@ export const FifthSection = () => {
                 <div className={f.question_btn}>
                   <span className={f.question}>What can I use NFTs for?</span>
                   <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={!answer ? true : false} />
+                    <Plus />
                   </button>
                 </div>
-                <p className={f.answer}>
+                <p>
                   NFTs are best known for signifying ownership of digital
                   collectibles like graphic art and gaming assets. The creator
                   of a digital collectible can “tokenize” the asset by minting
@@ -223,15 +224,17 @@ export const FifthSection = () => {
               </li>
               <li className={f.questions_list}>
                 <div className={f.question_btn}>
-                  <span className={f.question}>What is the difference between an NFT and cryptocurrency?</span>
+                  <span className={f.question}>
+                    What is the difference between an NFT and cryptocurrency?
+                  </span>
                   <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={!answer ? true : false} />
+                    <Plus />
                   </button>
                 </div>
-                <p className={f.answer}>
+                <p>
                   There are several differences between the two, including the
-                  following:The main difference is that every NFT
-                  is unique, which sets it apart from fungible tokens, such as
+                  following:The main difference is that every NFT is unique,
+                  which sets it apart from fungible tokens, such as
                   cryptocurrency, that can be traded or exchanged for one
                   another with no loss of value. Target use. NFTs are
                   fundamentally a type of digital collectable item, much like
@@ -244,19 +247,19 @@ export const FifthSection = () => {
                 <div className={f.question_btn}>
                   <span className={f.question}>How much is an NFT worth?</span>
                   <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={!answer ? true : false} />
+                    <Plus />
                   </button>
                 </div>
-                <p className={f.answer}>Some answer text here...</p>
+                <p>Some answer text here...</p>
               </li>
               <li className={f.questions_list}>
                 <div className={f.question_btn}>
                   <span className={f.question}>What is Nft?</span>
                   <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={!answer ? true : false} />
+                    <Plus />
                   </button>
                 </div>
-                <p className={f.answer}>Some answer text here...</p>
+                <p>Some answer text here...</p>
               </li>
             </ul>
           </div>
