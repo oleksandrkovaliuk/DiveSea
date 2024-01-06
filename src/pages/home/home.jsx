@@ -4,6 +4,8 @@ import { SecondSection } from "./sections/secondSection";
 import { ThirdSection } from "./sections/thirdSection";
 import { FourthSection } from "./sections/forthSection/index.jsx";
 import { FifthSection } from "./sections/fifthSection/fifthSection.jsx";
+import { Footer } from "../../components/footer/footer.jsx";
+import { SixthSection } from "./sections/sixthSection/sixthSection.jsx";
 export const Home = () => {
   return (
     <>
@@ -12,6 +14,8 @@ export const Home = () => {
       <ThirdSection />
       <FourthSection />
       <FifthSection />
+      <SixthSection />
+      <Footer />
     </>
   );
 };

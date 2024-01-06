@@ -8,12 +8,10 @@ import { Viewed } from "../../../../components/recentViewed";
 import { Tick } from "../../../../icons/tick";
 import { Button } from "../../../../components/button";
 import { ArrowRight } from "../../../../icons/arrowRight";
-import { Plus } from "../../../../icons/plus/plus";
+import { Collaps } from "../../../../components/collaps";
 export const FifthSection = () => {
   const [filteredData, setFilterData] = useState([]);
-  const [followBtn, setStyleForBtn] = useState(false);
   const [exploreMoreBtn, setExploreBtn] = useState(false);
-  const [answer, setAnswer] = useState(false);
   const formatDate = (date) => {
     const day = date.getDate();
     const month = date.toLocaleString("default", { month: "long" }); // назва місяця
@@ -28,18 +26,6 @@ export const FifthSection = () => {
     const formattedTime = `${day} ${month} ${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
     return formattedTime;
   };
-  const followBtnClickHandler = (event) => {
-    const btn = event.target;
-    if (followBtn !== true) {
-      btn.textContent = "followed";
-      btn.classList.add(`${f.followed}`);
-      setStyleForBtn(true);
-    } else {
-      btn.textContent = "follow";
-      btn.classList.remove(`${f.followed}`);
-      setStyleForBtn(false);
-    }
-  };
   const exploreMoreClickHandler = () => {
     if (exploreMoreBtn !== true) {
       document.querySelector("#fifthSection").style.marginBottom = "600px";
@@ -47,19 +33,6 @@ export const FifthSection = () => {
     }
     document.querySelector("#fifthSection").style.marginBottom = "180px";
     return setExploreBtn(false);
-  };
-  const handleAnswerForQuestion = (event) => {
-    const btn = event.currentTarget;
-    const parentDiv = btn.parentElement;
-    const p = parentDiv.nextElementSibling;
-    console.log(answer);
-    if (!answer) {
-      p.classList.add(`${f.answer}`);
-      setAnswer(true);
-    } else {
-      p.classList.remove(`${f.answer}`);
-      setAnswer(false);
-    }
   };
   useEffect(() => {
     const intervalForItem = setInterval(() => {
@@ -114,9 +87,10 @@ export const FifthSection = () => {
             <div className={f.best_seller}>
               <h2 className={f.title}>Best Seller</h2>
               <UserInfo data={userData.slice(0, 6)} cropped>
-                <button onClick={(event) => followBtnClickHandler(event)}>
+                {/* <button onClick={(event) => followBtnClickHandler(event)}>
                   follow
-                </button>
+                </button> */}
+                <Button follow>follow</Button>
               </UserInfo>
             </div>
             {filteredData.map((item) => (
@@ -191,76 +165,40 @@ export const FifthSection = () => {
               Questions
             </h1>
             <ul>
-              <li className={f.questions_list}>
-                <div className={f.question_btn}>
-                  <span className={f.question}>What is Nft?</span>
-                  <button onClick={handleAnswerForQuestion}>
-                    <Plus setActive={answer ? true : false} />
-                  </button>
-                </div>
-                <p>
-                  A non-fungible token is a unique digital identifier that is
-                  recorded on a blockchain, and is used to certify ownership and
-                  authenticity. It cannot be copied, substituted, or subdivided.
-                  The ownership of an NFT is recorded in the blockchain and can
-                  be transferred by the owner, allowing NFTs to be sold and
-                  traded
-                </p>
-              </li>
-              <li className={f.questions_list}>
-                <div className={f.question_btn}>
-                  <span className={f.question}>What can I use NFTs for?</span>
-                  <button onClick={handleAnswerForQuestion}>
-                    <Plus />
-                  </button>
-                </div>
-                <p>
-                  NFTs are best known for signifying ownership of digital
-                  collectibles like graphic art and gaming assets. The creator
-                  of a digital collectible can “tokenize” the asset by minting
-                  an NFT—that is, using a blockchain platform to create a unique
-                  token associated with the asset.
-                </p>
-              </li>
-              <li className={f.questions_list}>
-                <div className={f.question_btn}>
-                  <span className={f.question}>
-                    What is the difference between an NFT and cryptocurrency?
-                  </span>
-                  <button onClick={handleAnswerForQuestion}>
-                    <Plus />
-                  </button>
-                </div>
-                <p>
-                  There are several differences between the two, including the
-                  following:The main difference is that every NFT is unique,
-                  which sets it apart from fungible tokens, such as
-                  cryptocurrency, that can be traded or exchanged for one
-                  another with no loss of value. Target use. NFTs are
-                  fundamentally a type of digital collectable item, much like
-                  art or wine. Cryptocurrency can also be collected, though the
-                  purpose is not as a collectible, but rather as a form of
-                  payment..
-                </p>
-              </li>
-              <li className={f.questions_list}>
-                <div className={f.question_btn}>
-                  <span className={f.question}>How much is an NFT worth?</span>
-                  <button onClick={handleAnswerForQuestion}>
-                    <Plus />
-                  </button>
-                </div>
-                <p>Some answer text here...</p>
-              </li>
-              <li className={f.questions_list}>
-                <div className={f.question_btn}>
-                  <span className={f.question}>What is Nft?</span>
-                  <button onClick={handleAnswerForQuestion}>
-                    <Plus />
-                  </button>
-                </div>
-                <p>Some answer text here...</p>
-              </li>
+              <Collaps speed={250} title={"What is an NFT?"}>
+                A non-fungible token is a unique digital identifier that is
+                recorded on a blockchain, and is used to certify ownership and
+                authenticity. It cannot be copied, substituted, or subdivided.
+                The ownership of an NFT is recorded in the blockchain and can be
+                transferred by the owner, allowing NFTs to be sold and traded
+              </Collaps>
+              <Collaps title={"What can I use NFTs for?"}>
+                NFTs are best known for signifying ownership of digital
+                collectibles like graphic art and gaming assets. The creator of
+                a digital collectible can “tokenize” the asset by minting an
+                NFT—that is, using a blockchain platform to create a unique
+                token associated with the asset.
+              </Collaps>
+              <Collaps
+                title={
+                  "What is the difference between an NFT and cryptocurrency?"
+                }
+              >
+                There are several differences between the two, including the
+                following:The main difference is that every NFT is unique, which
+                sets it apart from fungible tokens, such as cryptocurrency, that
+                can be traded or exchanged for one another with no loss of
+                value. Target use. NFTs are fundamentally a type of digital
+                collectable item, much like art or wine. Cryptocurrency can also
+                be collected, though the purpose is not as a collectible, but
+                rather as a form of payment..
+              </Collaps>
+              <Collaps title={"How much is an NFT worth?"}>
+                Some answer text here...
+              </Collaps>
+              <Collaps title={"How do I purchase an NFT on your platform ?"}>
+                Some answer text here...
+              </Collaps>
             </ul>
           </div>
         </div>

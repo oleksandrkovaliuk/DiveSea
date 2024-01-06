@@ -70,23 +70,6 @@
             letter-spacing: 0.176px;
             margin-bottom: 23px;
           }
-          button {
-            padding: 6px 13px;
-            border-radius: 4.96px;
-            border: 1.24px solid var(--color-neutrals6);
-            color: #23262f;
-            text-align: center;
-            font-family: DM Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 16px;
-            background-color: transparent;
-            transition: 0.5s;
-            &.followed {
-              background: var(--color-neutrals6);
-            }
-          }
         }
         .new_bit {
           position: absolute;
@@ -182,6 +165,7 @@
     }
   }
   .exploreMore_wrap {
+    margin-bottom:214px;
     .joinCommunity_container {
       max-width: 597px;
       margin: auto;
@@ -358,48 +342,6 @@
       ul {
         list-style: none;
         width: 100%;
-        .questions_list {
-          text-align: left;
-          padding-inline: 14px;
-          padding-bottom: 17px;
-          border-bottom: 1.1px solid #adadad;
-
-          .question_btn {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .question {
-              color: #323142;
-              font-family: var(--font-Poppins);
-              font-size: 25.368px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: 64.176px;
-            }
-            button {
-              border: none;
-              background-color: unset;
-              z-index: 1090;
-            }
-          }
-          &:not(:first-child) {
-            padding-top: 31px;
-          }
-          p {
-            display: none;
-            color: var(--Black, #12141d);
-            text-align: left;
-            font-family: var(--font-Poppins);
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 32px;
-            max-width:1100px;
-            &.answer {
-              display: block;
-            }
-          }
-        }
       }
     }
   }

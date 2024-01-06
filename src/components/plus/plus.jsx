@@ -22,21 +22,6 @@ const classes = classNames(p.svg , {
           stroke="#141416"
           strokeWidth="1.20853"
         />
-        {/* <rect
-          x="10.3486"
-          y="16.7461"
-          width="11.481"
-          height="1.20853"
-          fill="white"
-        />
-        <rect className={p.middle}
-          x="15.4854"
-          y="23.0906"
-          width="11.481"
-          height="1.20853"
-          transform="rotate(-90 15.4854 23.0906)"
-          fill="white"
-        /> */}
       </svg>
     </div>
   );
