@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import styles from "./button.module.scss";
+
+import { ButtonVariants, ButtonColors, ButtonSizes } from "../../shared/enums";
+
 export const Button = ({
+  variant,
+  size,
+  color,
   filled,
   fullSize,
   category,
@@ -13,7 +19,11 @@ export const Button = ({
   filledWhite,
   clearWhite,
 }) => {
-  const [isActive , setActive] = useState(false);
+  const buttonVariant = variant || ButtonVariants.contained;
+  const buttonSize = size || ButtonSizes.medium;
+  const buttonColor = color || ButtonColors.primary;
+
+  const [isActive, setActive] = useState(false);
 
   const classes = classNames(styles.button, {
     [styles.filled]: filled,
@@ -22,8 +32,8 @@ export const Button = ({
     [styles.focus]: focus,
     [styles.exploreMore]: exploreMore,
     [styles.follow]: follow,
-    [styles.filledWhite]:filledWhite,
-[styles.clearWhite]:clearWhite,
+    [styles.filledWhite]: filledWhite,
+    [styles.clearWhite]: clearWhite,
   });
   const handleClick = (event) => {
     if (onClick) {
@@ -32,17 +42,16 @@ export const Button = ({
   };
   const handleFollow = (event) => {
     const btn = event.target;
-    if(!isActive){
-      btn.textContent = "followed"
-      btn.style.backgroundColor = 'var(--color-neutrals6)';
-      setActive(!isActive)
-    }else{
-      btn.textContent = "follow"
-      btn.style.backgroundColor = 'transparent';
-      setActive(!isActive)
+    if (!isActive) {
+      btn.textContent = "followed";
+      btn.style.backgroundColor = "var(--color-neutrals6)";
+      setActive(!isActive);
+    } else {
+      btn.textContent = "follow";
+      btn.style.backgroundColor = "transparent";
+      setActive(!isActive);
     }
-
-  }
+  };
   return (
     <button className={classes} onClick={follow ? handleFollow : handleClick}>
       {children}
