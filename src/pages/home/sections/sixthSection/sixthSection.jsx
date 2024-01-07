@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { cardInfo } from "../../../../components/card/cardInfo";
 import s from "./sixthSection.module.scss";
 import { Button } from "../../../../components/button";
-export const SixthSection = () => {
+export const SixthSectione = () => {
   const [randomImg, setRandomImg] = useState([]);
   useEffect(() => {
     const intervalForImg = setInterval(() => {

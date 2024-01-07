@@ -8,7 +8,7 @@ import { BigCard } from "../../../../components/card/BigCard";
 import { DropMenu } from "../../../../components/dropDownBtnMenu";
 import { cardInfo } from "../../../../components/card/cardInfo";
 
-export const FourthSection = () => {
+export const FourthSectione = () => {
   const [filteredData, setFilteredData] = useState(cardInfo);
   const [dropMenuPosition, setDropMenudPosition] = useState(null);
   const [dropdownContent, setDropDownContent] = useState(null);

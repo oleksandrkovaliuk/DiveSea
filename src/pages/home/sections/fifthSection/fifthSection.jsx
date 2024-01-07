@@ -9,7 +9,7 @@ import { Tick } from "../../../../icons/tick";
 import { Button } from "../../../../components/button";
 import { ArrowRight } from "../../../../icons/arrowRight";
 import { Collaps } from "../../../../components/collaps";
-export const FifthSection = () => {
+export const FifthSectione = () => {
   const [filteredData, setFilterData] = useState([]);
   const [exploreMoreBtn, setExploreBtn] = useState(false);
   const formatDate = (date) => {

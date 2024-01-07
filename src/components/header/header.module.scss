@@ -21,7 +21,7 @@
       gap: 53px;
     }
 
-    .head_nav {
+    .head_nav a {
       color: #606060;
 
       font-family: var(--font-Inter);
@@ -30,6 +30,7 @@
       font-weight: 500;
       line-height: 26.743px;
       text-transform: uppercase;
+      text-decoration: unset;
       cursor: pointer;
     }
   }

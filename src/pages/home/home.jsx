@@ -1,20 +1,21 @@
 import React from "react";
-import { FirstSection } from "./sections/firstSection";
-import { SecondSection } from "./sections/secondSection";
-import { ThirdSection } from "./sections/thirdSection";
-import { FourthSection } from "./sections/forthSection/index.jsx";
-import { FifthSection } from "./sections/fifthSection/fifthSection.jsx";
-import { Footer } from "../../components/footer/footer.jsx";
-import { SixthSection } from "./sections/sixthSection/sixthSection.jsx";
-export const Home = () => {
+import { FirstSectione } from "./sections/firstSection";
+import { SecondSectione } from "./sections/secondSection";
+import { ThirdSectione } from "./sections/thirdSection";
+import { FourthSectione } from "./sections/forthSection";
+import { FifthSectione } from "./sections/fifthSection";
+import { SixthSectione } from "./sections/sixthSection";
+import { Footer } from "../../components/footer";
+
+export const HomePage = () => {
   return (
     <>
-      <FirstSection />
-      <SecondSection />
-      <ThirdSection />
-      <FourthSection />
-      <FifthSection />
-      <SixthSection />
+      <FirstSectione />
+      <SecondSectione />
+      <ThirdSectione />
+      <FourthSectione />
+      <FifthSectione />
+      <SixthSectione />
       <Footer />
     </>
   );

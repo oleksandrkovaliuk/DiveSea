@@ -1,12 +1,11 @@
 import React from "react";
 import m from "./firstSection.module.scss";
-import { Switcher } from "../../../../components/leftRightSwitcher";
 import { Button } from "../../../../components/button/button";
-import { Header } from "../../../../components/header";
-export const FirstSection = () => {
+import { SliderComponent } from "../../../../components/slider";
+import { cardInfo } from "../../../../components/card/cardInfo";
+export const FirstSectione = () => {
   return (
     <div className={m.homepage_wrap}>
-      <Header />
       <div className={m.firstsection_wrap}>
         <div className={m.left_information}>
           <h2 className={m.main_text}>Discover And Create NFTs</h2>
@@ -34,7 +33,7 @@ export const FirstSection = () => {
             </div>
           </div>
         </div>
-        <Switcher />
+        <SliderComponent/>
       </div>
     </div>
   );

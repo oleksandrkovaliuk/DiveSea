@@ -1,1 +1,1 @@
-export {FirstSection} from "./firstSection"
+export { FirstSectione } from "./firstSection";

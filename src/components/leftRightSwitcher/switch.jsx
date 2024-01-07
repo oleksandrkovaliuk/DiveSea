@@ -1,10 +1,10 @@
 import React from "react";
 import sw from "./switcher.module.scss";
 
-export const Switcher = () => {
+export const Switcher = ({prev , next}) => {
   return (
     <div className={sw.switcher}>
-      <button className={sw.left_arrow}>
+      <button onClick={prev} className={sw.left_arrow}>
         <svg
           width="27"
           height="27"
@@ -19,7 +19,7 @@ export const Switcher = () => {
           />
         </svg>
       </button>
-      <button className={sw.right_arrow}>
+      <button onClick={next} className={sw.right_arrow}>
         <svg
           width="27"
           height="27"
