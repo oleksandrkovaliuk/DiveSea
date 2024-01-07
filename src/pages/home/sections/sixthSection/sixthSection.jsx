@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { cardInfo } from "../../../../components/card/cardInfo";
 import s from "./sixthSection.module.scss";
 import { Button } from "../../../../components/button";
@@ -13,7 +13,7 @@ export const SixthSectione = () => {
     return () => {
       clearInterval(intervalForImg);
     };
-  },[]);
+  }, []);
   return (
     <div className={s.sixthSection_container}>
       <div className={s.sixSection_wrap}>
@@ -21,16 +21,16 @@ export const SixthSectione = () => {
           <h1 className={s.title}>Create and Sell NFTs</h1>
           <h2 className={s.disc}>World’s Largest NFT Place</h2>
           <div className={s.buttons}>
-            <Button filledWhite >Explore More</Button>
-            <Button clearWhite >Sell Artwork</Button>
+            <Button filledWhite>Explore More</Button>
+            <Button clearWhite>Sell Artwork</Button>
           </div>
         </div>
         <div className={s.img}>
           {randomImg.map((item) => (
-            <>
-            <img className={s.main_img} src={item.img} alt="mainImg"></img>
-            <img className={s.back_img} src={item.img} alt="SecongImg"></img>
-          </>
+            <Fragment key={item.id}>
+              <img className={s.main_img} src={item.img} alt="mainImg"></img>
+              <img className={s.back_img} src={item.img} alt="SecongImg"></img>
+            </Fragment>
           ))}
         </div>
       </div>

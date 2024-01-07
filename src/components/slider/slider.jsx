@@ -6,9 +6,12 @@ import "slick-carousel/slick/slick-theme.css";
 import { Switcher } from "../leftRightSwitcher";
 import { cardInfo } from "../card/cardInfo";
 
-export const SliderComponent = ({}) => {
+import "./custom-styles-slider.scss";
+
+export const SliderComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
+
   const next = () => {
     sliderRef.current.slickNext();
   };
@@ -16,6 +19,7 @@ export const SliderComponent = ({}) => {
   const previous = () => {
     sliderRef.current.slickPrev();
   };
+
   const handleBeforeChange = (newIndex) => {
     setCurrentSlide(newIndex);
   };
@@ -29,16 +33,16 @@ export const SliderComponent = ({}) => {
     beforeChange: handleBeforeChange,
   };
   return (
-    <div className={s.slider_container}>
+    <div className={`${s.slider_container} custom-slider-container`}>
       <Slider ref={sliderRef} {...settings}>
         {cardInfo.map((item, index) => (
-          <div className={s.slid_wrap}>
+          <div className={s.slid_wrap} key={item.id}>
             <div
               className={`${s.slides} ${
                 currentSlide === index ? s.activeSlide : ""
-              }`}
+              } slides`}
             >
-              <img src={item.img}></img>
+              <img src={item.img} alt="img of slide" />
             </div>
           </div>
         ))}

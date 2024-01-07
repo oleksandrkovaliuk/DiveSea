@@ -94,7 +94,7 @@ export const FifthSectione = () => {
               </UserInfo>
             </div>
             {filteredData.map((item) => (
-              <div className={f.new_bit}>
+              <div key={item.id} className={f.new_bit}>
                 <div className={f.user_bit_wrap}>
                   <div className={f.user_img_wrap}>
                     <Dot />
@@ -116,7 +116,7 @@ export const FifthSectione = () => {
               </div>
             ))}
             <Viewed bestSellPos />
-            <img className={f.dots} src="/images/Dots.png"></img>
+            <img className={f.dots} src="/images/Dots.png" alt="img" />
           </div>
         </div>
       </div>
