@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import classNames from "classnames";
 import Slider from "react-slick";
 import s from "./slider.module.scss";
 import "slick-carousel/slick/slick.css";
@@ -32,20 +33,22 @@ export const SliderComponent = () => {
     prevArrow: null,
     beforeChange: handleBeforeChange,
   };
+
   return (
     <div className={`${s.slider_container} custom-slider-container`}>
       <Slider ref={sliderRef} {...settings}>
-        {cardInfo.map((item, index) => (
-          <div className={s.slid_wrap} key={item.id}>
-            <div
-              className={`${s.slides} ${
-                currentSlide === index ? s.activeSlide : ""
-              } slides`}
-            >
-              <img src={item.img} alt="img of slide" />
+        {cardInfo.map((item, index) => {
+          const sliderClassNames = classNames(s.slides, "slides", {
+            [s.activeSlide]: currentSlide === index,
+          });
+          return (
+            <div className={s.slid_wrap} key={item.id}>
+              <div className={sliderClassNames}>
+                <img src={item.img} alt="img of slide" />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </Slider>
       <div className={s.switcher_wrap}>
         <Switcher prev={previous} next={next} />
