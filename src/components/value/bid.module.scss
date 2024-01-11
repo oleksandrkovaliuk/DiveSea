@@ -1,7 +1,7 @@
 .bid {
   display: flex;
   gap: 2px;
-  margin-bottom:7px;
+  margin-bottom: 7px;
   .value {
     color: var(--text-grayblack);
 
@@ -18,9 +18,9 @@
       font-weight: 600;
       line-height: 100%;
     }
-    svg{
-      width:15px;
-      height:15px;
+    svg {
+      width: 15px;
+      height: 15px;
     }
   }
   &.full {
@@ -30,6 +30,21 @@
       font-size: 17.433px;
       font-weight: 600;
       line-height: 140%;
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .bid {
+    margin-bottom:2px;
+    .value {
+      font-size: 12.96px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18.72px;
+    }
+    svg{
+      width:15px;
+      height:15px;
     }
   }
 }

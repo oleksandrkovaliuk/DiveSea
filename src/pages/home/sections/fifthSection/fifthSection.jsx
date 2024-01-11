@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import f from "./fifthSection.module.scss";
-import { userData } from "../../../../components/userData";
+import { userData } from "../../../../shared/userData";
 import { VerifiedUser } from "../../../../icons/verifiedUser";
 import { Dot } from "../../../../icons/dot";
 import { UserInfo } from "../../../../components/userInfo";
@@ -78,7 +78,13 @@ export const FifthSectione = () => {
                 Join Our Community
               </li>
             </ul>
-            <Button exploreMore onClick={() => exploreMoreClickHandler()}>
+            <Button
+              colors={"primary"}
+              variants={"contained"}
+              specific={"withSvg"}
+              size={"medium"}
+              onClick={() => exploreMoreClickHandler()}
+            >
               Explore More
               <ArrowRight />
             </Button>
@@ -90,7 +96,7 @@ export const FifthSectione = () => {
                 {/* <button onClick={(event) => followBtnClickHandler(event)}>
                   follow
                 </button> */}
-                <Button follow>follow</Button>
+                <Button specific={"follow"}>follow</Button>
               </UserInfo>
             </div>
             {filteredData.map((item) => (
@@ -157,7 +163,9 @@ export const FifthSectione = () => {
               Our vibrant community is full of collectors, artists, and
               enthusiasts who share a passion for one-of-a-kind digital.
             </p>
-            <Button filled>Join Our Community</Button>
+            <Button colors={"primary"} size={"medium"} variants={"contained"}>
+              Join Our Community
+            </Button>
           </div>
           <div className={f.frequently_asked_container}>
             <h1 className={f.frequentlyAsked_title}>
@@ -165,7 +173,7 @@ export const FifthSectione = () => {
               Questions
             </h1>
             <ul>
-              <Collaps speed={250} title={"What is an NFT?"}>
+              <Collaps title={"What is an NFT?"}>
                 A non-fungible token is a unique digital identifier that is
                 recorded on a blockchain, and is used to certify ownership and
                 authenticity. It cannot be copied, substituted, or subdivided.

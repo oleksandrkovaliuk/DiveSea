@@ -14,7 +14,7 @@ export const BigCard = ({ card }) => {
             <h3 className={s.currentBid_text}>Current bid</h3>
             <EthValue value={card.value} />
           </div>
-          <Button filled>PLACE BID</Button>
+          <Button size={"small"} colors={"primary"} variants={"contained"}>PLACE BID</Button>
         </div>
       </div>
     </Card>

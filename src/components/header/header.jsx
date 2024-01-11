@@ -41,7 +41,7 @@ export const Header = () => {
             Search Art Work / Creator
           </label>
         </div>
-        <Button filled>Connect Wallet</Button>
+        <Button size={"medium"} colors={"primary"} variants={"contained"}>Connect Wallet</Button>
       </div>
     </div>
   );

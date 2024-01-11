@@ -6,7 +6,7 @@ import { Price } from "../../../../icons/price";
 import f from "./fourthSection.module.scss";
 import { BigCard } from "../../../../components/card/BigCard";
 import { DropMenu } from "../../../../components/dropDownBtnMenu";
-import { cardInfo } from "../../../../components/card/cardInfo";
+import { cardInfo } from "../../../../shared/cardInfo";
 
 export const FourthSectione = () => {
   const [filteredData, setFilteredData] = useState(cardInfo);
@@ -47,16 +47,15 @@ export const FourthSectione = () => {
     const data = cardInfo.filter((item) =>
       item.title === filterItem ? item : item.collectionType === filterItem
     );
-    if(filterItem === 'all'){
+    if (filterItem === "all") {
       setFilteredData(arr);
-    }
-    else if (filterItem === "> to <") {
+    } else if (filterItem === "> to <") {
       arr.sort((a, b) => a.value - b.value);
       setFilteredData(arr);
     } else if (filterItem === "< to >") {
       arr.sort((a, b) => b.value - a.value);
       setFilteredData(arr);
-    } else{
+    } else {
       setFilteredData(data);
     }
     setDropMenudPosition(null);
@@ -85,7 +84,12 @@ export const FourthSectione = () => {
         />
       )}
       <div className={f.markeplace_nav}>
-        <Button onClick={handleClickForAll} category>
+        <Button
+          onClick={handleClickForAll}
+          size={"small"}
+          variants={"outlined"}
+          colors={"secondary"}
+        >
           All
         </Button>
         <Button
@@ -93,7 +97,10 @@ export const FourthSectione = () => {
           onClick={(event) => {
             handleOpenDropdownFilter(event, "categoryName");
           }}
-          category
+          size={"small"}
+          variants={"outlined"}
+          specific={"withSvg"}
+          colors={"secondary"}
         >
           <Category />
           Category
@@ -103,7 +110,10 @@ export const FourthSectione = () => {
           onClick={(event) => {
             handleOpenDropdownFilter(event, "collectionType");
           }}
-          category
+          size={"small"}
+          variants={"outlined"}
+          specific={"withSvg"}
+          colors={"secondary"}
         >
           <Collection />
           Collection
@@ -111,22 +121,21 @@ export const FourthSectione = () => {
         <Button
           focus={focusBtn === "priceType"}
           onClick={(event) => handleOpenDropdownFilter(event, "priceType")}
-          category
+          size={"small"}
+          variants={"outlined"}
+          specific={"withSvg"}
+          colors={"secondary"}
         >
           <Price />
           Price
         </Button>
       </div>
       <div className={f.productWrap}>
-      {filteredData.length > 8
-    ? filteredData.slice(0, 8).map((card) => (
-      <BigCard key={card.id} card={card} />
-      ))
-    : filteredData?.map((card) =>
-        (
-          <BigCard key={card.id} card={card} />
-        )
-      )}
+        {filteredData.length > 8
+          ? filteredData
+              .slice(0, 8)
+              .map((card) => <BigCard key={card.id} card={card} />)
+          : filteredData?.map((card) => <BigCard key={card.id} card={card} />)}
       </div>
     </div>
   );

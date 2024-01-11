@@ -5,9 +5,11 @@ import s from "./slider.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Switcher } from "../leftRightSwitcher";
-import { cardInfo } from "../card/cardInfo";
+import { cardInfo } from "../../shared/cardInfo";
 
 import "./custom-styles-slider.scss";
+import { SliderArrow } from "../../icons/sliderArrow";
+import { SliderDots } from "../../icons/sliderDots";
 
 export const SliderComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -27,15 +29,16 @@ export const SliderComponent = () => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 1.15,
     slidesToScroll: 1,
-    nextArrow: null,
-    prevArrow: null,
+    arrows: false,
     beforeChange: handleBeforeChange,
   };
 
   return (
     <div className={`${s.slider_container} custom-slider-container`}>
+     <SliderDots className={s.slider_dots}/>
+      <SliderArrow className={s.arrow} />
       <Slider ref={sliderRef} {...settings}>
         {cardInfo.map((item, index) => {
           const sliderClassNames = classNames(s.slides, "slides", {
@@ -44,7 +47,10 @@ export const SliderComponent = () => {
           return (
             <div className={s.slid_wrap} key={item.id}>
               <div className={sliderClassNames}>
-                <img src={item.img} alt="img of slide" />
+                <div className="imgs">
+                  <img src={item.img} className="main-img" alt="img of slide" />
+                  <img src={item.img} className="bloor" alt="img of slide" />
+                </div>
               </div>
             </div>
           );

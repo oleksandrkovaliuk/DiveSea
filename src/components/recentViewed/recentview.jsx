@@ -3,7 +3,7 @@ import { ThreeDots } from "../../icons/threedots";
 import classNames from "classnames";
 import v from "./recentview.module.scss";
 import { UserInfo } from "../userInfo";
-import { userData } from "../userData";
+import { userData } from "../../shared/userData";
 export const Viewed = ({ pos, bestSellPos , full }) => {
   const classes = classNames(v.recent_view, {
     [v.pos]: pos,

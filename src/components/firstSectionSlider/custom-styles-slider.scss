@@ -1,0 +1,100 @@
+.custom-slider-container {
+  .slick-slider.slick-initialized {
+    transform: translate(0px, -60px);
+
+    .slick-list {
+      padding: 60px;
+      padding-bottom: 50px;
+      margin-left: 20px;
+    }
+  }
+  .slick-slide {
+    .slides {
+      z-index: 2;
+      min-height: 560px;
+      .imgs {
+        transform: translate(-45%, 60%);
+        transition: all 0.5s;
+        max-width: 319.156px;
+        .main-img {
+          max-height: 322.084px;
+          border-radius: 22.35px;
+          transition: all 0.5s;
+        }
+        .bloor {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 11.957px;
+          max-height: 322.084px;
+          filter: blur(26.437305450439453px);
+          z-index: -1;
+          transition: all 0.5s;
+          margin-top: 23px;
+        }
+      }
+    }
+  }
+  .slick-slide.slick-active.slick-current {
+    .slides {
+      .imgs {
+        margin-left: 4%;
+        max-width: 394px;
+        transform: translate(70px, 0%);
+        .main-img {
+          max-height: 391px;
+          border-radius: 22.35px;
+        }
+        .bloor {
+          max-height: 391px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .custom-slider-container {
+    .slick-slider.slick-initialized {
+      transform: translate(0px, -60px);
+
+      .slick-list {
+        padding: 90px;
+        padding-top: 60px;
+        padding-bottom: 50px;
+        margin-left: 0px;
+      }
+    }
+    .slick-slide {
+      .slides {
+        min-height: 393px;
+        .imgs {
+          transform: translate(-45%, 60%);
+          max-width: 226px;
+          .main-img {
+            max-height: 229px;
+          }
+          .bloor {
+            max-height: 229px;
+          }
+        }
+      }
+    }
+    .slick-slide.slick-active.slick-current {
+      .slides {
+        .imgs {
+          margin-left: 4%;
+          max-width: 278px;
+          transform: translate(20px, 0%);
+          .main-img {
+            max-height: 280px;
+          }
+          .bloor {
+            max-height: 280px;
+          }
+        }
+      }
+    }
+  }
+}

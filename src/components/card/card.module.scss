@@ -13,6 +13,7 @@
     padding: 13px;
     width: 100%;
     .imgs {
+      margin-bottom: 6px;
       img {
         width: 100%;
         max-height: 164px;
@@ -109,6 +110,91 @@
           line-height: 150%;
           letter-spacing: 0.118px;
           margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .card_wrap {
+    padding-block: 6px 14px;
+    &.big {
+      max-width: 200px;
+      min-width: 200px;
+    }
+    &.small {
+      padding: 9px;
+      .imgs {
+        margin-bottom: 4px;
+        img {
+          max-height: 116px;
+        }
+      }
+      .card_disc {
+        .title {
+          font-size: 12.365px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 19.431px;
+        }
+      }
+    }
+    .imgs {
+      position: relative;
+      margin-bottom: 12px;
+      img {
+        border-radius: 23.479px;
+        flex-shrink: 0;
+        max-height: 190px;
+        min-height:190px;
+      }
+      .timer {
+        padding: 6px 10px;
+        font-size: 10.038px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: 0.084px;
+      }
+    }
+    .card_disc {
+      padding-inline: unset;
+      .sub_title {
+        gap: 3px;
+        font-size: 9.958px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 15.648px;
+      }
+      .title {
+        font-size: 15.106px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+      }
+      .currentBid_placeBid {
+        .likes {
+          display: flex;
+          gap: 3px;
+          align-items: center;
+          span {
+            font-size: 9.152px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 13.219px;
+          }
+        }
+        .currentBid {
+          button {
+            height: unset !important;
+          }
+          .currentBid_text {
+            font-size: 10.07px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.084px;
+          }
         }
       }
     }

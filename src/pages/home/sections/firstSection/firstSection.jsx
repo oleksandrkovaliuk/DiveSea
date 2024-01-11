@@ -1,8 +1,7 @@
 import React from "react";
 import m from "./firstSection.module.scss";
 import { Button } from "../../../../components/button/button";
-import { SliderComponent } from "../../../../components/slider";
-import { cardInfo } from "../../../../components/card/cardInfo";
+import { SliderComponent } from "../../../../components/firstSectionSlider";
 export const FirstSectione = () => {
   return (
     <div className={m.homepage_wrap}>
@@ -14,9 +13,9 @@ export const FirstSectione = () => {
             Thousands Of NFTs And Get a<span> $20 bonus.</span>
           </p>
           <div className={m.explore_more}>
-            <Button filled>Explore More</Button>
+            <Button colors={"primary"} size={'medium'} variants={"container"}>Explore More</Button>
 
-            <Button>create NFT</Button>
+            <Button colors={"secondary"} variants={"outlined"} size={'medium'}>create NFT</Button>
           </div>
           <div className={m.achivments}>
             <div className={m.achive}>

@@ -1,0 +1,43 @@
+.slider_container {
+  max-width: 800px;
+  position: relative;
+  .switcher_wrap {
+    position: absolute;
+    bottom: 19%;
+    left: 22%;
+  }
+  .arrow {
+    position: absolute;
+    right: 22%;
+    top: 8%;
+  }
+  .slider_dots {
+    max-width: 173px;
+    max-height: 192.224px;
+    flex-shrink: 0;
+    position: absolute;
+    top: -20px;
+    right: 0;
+  }
+}
+@media (max-width: 1280px) {
+  .slider_container {
+    max-width: 554px;
+    position: relative;
+    .switcher_wrap {
+      bottom: 22%;
+    }
+    .arrow {
+      max-height:91px;
+      max-width:91px;
+    }
+    .slider_dots {
+      max-width: 123.036px;
+      max-height: 136.71px;
+      flex-shrink: 0;
+      position: absolute;
+      top: -5px;
+      right: 0;
+    }
+  }
+}

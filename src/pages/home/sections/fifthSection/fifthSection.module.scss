@@ -47,6 +47,9 @@
             }
           }
         }
+        button{
+          text-transform: unset;
+        }
       }
       .right_block {
         max-width: 322px;
@@ -165,7 +168,7 @@
     }
   }
   .exploreMore_wrap {
-    margin-bottom:214px;
+    margin-bottom: 214px;
     .joinCommunity_container {
       max-width: 597px;
       margin: auto;

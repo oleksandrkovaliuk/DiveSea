@@ -46,3 +46,11 @@
     fill: #929292;
   }
 }
+@media(max-width:1280px){
+  .switcher  {
+    button {
+
+      padding-block: 15px;
+    }
+  }
+}

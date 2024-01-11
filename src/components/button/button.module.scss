@@ -1,55 +1,45 @@
 .button {
-  color: #000;
-  font-size: 16px;
-  font-family: var(--font-Poppins);
-  min-width: 120px;
-  font-weight: 500;
   transition: 0.3s;
   text-align: center;
-  border-radius: 10px;
-  padding-inline: 20px;
-  border: 1.2px solid #000;
+  border-radius: 11px;
+  min-width:120px;
   text-transform: uppercase;
-  background-color: transparent;
   position: relative;
   z-index: 2;
-  &.clearWhite {
-    min-width: unset;
-    text-transform: unset;
-    border-radius: 12.204px;
-    border: 2.288px solid #fff;
+  &.withSvg {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  &.small {
+    padding: 13px;
+    font-family: var(--font-Poppins);
+    font-size: 14.115px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 21.173px */
+    letter-spacing: 0.118px;
+  }
+  &.medium {
+    font-family: var(--font-Poppins);
+    padding: 17px 22px;
+    font-size: 16.271px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.163px;
+    text-transform: uppercase;
+  }
+  &.large {
+    padding: 19px 25px;
     font-family: var(--font-Outfit);
-    color: #fff;
     font-size: 21.357px;
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
     letter-spacing: 0.214px;
-    &:hover {
-      color: var(--text-grayblack);
-      background-color: #fff;
-    }
   }
-  &.filledWhite {
-    min-width: unset;
-    text-transform: unset;
-    border-radius: 12.204px;
-    border: 2.288px solid #fff;
-    background-color: #fff;
-    color: var(--text-grayblack);
-
-    font-family: var(--font-Outfit);
-    font-size: 21.357px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
-    letter-spacing: 0.214px;
-    &:hover {
-      color: #fff;
-      background-color: transparent;
-    }
-  }
-  &.follow {
+  &.specificClassFollow {
     padding: 6px 13px;
     min-width: unset;
     text-transform: unset;
@@ -69,37 +59,49 @@
       background-color: transparent;
     }
   }
-  &.category {
-    padding: 13px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 51px;
-    justify-content: center;
-    border: 2px solid #000;
-  }
-  &.category:hover svg path {
-    fill: var(--color-white);
-  }
-  &.fullSize {
-    width: 100%;
-  }
-
-  &.filled {
-    color: #fff;
+  &.primary {
     background-color: #000;
-  }
-
-  &:hover {
     color: #fff;
-    background-color: #000;
-
-    &.filled {
+    border: 1.5px solid #000;
+    &:hover {
       color: #000;
-      background-color: #fff;
+      background-color: transparent;
+      svg path{
+        stroke:#000;
+      }
     }
-    &.filled svg path {
-      fill: #000;
+  }
+  &.secondary {
+    background-color: #fff;
+    color: #000;
+    &:hover {
+      color: #fff;
+      background-color: #000;
+      svg path {
+        fill: #fff;
+      }
+    }
+  }
+  &.outlined {
+    background-color: transparent;
+    border: 1.7px solid #000;
+  }
+  &.outlinedWhite {
+    border: 2px solid #fff;
+    color: #fff;
+    background-color: transparent;
+    &:hover{
+      background-color: #fff;
+      color: var(--text-grayblack);
+    }
+  }
+  &.containedWhite {
+    background-color: #fff;
+    color: var(--text-grayblack);
+    border: 2px solid #fff;
+    &:hover {
+      background-color: transparent;
+      color: #fff;
     }
   }
   &.focus {
@@ -112,32 +114,15 @@
   svg {
     pointer-events: none;
   }
-  &.exploreMore {
-    color: #fff;
-    background-color: #000;
-    padding: 18px 14px 18px 21px;
-    font-size: 14.76px;
+}
+@media (max-width: 1280px) {
+  .button {
+    color: #000;
+    font-size: 11.501px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 18.45px;
-    text-transform: capitalize;
-    display: flex;
-    gap: 11px;
-    align-items: center;
-    max-width: 170px;
-    border-radius: 11px;
-    text-transform: capitalize;
-    svg {
-      pointer-events: unset;
-      width: 22px;
-      height: 22px;
-    }
-    &:hover {
-      background-color: transparent;
-      color: #000;
-      svg path {
-        stroke: #000;
-      }
-    }
+    font-weight: 600;
+    line-height: 17.252px;
+    padding: 12px 20px;
+    min-width: unset;
   }
 }

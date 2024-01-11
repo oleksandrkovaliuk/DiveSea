@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { cardInfo } from "../../../../components/card/cardInfo";
+import { cardInfo } from "../../../../shared/cardInfo";
 import s from "./sixthSection.module.scss";
 import { Button } from "../../../../components/button";
 export const SixthSectione = () => {
@@ -21,8 +21,8 @@ export const SixthSectione = () => {
           <h1 className={s.title}>Create and Sell NFTs</h1>
           <h2 className={s.disc}>World’s Largest NFT Place</h2>
           <div className={s.buttons}>
-            <Button filledWhite>Explore More</Button>
-            <Button clearWhite>Sell Artwork</Button>
+            <Button colors={"secondary"} variants={"containedWhite"} size={"large"}>Explore More</Button>
+            <Button colors={"primary"} variants={"outlinedWhite"} size={"large"}>Sell Artwork</Button>
           </div>
         </div>
         <div className={s.img}>

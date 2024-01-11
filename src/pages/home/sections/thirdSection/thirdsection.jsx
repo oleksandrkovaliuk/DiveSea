@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "../../../../components/table";
 import s from "./thirdsection.module.scss";
-import { userData } from "../../../../components/userData";
+import { userData } from "../../../../shared/userData";
 export const ThirdSectione = () => {
   return (
     <div className={s.top_colection}>
