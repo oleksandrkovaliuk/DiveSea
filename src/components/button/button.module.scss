@@ -2,7 +2,7 @@
   transition: 0.3s;
   text-align: center;
   border-radius: 11px;
-  min-width:120px;
+  min-width: 120px;
   text-transform: uppercase;
   position: relative;
   z-index: 2;
@@ -39,26 +39,6 @@
     line-height: 130%;
     letter-spacing: 0.214px;
   }
-  &.specificClassFollow {
-    padding: 6px 13px;
-    min-width: unset;
-    text-transform: unset;
-    border-radius: 6.965px;
-    border: 2px solid var(--color-neutrals6);
-    color: #23262f;
-    text-align: center;
-    font-family: var(--font-DmSans);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 16px;
-    background-color: transparent;
-    transition: 0.5s;
-    &:hover {
-      color: #23262f;
-      background-color: transparent;
-    }
-  }
   &.primary {
     background-color: #000;
     color: #fff;
@@ -66,8 +46,8 @@
     &:hover {
       color: #000;
       background-color: transparent;
-      svg path{
-        stroke:#000;
+      svg path {
+        stroke: #000;
       }
     }
   }
@@ -90,7 +70,7 @@
     border: 2px solid #fff;
     color: #fff;
     background-color: transparent;
-    &:hover{
+    &:hover {
       background-color: #fff;
       color: var(--text-grayblack);
     }

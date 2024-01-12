@@ -22,8 +22,10 @@
     button {
       min-width: 51px;
       border: 2.2px solid #000;
-      // font-family: var(--font-Manrope);
       font-weight: 500;
+      display: flex;
+      gap: 7px;
+      align-items: center;
     }
   }
   .productWrap {

@@ -67,7 +67,7 @@ export const FourthSectione = () => {
   const handleClickForAll = () => {
     setFilteredData(cardInfo);
     setDropMenudPosition(null);
-    setFocusBtn(null);
+    setFocusBtn("all");
   };
   return (
     <div className={f.marketplace}>
@@ -88,7 +88,7 @@ export const FourthSectione = () => {
           onClick={handleClickForAll}
           size={"small"}
           variants={"outlined"}
-          colors={"secondary"}
+          colors={focusBtn === "all" ? "focus" : " secondary"}
         >
           All
         </Button>
@@ -99,32 +99,27 @@ export const FourthSectione = () => {
           }}
           size={"small"}
           variants={"outlined"}
-          specific={"withSvg"}
-          colors={"secondary"}
+          colors={focusBtn === "categoryName" ? "focus" : " secondary"}
         >
           <Category />
           Category
         </Button>
         <Button
-          focus={focusBtn === "collectionType"}
           onClick={(event) => {
             handleOpenDropdownFilter(event, "collectionType");
           }}
           size={"small"}
           variants={"outlined"}
-          specific={"withSvg"}
-          colors={"secondary"}
+          colors={focusBtn === "collectionType" ? "focus" : " secondary"}
         >
           <Collection />
           Collection
         </Button>
         <Button
-          focus={focusBtn === "priceType"}
           onClick={(event) => handleOpenDropdownFilter(event, "priceType")}
           size={"small"}
           variants={"outlined"}
-          specific={"withSvg"}
-          colors={"secondary"}
+          colors={focusBtn === "priceType" ? "focus" : " secondary"}
         >
           <Price />
           Price

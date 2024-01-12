@@ -1,0 +1,20 @@
+.followBtn {
+  padding: 6px 13px;
+  min-width: unset;
+  text-transform: unset;
+  border-radius: 6.965px;
+  border: 2px solid var(--color-neutrals6);
+  color: #23262f;
+  text-align: center;
+  font-family: var(--font-DmSans);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  background-color: transparent;
+  transition: 0.5s;
+  &:hover {
+    color: #23262f;
+    background-color: transparent;
+  }
+}

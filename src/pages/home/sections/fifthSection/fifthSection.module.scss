@@ -47,8 +47,11 @@
             }
           }
         }
-        button{
+        button {
           text-transform: unset;
+          display: flex;
+          gap: 11px;
+          align-items: center;
         }
       }
       .right_block {

@@ -1,11 +1,11 @@
 export const ButtonVariants = {
-  text: "text",
   outlined: "outlined",
   outlinedWhite: "outlinedWhite",
   containedWhite: "containedWhite",
   contained: "contained",
 };
 export const ButtonColors = {
+  focused: "focus",
   primary: "primary",
   secondary: "secondary",
 };
@@ -16,7 +16,3 @@ export const ButtonSizes = {
   medium: "medium",
   fullSize: "fullSize",
 };
-export const SpecificButton = {
-  follow:"follow",
-  withSvg: "withSvg",
-}

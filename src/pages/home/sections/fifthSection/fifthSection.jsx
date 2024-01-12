@@ -9,6 +9,7 @@ import { Tick } from "../../../../icons/tick";
 import { Button } from "../../../../components/button";
 import { ArrowRight } from "../../../../icons/arrowRight";
 import { Collaps } from "../../../../components/collaps";
+import { FollowBtn } from "../../../../components/followBtn";
 export const FifthSectione = () => {
   const [filteredData, setFilterData] = useState([]);
   const [exploreMoreBtn, setExploreBtn] = useState(false);
@@ -81,7 +82,6 @@ export const FifthSectione = () => {
             <Button
               colors={"primary"}
               variants={"contained"}
-              specific={"withSvg"}
               size={"medium"}
               onClick={() => exploreMoreClickHandler()}
             >
@@ -93,10 +93,7 @@ export const FifthSectione = () => {
             <div className={f.best_seller}>
               <h2 className={f.title}>Best Seller</h2>
               <UserInfo data={userData.slice(0, 6)} cropped>
-                {/* <button onClick={(event) => followBtnClickHandler(event)}>
-                  follow
-                </button> */}
-                <Button specific={"follow"}>follow</Button>
+                <FollowBtn >follow</FollowBtn>
               </UserInfo>
             </div>
             {filteredData.map((item) => (
