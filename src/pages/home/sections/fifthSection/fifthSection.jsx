@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import f from "./fifthSection.module.scss";
 import { userData } from "../../../../shared/userData";
 import { VerifiedUser } from "../../../../icons/verifiedUser";
@@ -11,7 +11,7 @@ import { ArrowRight } from "../../../../icons/arrowRight";
 import { Collaps } from "../../../../components/collaps";
 import { FollowBtn } from "../../../../components/followBtn";
 export const FifthSectione = () => {
-  const [filteredData, setFilterData] = useState([]);
+  const [filteredData, setFilterData] = useState([userData[1]]);
   const [exploreMoreBtn, setExploreBtn] = useState(false);
   const formatDate = (date) => {
     const day = date.getDate();
@@ -35,7 +35,7 @@ export const FifthSectione = () => {
     document.querySelector("#fifthSection").style.marginBottom = "180px";
     return setExploreBtn(false);
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     const intervalForItem = setInterval(() => {
       const generateRandomIndex = Math.floor(Math.random() * 14) + 1;
       const newItem = [userData[generateRandomIndex]];

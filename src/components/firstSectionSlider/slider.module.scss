@@ -20,12 +20,13 @@
     right: 0;
   }
 }
-@media (max-width: 1280px) {
+@media (max-width: 1370px) {
   .slider_container {
     max-width: 554px;
     position: relative;
     .switcher_wrap {
       bottom: 22%;
+      left:20%;
     }
     .arrow {
       max-height:91px;

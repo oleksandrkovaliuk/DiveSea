@@ -1,9 +1,10 @@
 .sixthSection_container {
   padding-inline: 97px;
-  margin-bottom:160px;
+  margin-bottom: 160px;
   .sixSection_wrap {
     max-width: 1245px;
     width: 100%;
+    margin: auto;
     padding-block: 31px;
     padding-inline: 66px 22px;
     background-color: var(--text-grayblack);
@@ -43,25 +44,69 @@
     }
     .img {
       position: relative;
-      z-index:2;
+      z-index: 2;
       .main_img {
         border-radius: 15.793px;
-        min-width:369px;
-        max-height:249px;
+        min-width: 369px;
+        max-height: 249px;
         width: 100%;
-        z-index:1090;
+        z-index: 1090;
       }
       .back_img {
         position: absolute;
         top: 15px;
         min-width: 390px;
-        max-height:249px;
+        max-height: 249px;
         width: 100%;
         border-radius: 7.554px;
         filter: blur(26.437305450439453px);
-        z-index:-1;
-        left:50%;
-        transform:translateX(-50%);
+        z-index: -1;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .sixthSection_container {
+    padding-inline: 70px;
+    margin-bottom: 160px;
+    .sixSection_wrap {
+      max-width: 885px;
+      padding-block: 22px;
+      padding-inline: 46px 22px;
+      border-radius: 21.335px;
+      .left_block {
+        .title {
+          font-size: 32.003px;
+          line-height: 130%;
+          letter-spacing: 0.32px;
+          margin-bottom: 8px;
+        }
+        .disc {
+          font-size: 14.412px;
+          line-height: 130%;
+          letter-spacing: 0.144px;
+          margin-bottom: 35px;
+        }
+        .buttons {
+          gap: 21px;
+        }
+      }
+      .img {
+        position: relative;
+        z-index: 2;
+        .main_img {
+          border-radius: 11.232px;
+          min-width: 262px;
+          max-height: 177px;
+        }
+        .back_img {
+          min-width: 277px;
+          max-height: 177px;
+          border-radius: 5.372px;
+          filter: blur(18.801748275756836px);
+        }
       }
     }
   }

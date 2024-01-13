@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useLayoutEffect, useState } from "react";
 import { cardInfo } from "../../../../shared/cardInfo";
 import s from "./sixthSection.module.scss";
 import { Button } from "../../../../components/button";
 export const SixthSectione = () => {
-  const [randomImg, setRandomImg] = useState([]);
-  useEffect(() => {
+  const [randomImg, setRandomImg] = useState([cardInfo[1]]);
+  useLayoutEffect(() => {
     const intervalForImg = setInterval(() => {
       const generateRandomNum = Math.floor(Math.random() * 14) + 1;
       const newItem = [cardInfo[generateRandomNum]];

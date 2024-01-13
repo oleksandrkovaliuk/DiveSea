@@ -5,22 +5,23 @@
   top: 0;
   bottom: 0;
   background-color: #0000000f;
-  z-index:1;
+  z-index: 1;
+  cursor: pointer;
 }
 .dropmenu_wrap {
   position: fixed;
-  // top:-300%;
   background-color: #000;
   border: 2px solid #000;
 
   border-radius: 10px;
-  padding: 15px;
+  padding: 9px;
+  padding-top:11px;
   width: 100%;
   border-top-left-radius: unset;
   border-top-right-radius: unset;
   border-top: unset;
   transition: 0.3s;
-  z-index:1;
+  z-index: 1;
   .list_menu {
     list-style: none;
     li {
@@ -30,10 +31,28 @@
         color: var(--color-white);
         font-size: 16px;
         font-family: var(--font-Poppins);
-        padding-inline:2px;
+        padding-inline: 2px;
         &:hover {
           background-color: var(--background-white);
-          color:#000;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .dropmenu_wrap {
+    border-radius: 9px;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+    padding: 6px;
+    padding-top:10px;
+    .list_menu {
+      li {
+        button {
+          font-size: 11.004px;
+          line-height: 150%;
+          letter-spacing: 0.157px;
         }
       }
     }

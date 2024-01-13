@@ -1,6 +1,7 @@
 .table {
   max-width: 1247px;
   width: 100%;
+  margin:auto;
   tr {
     th {
       color: #93989a;
@@ -39,26 +40,27 @@
       width: 100%;
       text-align: left;
       img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+        width: 84px;
+        height: 84px;
+        border-radius: 1750.911px;
+        border: 3.502px solid #fff;
         flex-shrink: 0;
       }
       .fio {
         text-align: left;
         .name {
-            color: var(--text-grayblack);
+          color: var(--text-grayblack);
 
-            font-family: var(--font-Poppins);
-            font-size: 19.923px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 140%;
+          font-family: var(--font-Poppins);
+          font-size: 28.015px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 140%;
         }
         .nick {
           color: var(--text-disbluegray);
           font-family: var(--font-Poppins);
-          font-size: 16.188px;
+          font-size: 22.762px;
           font-style: normal;
           font-weight: 400;
           line-height: 150%;
@@ -69,28 +71,92 @@
     td {
       text-align: center;
       padding-block: 23px 27px !important;
-      border-bottom: 1px solid #ebe9e9;
+      border-bottom: 1.2px solid #ebe9e9;
 
       .profitNumbers {
         color: #010101;
         font-family: var(--font-Poppins);
-        font-size: 16.822px;
+        font-size: 24.513px;
         font-style: normal;
         font-weight: 500;
         line-height: 130%;
-        letter-spacing: 0.168px;
+        letter-spacing: 0.245px;
       }
-      .profitNumbers_profit{
+      .profitNumbers_profit {
         color: var(--color-green);
         font-family: var(--font-Poppins);
-        font-size: 17.433px;
+        font-size: 24.513px;
         font-style: normal;
         font-weight: 500;
-        line-height: 130%;
-        letter-spacing: 0.174px;
+        line-height: 130%; /* 31.867px */
+        letter-spacing: 0.245px;
       }
       &:last-child {
         text-align: right;
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .table {
+    max-width: 886px;
+    tr {
+      th {
+        font-size: 15.646px;
+        line-height: 130%;
+        letter-spacing: 0.156px;
+      }
+      th:first-child {
+        width: 323px;
+        text-align: left;
+      }
+    }
+    .userField {
+      td:first-child {
+        padding-top: 33px !important;
+      }
+      .user_fio {
+        gap: 16px;
+        max-width: 323px;
+        img {
+          width: 59.77px;
+          height: 59.77px;
+          border-radius: 1245.218px;
+          border: 2.49px solid #fff;
+          flex-shrink: 0;
+        }
+        .fio {
+          text-align: left;
+          .name {
+            font-size: 19.923px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+          }
+          .nick {
+            font-size: 16.188px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+          }
+        }
+      }
+
+      td {
+        padding-block: 13px 12px !important;
+
+        .profitNumbers {
+          font-size: 17.433px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 140%;
+        }
+        .profitNumbers_profit {
+          font-size: 17.433px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 140%;
+        }
       }
     }
   }

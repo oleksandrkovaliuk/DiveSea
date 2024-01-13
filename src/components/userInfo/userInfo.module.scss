@@ -113,3 +113,82 @@
     }
   }
 }
+@media (max-width: 1280px) {
+  .user_wrap {
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+    .user_info {
+      gap: 9px;
+      .img {
+        img {
+          border-radius: 27px;
+          width: 27px;
+          height: 27px;
+        }
+        &::after {
+          bottom: -3px;
+          right: -4px;
+          width: 13px;
+          height: 13px;
+          font-size: 7.232px;
+          line-height: 150%;
+          letter-spacing: 0.06px;
+        }
+      }
+      .text {
+        .name {
+          font-size: 9.642px;
+          line-height: 140%;
+        }
+        .nick {
+          font-size: 7.834px;
+          line-height: 150%;
+        }
+      }
+    }
+    .user_accomplish {
+      span {
+        font-size: 8.437px;
+        line-height: 150%;
+      }
+      .positive {
+        color: var(--color-green);
+      }
+      .negative {
+        color: var(--color-red);
+      }
+    }
+    &.cropped {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      .user_info {
+        gap: 7px;
+        .img {
+          img {
+            width: 34px !important;
+            height: 34px !important;
+          }
+          &::after {
+            top: 0px;
+            bottom: 0;
+            right: -2px;
+            background-color: #23262f;
+            color: var(--color-neutrals8);
+          }
+        }
+        .text {
+          .name {
+            font-size: 8.68px;
+            line-height: 14.879px;
+          }
+          .nick {
+            font-size: 7.44px;
+            line-height: 12.4px;
+          }
+        }
+      }
+    }
+  }
+}
