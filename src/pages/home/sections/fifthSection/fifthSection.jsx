@@ -93,7 +93,7 @@ export const FifthSectione = () => {
             <div className={f.best_seller}>
               <h2 className={f.title}>Best Seller</h2>
               <UserInfo data={userData.slice(0, 6)} cropped>
-                <FollowBtn >follow</FollowBtn>
+                <FollowBtn>follow</FollowBtn>
               </UserInfo>
             </div>
             {filteredData.map((item) => (
@@ -131,11 +131,12 @@ export const FifthSectione = () => {
                 <img src="/images/SmallestEclipse.png" alt="smalEclips"></img>
                 {userData.slice(0, 4).map((item, index) => (
                   <img
+                    key={item.id}
                     className={f.profile}
                     data-profile-number={index + 1}
                     src={item.img}
                     alt="profile1"
-                  ></img>
+                  />
                 ))}
               </div>
             </div>
@@ -144,11 +145,12 @@ export const FifthSectione = () => {
                 <img src="/images/BiggestEclipse.png" alt="bigEclips"></img>
                 {userData.slice(0, 5).map((item, index) => (
                   <img
+                    key={item.id}
                     className={f.profile}
                     data-profile-number={index + 1}
                     src={item.img}
                     alt="profile1"
-                  ></img>
+                  />
                 ))}
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { HomePage } from "../pages/home";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/header";
 import { Discover } from "../pages/discover/discover";
 import { NotFound } from "../pages/ifNotFound/notFound";

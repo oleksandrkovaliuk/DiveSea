@@ -30,8 +30,8 @@ export const SimpleSLider = () => {
     <div className="simpleSlider">
       <Slider ref={sliderRef} {...settings}>
         {cardInfo.map((card) => (
-          <div className={s.slides}>
-            <BigCard key={card.id} card={card} />
+          <div key={card.id} className={s.slides}>
+            <BigCard card={card} />
           </div>
         ))}
       </Slider>
