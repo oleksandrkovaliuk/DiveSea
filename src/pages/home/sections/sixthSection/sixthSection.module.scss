@@ -12,35 +12,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .left_block {
-      .title {
-        color: #fff;
-        font-family: var(--font-Poppins);
-        font-size: 45px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
-        letter-spacing: 0.45px;
-        margin-bottom: 12px;
-      }
-      .disc {
-        color: #d4d4d4;
+  }
+  .title {
+    color: #fff;
+    font-family: var(--font-Poppins);
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: 0.45px;
+    margin-bottom: 12px;
+  }
+  .disc {
+    color: #d4d4d4;
 
-        font-family: var(--font-Poppins);
-        font-size: 20.265px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 130%;
-        letter-spacing: 0.203px;
-        margin-bottom: 50px;
-      }
-      .buttons {
-        display: flex;
-        gap: 30px;
-        button {
-          text-transform: unset;
-        }
-      }
+    font-family: var(--font-Poppins);
+    font-size: 20.265px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: 0.203px;
+    margin-bottom: 50px;
+  }
+  .buttons {
+    display: flex;
+    gap: 30px;
+    button {
+      text-transform: unset;
     }
   }
 }
@@ -52,38 +50,38 @@
       max-width: 885px;
       padding-block: 22px;
       padding-inline: 46px 22px;
-      border-radius: 21.335px;
-      .left_block {
-        .title {
-          font-size: 32.003px;
-          line-height: 130%;
-          letter-spacing: 0.32px;
-          margin-bottom: 8px;
-        }
-        .disc {
-          font-size: 14.412px;
-          line-height: 130%;
-          letter-spacing: 0.144px;
-          margin-bottom: 35px;
-        }
-        .buttons {
-          gap: 21px;
-        }
+      border-radius: 21px;
+
+      .title {
+        font-size: 32px;
+        line-height: 130%;
+        letter-spacing: 0.32px;
+        margin-bottom: 8px;
       }
+      .disc {
+        font-size: 14px;
+        line-height: 130%;
+        letter-spacing: 0.14px;
+        margin-bottom: 35px;
+      }
+      .buttons {
+        gap: 21px;
+      }
+
       .img {
         position: relative;
         z-index: 2;
-        .main_img {
-          border-radius: 11.232px;
-          min-width: 262px;
-          max-height: 177px;
-        }
-        .back_img {
-          min-width: 277px;
-          max-height: 177px;
-          border-radius: 5.372px;
-          filter: blur(18.801748275756836px);
-        }
+      }
+      .main_img {
+        border-radius: 11px;
+        min-width: 262px;
+        max-height: 177px;
+      }
+      .back_img {
+        min-width: 277px;
+        max-height: 177px;
+        border-radius: 5.372px;
+        filter: blur(19px);
       }
     }
   }

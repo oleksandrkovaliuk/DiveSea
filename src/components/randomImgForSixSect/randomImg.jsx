@@ -14,11 +14,9 @@ export const RandomImg = () => {
     };
   }, []);
   return randomImg.map((item) => (
-    <div className={s.img}>
-      <Fragment key={item.id}>
-        <img className={s.main_img} src={item.img} alt="mainImg"></img>
-        <img className={s.back_img} src={item.img} alt="SecongImg"></img>
-      </Fragment>
+    <div key={item.id} className={s.img}>
+      <img className={s.main_img} src={item.img} alt="mainImg"></img>
+      <img className={s.back_img} src={item.img} alt="SecongImg"></img>
     </div>
   ));
 };
