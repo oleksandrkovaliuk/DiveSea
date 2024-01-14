@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import t from "./table.module.scss";
 import { EthValue } from "../value";
 import { TableHeaders } from "./tableheader";
-
+import { CryptoData } from "../cryptoData/getCryptoData";
 export const Table = ({ data, limit }) => {
   let sliced = data;
   if (limit) {
@@ -25,7 +25,7 @@ export const Table = ({ data, limit }) => {
               <EthValue idEditable full value={tr.volume} />
             </td>
             <td>
-              <span className={t.profitNumbers_profit}>{tr.profit}</span>
+              {/* <CryptoData rate coins={"ETH"} /> */}
             </td>
             <td>
               <EthValue idEditable full value={tr.floorprice} />

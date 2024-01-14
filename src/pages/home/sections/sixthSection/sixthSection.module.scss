@@ -42,29 +42,6 @@
         }
       }
     }
-    .img {
-      position: relative;
-      z-index: 2;
-      .main_img {
-        border-radius: 15.793px;
-        min-width: 369px;
-        max-height: 249px;
-        width: 100%;
-        z-index: 1090;
-      }
-      .back_img {
-        position: absolute;
-        top: 15px;
-        min-width: 390px;
-        max-height: 249px;
-        width: 100%;
-        border-radius: 7.554px;
-        filter: blur(26.437305450439453px);
-        z-index: -1;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    }
   }
 }
 @media (max-width: 1280px) {

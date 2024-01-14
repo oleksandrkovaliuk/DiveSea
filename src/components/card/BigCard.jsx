@@ -3,6 +3,7 @@ import { Card } from "./card";
 import { EthValue } from "../value";
 import { Button } from "../button";
 import s from "./card.module.scss";
+import { ButtonColors, ButtonSizes, ButtonVariants } from "../../shared/enums";
 
 export const BigCard = ({ card }) => {
   return (
@@ -14,7 +15,7 @@ export const BigCard = ({ card }) => {
             <h3 className={s.currentBid_text}>Current bid</h3>
             <EthValue value={card.value} />
           </div>
-          <Button size={"small"} colors={"primary"} variants={"contained"}>PLACE BID</Button>
+          <Button size={ButtonSizes.small} colors={ButtonColors.primary} variants={ButtonVariants.contained}>PLACE BID</Button>
         </div>
       </div>
     </Card>

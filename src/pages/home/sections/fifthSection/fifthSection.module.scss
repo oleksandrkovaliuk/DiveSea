@@ -77,94 +77,10 @@
             margin-bottom: 23px;
           }
         }
-        .new_bit {
-          position: absolute;
-          right: -50%;
-          top: -27px;
-          padding: 8px;
-          border-radius: 9.453px;
-          background: linear-gradient(
-            217deg,
-            #fcfcfd -0.01%,
-            rgba(252, 252, 253, 0.6) 100%
-          );
-          box-shadow: 0px 13.504px 20.256px 0px rgba(70, 70, 70, 0.1);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          max-width: 325px;
-          width: 100%;
-          z-index: 2;
-          .user_bit_wrap {
-            display: flex;
-            gap: 11px;
-            align-items: flex-start;
-            .user_img_wrap {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              .img {
-                position: relative;
-                padding: 2px;
-                img {
-                  border-radius: 34.178px;
-                  width: 39px;
-                  height: 39px;
-                }
-                svg {
-                  position: absolute;
-                  top: 0;
-                  right: -2px;
-                }
-              }
-            }
-            .info_about_bit {
-              text-align: left;
-              .top_info {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                span {
-                  color: var(--color-gray94);
-                  font-family: var(--font-Poppins);
-                  font-size: 13.291px;
-                  font-style: normal;
-                  font-weight: 500;
-                  line-height: 22.785px;
-                }
-                .rotation {
-                  color: var(--text-grayblack);
-                }
-              }
-              h2 {
-                color: var(--text-grayblack);
-
-                font-family: var(--font-Poppins);
-                font-size: 11.393px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: 18.988px;
-              }
-              .date {
-                color: var(--color-gray94);
-                font-family: var(--font-Poppins);
-                font-size: 11.393px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: 18.988px;
-              }
-            }
-          }
-          .nft_img {
-            border-radius: 10px;
-            max-width: 60px;
-            max-height: 60px;
-          }
-        }
         .dots {
           position: absolute;
           z-index: -1;
-          right: -84%;
+          right: -70%;
           bottom: 11%;
         }
       }
@@ -386,48 +302,6 @@
               font-size: 13.179px;
               line-height: 135%;
               letter-spacing: 0.126px;
-            }
-          }
-          .new_bit {
-            max-width: 231px;
-            .user_bit_wrap {
-              gap: 8px;
-              .user_img_wrap {
-                gap: 7px;
-                .img {
-                  img {
-                    border-radius: 24px;
-                    width: 28px;
-                    height: 28px;
-                  }
-                  svg {
-                    position: absolute;
-                    top: 0;
-                    right: -2px;
-                  }
-                }
-              }
-              .info_about_bit {
-                .top_info {
-                  span {
-                    font-size: 9.453px;
-                    line-height: 16.204px;
-                  }
-                }
-                h2 {
-                  font-size: 8.102px;
-                  line-height: 13.504px;
-                }
-                .date {
-                  font-size: 8.102px;
-                  line-height: 13.504px;
-                }
-              }
-            }
-            .nft_img {
-              border-radius: 7.427px;
-              max-width: 43px;
-              max-height: 43px;
             }
           }
           .dots {

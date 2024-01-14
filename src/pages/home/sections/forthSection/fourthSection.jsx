@@ -7,6 +7,11 @@ import f from "./fourthSection.module.scss";
 import { BigCard } from "../../../../components/card/BigCard";
 import { DropMenu } from "../../../../components/dropDownBtnMenu";
 import { cardInfo } from "../../../../shared/cardInfo";
+import {
+  ButtonColors,
+  ButtonSizes,
+  ButtonVariants,
+} from "../../../../shared/enums";
 
 export const FourthSectione = () => {
   const [filteredData, setFilteredData] = useState(cardInfo);
@@ -86,9 +91,13 @@ export const FourthSectione = () => {
       <div className={f.markeplace_nav}>
         <Button
           onClick={handleClickForAll}
-          size={"small"}
-          variants={"outlined"}
-          colors={focusBtn === "all" ? "focus" : " secondary"}
+          size={ButtonSizes.small}
+          variants={ButtonVariants.outlined}
+          colors={
+            focusBtn === "all"
+              ? `${ButtonColors.focused}`
+              : `${ButtonColors.secondary}`
+          }
         >
           All
         </Button>
@@ -97,9 +106,13 @@ export const FourthSectione = () => {
           onClick={(event) => {
             handleOpenDropdownFilter(event, "categoryName");
           }}
-          size={"small"}
-          variants={"outlined"}
-          colors={focusBtn === "categoryName" ? "focus" : " secondary"}
+          size={ButtonSizes.small}
+          variants={ButtonVariants.outlined}
+          colors={
+            focusBtn === "categoryName"
+              ? `${ButtonColors.focused}`
+              : `${ButtonColors.secondary}`
+          }
         >
           <Category />
           Category
@@ -108,18 +121,26 @@ export const FourthSectione = () => {
           onClick={(event) => {
             handleOpenDropdownFilter(event, "collectionType");
           }}
-          size={"small"}
-          variants={"outlined"}
-          colors={focusBtn === "collectionType" ? "focus" : " secondary"}
+          size={ButtonSizes.small}
+          variants={ButtonVariants.outlined}
+          colors={
+            focusBtn === "collectionType"
+              ? `${ButtonColors.focused}`
+              : `${ButtonColors.secondary}`
+          }
         >
           <Collection />
           Collection
         </Button>
         <Button
           onClick={(event) => handleOpenDropdownFilter(event, "priceType")}
-          size={"small"}
-          variants={"outlined"}
-          colors={focusBtn === "priceType" ? "focus" : " secondary"}
+          size={ButtonSizes.small}
+          variants={ButtonVariants.outlined}
+          colors={
+            focusBtn === "priceType"
+              ? `${ButtonColors.focused}`
+              : `${ButtonColors.secondary}`
+          }
         >
           <Price />
           Price

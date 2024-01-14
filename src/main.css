@@ -29,7 +29,6 @@
   --color-green: #10c352;
 }
 body {
-  max-width: 1440px;
   margin: auto;
   background-color: var(--background-white);
 }

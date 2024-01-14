@@ -1,8 +1,6 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import f from "./fifthSection.module.scss";
 import { userData } from "../../../../shared/userData";
-import { VerifiedUser } from "../../../../icons/verifiedUser";
-import { Dot } from "../../../../icons/dot";
 import { UserInfo } from "../../../../components/userInfo";
 import { Viewed } from "../../../../components/recentViewed";
 import { Tick } from "../../../../icons/tick";
@@ -10,23 +8,10 @@ import { Button } from "../../../../components/button";
 import { ArrowRight } from "../../../../icons/arrowRight";
 import { Collaps } from "../../../../components/collaps";
 import { FollowBtn } from "../../../../components/followBtn";
+import { ButtonColors, ButtonSizes, ButtonVariants } from "../../../../shared/enums";
+import { NewBit } from "../../../../components/newBit";
 export const FifthSectione = () => {
-  const [filteredData, setFilterData] = useState([userData[1]]);
   const [exploreMoreBtn, setExploreBtn] = useState(false);
-  const formatDate = (date) => {
-    const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "long" }); // назва місяця
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-
-    const formattedHours = hours % 12 || 12;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-
-    const formattedTime = `${day} ${month} ${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
-    return formattedTime;
-  };
   const exploreMoreClickHandler = () => {
     if (exploreMoreBtn !== true) {
       document.querySelector("#fifthSection").style.marginBottom = "600px";
@@ -35,15 +20,6 @@ export const FifthSectione = () => {
     document.querySelector("#fifthSection").style.marginBottom = "180px";
     return setExploreBtn(false);
   };
-  useLayoutEffect(() => {
-    const intervalForItem = setInterval(() => {
-      const generateRandomIndex = Math.floor(Math.random() * 14) + 1;
-      const newItem = [userData[generateRandomIndex]];
-      setFilterData(newItem);
-    }, 4000);
-
-    return () => clearInterval(intervalForItem);
-  }, []);
   return (
     <div className={f.fifthSection_exploreMore}>
       <div id="fifthSection" className={f.fifth_section}>
@@ -80,9 +56,9 @@ export const FifthSectione = () => {
               </li>
             </ul>
             <Button
-              colors={"primary"}
-              variants={"contained"}
-              size={"medium"}
+              colors={ButtonColors.primary}
+              variants={ButtonVariants.contained}
+              size={ButtonSizes.medium}
               onClick={() => exploreMoreClickHandler()}
             >
               Explore More
@@ -96,28 +72,7 @@ export const FifthSectione = () => {
                 <FollowBtn>follow</FollowBtn>
               </UserInfo>
             </div>
-            {filteredData.map((item) => (
-              <div key={item.id} className={f.new_bit}>
-                <div className={f.user_bit_wrap}>
-                  <div className={f.user_img_wrap}>
-                    <Dot />
-                    <div className={f.img}>
-                      <img src={item.img} alt="userWhoDidBit"></img>
-                      <VerifiedUser className={f.verifiedUser} />
-                    </div>
-                  </div>
-                  <div className={f.info_about_bit}>
-                    <div className={f.top_info}>
-                      <span>New Bid</span>
-                      <span className={f.rotation}>Rotation</span>
-                    </div>
-                    <h2>{item.volume} ETH</h2>
-                    <h3 className={f.date}>{formatDate(new Date())}</h3>
-                  </div>
-                </div>
-                <img className={f.nft_img} src={item.img} alt="nftImg"></img>
-              </div>
-            ))}
+            <NewBit />
             <Viewed bestSellPos />
             <img className={f.dots} src="/images/Dots.png" alt="img" />
           </div>
@@ -162,7 +117,7 @@ export const FifthSectione = () => {
               Our vibrant community is full of collectors, artists, and
               enthusiasts who share a passion for one-of-a-kind digital.
             </p>
-            <Button colors={"primary"} size={"medium"} variants={"contained"}>
+            <Button colors={ButtonColors.primary} size={ButtonSizes.medium} variants={ButtonVariants.contained}>
               Join Our Community
             </Button>
           </div>

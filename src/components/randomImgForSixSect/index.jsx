@@ -1,0 +1,1 @@
+export { RandomImg } from "./randomImg";

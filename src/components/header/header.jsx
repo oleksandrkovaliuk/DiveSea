@@ -4,6 +4,7 @@ import { Logo } from "../../icons/Logo";
 import { Button } from "../button/button";
 import { SearchIcon } from "../../icons/search";
 import { Link } from "react-router-dom";
+import { ButtonColors, ButtonSizes, ButtonVariants } from "../../shared/enums";
 
 export const Header = () => {
   return (
@@ -41,7 +42,7 @@ export const Header = () => {
             Search Art Work / Creator
           </label>
         </div>
-        <Button size={"medium"} colors={"primary"} variants={"contained"}>Connect Wallet</Button>
+        <Button size={ButtonSizes.medium} colors={ButtonColors.primary} variants={ButtonVariants.contained}>Connect Wallet</Button>
       </div>
     </div>
   );
