@@ -1,40 +1,113 @@
 import React, { useEffect, useState } from "react";
 import t from "./table.module.scss";
-import { EthValue } from "../value";
 import { TableHeaders } from "./tableheader";
-import { CryptoData } from "../cryptoData/getCryptoData";
-export const Table = ({ data, limit }) => {
-  let sliced = data;
-  if (limit) {
-    sliced = data.slice(0, 4);
-  }
+import { getCryptoList } from "../../service/api";
+export const Table = ({ up }) => {
+  const [coins, setCoins] = useState([]);
+
+  const formatMarketCap = (cap) => {
+    if (cap >= 1e12) {
+      return (
+        (cap / 1e12).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 4,
+          maximumFractionDigits: 3,
+        }) + " T"
+      );
+    } else if (cap >= 1e9) {
+      return (
+        (cap / 1e9).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 3,
+          maximumFractionDigits: 3,
+        }) + " B"
+      );
+    } else if (cap >= 1e6) {
+      return (
+        (cap / 1e6).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 3,
+        }) + "M"
+      );
+    } else if (cap >= 1e3) {
+      return (
+        (cap / 1e3).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 3,
+        }) + "K"
+      );
+    } else {
+      return cap.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 3,
+      });
+    }
+  };
+  const getApi = async () => {
+    const res = await getCryptoList();
+    localStorage.setItem("cryptoHistory", JSON.stringify(res));
+    const oldHistory = JSON.parse(localStorage.getItem("cryptoHistory"));
+    const newRes = oldHistory.map((item, index) => {
+      return {
+        ...item,
+        rate: item.rate.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 2,
+        }),
+        cap: formatMarketCap(item.cap),
+        volume: formatMarketCap(item.volume),
+      };
+    });
+    setCoins(newRes);
+    setTimeout(() => {
+      getApi();
+    }, 1000);
+  };
+  useEffect(() => {
+    getApi();
+  }, []);
   return (
     <table className={t.table}>
       <TableHeaders />
       <tbody>
-        {sliced.map((tr) => (
-          <tr key={tr.id} className={t.userField}>
-            <td className={t.user_fio}>
-              <img src={tr.img} alt="userAvatar"></img>
-              <div className={t.fio}>
-                <h2 className={t.name}>{tr.userName}</h2>
-                <h3 className={t.nick}>{tr.userNick}</h3>
+        {coins?.map((item) => (
+          <tr key={item.id} className={t.coin_field}>
+            <td className={t.coins}>
+              <img src={item.webp64} alt="coinAvatar"></img>
+              <div className={t.coin_info}>
+                <h2 className={t.coin_code}>{item.code}</h2>
+                <h3 className={t.coin_name}>{item.name}</h3>
               </div>
             </td>
             <td>
-              <EthValue idEditable full value={tr.volume} />
+              <span className={item.up ? t.price_up : t.price}>
+                {item.rate}
+              </span>
             </td>
             <td>
-              {/* <CryptoData rate coins={"ETH"} /> */}
+              <span className={t.otherInfo}>{item.cap}</span>
             </td>
             <td>
-              <EthValue idEditable full value={tr.floorprice} />
+              <span className={t.otherInfo}>{item.volume}</span>
             </td>
             <td>
-              <span className={t.profitNumbers}>{tr.owners}</span>
-            </td>
-            <td>
-              <span className={t.profitNumbers}>{tr.items}</span>
+              <span className={t.otherInfo}>
+                {"$" +
+                  item.allTimeHighUSD.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+              </span>
             </td>
           </tr>
         ))}

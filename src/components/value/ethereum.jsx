@@ -3,12 +3,12 @@ import s from "./bid.module.scss";
 import classNames from "classnames";
 import { Ethereum } from "../../icons/ethereum";
 
-export const EthValue = ({ value, bold, full, recentViewed}) => {
+export const EthValue = ({ value, bold, full, bestSeller}) => {
   const classes = classNames(s.bid, {
     [s.value]: value,
     [s.bold]: bold,
     [s.full]: full,
-    [s.recentViewed]:recentViewed
+    [s.bestSeller]: bestSeller
   });
   return (
     <div className={classes}>

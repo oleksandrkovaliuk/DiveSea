@@ -7,7 +7,6 @@ import {
   ButtonSizes,
   ButtonVariants,
 } from "../../../../shared/enums";
-import { CryptoData } from "../../../../components/cryptoData/getCryptoData";
 
 export const FirstSectione = () => {
   return (
@@ -15,7 +14,6 @@ export const FirstSectione = () => {
       <div className={m.firstsection_wrap}>
         <div className={m.left_information}>
           <h2 className={m.main_text}>Discover And Create NFTs</h2>
-          <CryptoData />
           <p className={m.discription}>
             Discover, Create and Sell NFTs On Our NFT Marketplace With Over
             Thousands Of NFTs And Get a<span> $20 bonus.</span>

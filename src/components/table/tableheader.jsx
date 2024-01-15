@@ -5,12 +5,11 @@ export const TableHeaders = () => {
   return (
     <thead>
       <tr className={t.titles}>
-        <th>Collection</th>
-        <th>Volume</th>
-        <th>24h %</th>
-        <th>Floor Price</th>
-        <th>Owners</th>
-        <th>Items</th>
+        <th>Coin</th>
+        <th>Price</th>
+        <th>Market Cap</th>
+        <th>Volume 24h</th>
+        <th>All-time High</th>
       </tr>
     </thead>
   );

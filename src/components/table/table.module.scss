@@ -1,7 +1,7 @@
 .table {
   max-width: 1247px;
   width: 100%;
-  margin:auto;
+  margin: auto;
   tr {
     th {
       color: #93989a;
@@ -28,11 +28,11 @@
       }
     }
   }
-  .userField {
+  .coin_field {
     td:first-child {
       padding-top: 33px !important;
     }
-    .user_fio {
+    .coins {
       display: flex;
       gap: 23px;
       align-items: center;
@@ -40,15 +40,14 @@
       width: 100%;
       text-align: left;
       img {
-        width: 84px;
-        height: 84px;
-        border-radius: 1750.911px;
-        border: 3.502px solid #fff;
+        width: 65px;
+        height: 65px;
+        // border-radius: 1750.911px;
         flex-shrink: 0;
       }
-      .fio {
+      .coin_info {
         text-align: left;
-        .name {
+        .coin_code {
           color: var(--text-grayblack);
 
           font-family: var(--font-Poppins);
@@ -57,7 +56,7 @@
           font-weight: 500;
           line-height: 140%;
         }
-        .nick {
+        .coin_name {
           color: var(--text-disbluegray);
           font-family: var(--font-Poppins);
           font-size: 22.762px;
@@ -73,7 +72,7 @@
       padding-block: 23px 27px !important;
       border-bottom: 1.2px solid #ebe9e9;
 
-      .profitNumbers {
+      .otherInfo {
         color: #010101;
         font-family: var(--font-Poppins);
         font-size: 24.513px;
@@ -82,8 +81,17 @@
         line-height: 130%;
         letter-spacing: 0.245px;
       }
-      .profitNumbers_profit {
-        color: var(--color-green);
+      .price {
+        color: red;
+        font-family: var(--font-Poppins);
+        font-size: 24.513px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 31.867px */
+        letter-spacing: 0.245px;
+      }
+      .price_up {
+        color: green;
         font-family: var(--font-Poppins);
         font-size: 24.513px;
         font-style: normal;
