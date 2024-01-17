@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
 import { getCryptoList } from "../../service/api";
-export const Table = ({ up }) => {
+export const Table = () => {
   const [coins, setCoins] = useState([]);
-
+  const [loaded, itsLoaded] = useState(false);
   const formatMarketCap = (cap) => {
     if (cap >= 1e12) {
       return (
@@ -53,31 +53,37 @@ export const Table = ({ up }) => {
   };
   const getApi = async () => {
     const res = await getCryptoList();
+    const oldInfo = JSON.parse(localStorage.getItem("cryptoHistory"));
+    if (oldInfo) {
+      const updatedInfo = res.map((newItem, index) => {
+        const checkRateChange = coins && newItem.rate > coins[index]?.rate;
+        return {
+          ...newItem,
+          up: checkRateChange,
+          formatedRate: newItem.rate.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 2,
+          }),
+          formatedCap: formatMarketCap(newItem.cap),
+          formatedVolume: formatMarketCap(newItem.volume),
+        };
+      });
+      setCoins(updatedInfo);
+    }
     localStorage.setItem("cryptoHistory", JSON.stringify(res));
-    const oldHistory = JSON.parse(localStorage.getItem("cryptoHistory"));
-    const newRes = oldHistory.map((item, index) => {
-      return {
-        ...item,
-        rate: item.rate.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 2,
-        }),
-        cap: formatMarketCap(item.cap),
-        volume: formatMarketCap(item.volume),
-      };
-    });
-    setCoins(newRes);
-    setTimeout(() => {
-      getApi();
-    }, 1000);
   };
   useEffect(() => {
-    getApi();
+    setInterval(() => {
+      getApi();
+    }, 1000);
   }, []);
+  // if (loading) {
+  //   return <div className={t.loading_screen}></div>;
+  // }
   return (
-    <table className={t.table}>
+    <table id="table" className={t.table}>
       <TableHeaders />
       <tbody>
         {coins?.map((item) => (
@@ -91,14 +97,14 @@ export const Table = ({ up }) => {
             </td>
             <td>
               <span className={item.up ? t.price_up : t.price}>
-                {item.rate}
+                {item.formatedRate}
               </span>
             </td>
             <td>
-              <span className={t.otherInfo}>{item.cap}</span>
+              <span className={t.otherInfo}>{item.formatedCap}</span>
             </td>
             <td>
-              <span className={t.otherInfo}>{item.volume}</span>
+              <span className={t.otherInfo}>{item.formatedVolume}</span>
             </td>
             <td>
               <span className={t.otherInfo}>
