@@ -89,22 +89,46 @@
         letter-spacing: 0.245px;
       }
       .price {
-        color: red;
+        color: #010101;
         font-family: var(--font-Poppins);
         font-size: 24.513px;
         font-style: normal;
         font-weight: 500;
         line-height: 130%; /* 31.867px */
         letter-spacing: 0.245px;
+        animation: goDown 0.7s linear forwards;
+      }
+      @keyframes goDown {
+        0% {
+          color: #010101;
+        }
+        50% {
+          color: red;
+        }
+        100% {
+          color: #010101;
+        }
       }
       .price_up {
-        color: green;
+        color: #010101;
         font-family: var(--font-Poppins);
         font-size: 24.513px;
         font-style: normal;
         font-weight: 500;
-        line-height: 130%; /* 31.867px */
+        line-height: 130%;
         letter-spacing: 0.245px;
+        animation: goUp 0.7s linear forwards;
+      }
+      @keyframes goUp {
+        0% {
+          color: #010101;
+        }
+        50% {
+          color: green;
+        }
+        100% {
+          color: #010101;
+        }
       }
       &:last-child {
         text-align: right;

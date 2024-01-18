@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
 import { getCryptoList } from "../../service/api";
 export const Table = () => {
   const [coins, setCoins] = useState([]);
-  const [loaded, itsLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
   const formatMarketCap = (cap) => {
     if (cap >= 1e12) {
       return (
@@ -51,38 +51,48 @@ export const Table = () => {
       });
     }
   };
-  const getApi = async () => {
-    const res = await getCryptoList();
-    const oldInfo = JSON.parse(localStorage.getItem("cryptoHistory"));
-    if (oldInfo) {
-      const updatedInfo = res.map((newItem, index) => {
-        const checkRateChange = coins && newItem.rate > coins[index]?.rate;
-        return {
-          ...newItem,
-          up: checkRateChange,
-          formatedRate: newItem.rate.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 1,
-            maximumFractionDigits: 2,
-          }),
-          formatedCap: formatMarketCap(newItem.cap),
-          formatedVolume: formatMarketCap(newItem.volume),
-        };
-      });
-      setCoins(updatedInfo);
+
+  const getCurrentData = useCallback(async () => {
+    try {
+      const res = await getCryptoList();
+      const oldInfo = JSON.parse(localStorage.getItem("cryptoHistory"));
+
+      if (oldInfo) {
+        const updatedInfo = res.map((newItem) => {
+          const oldItem = oldInfo.find((item) => item.name === newItem.name);
+          const checkRateChange = oldItem && newItem.rate > oldItem.rate;
+          return {
+            ...newItem,
+            up: checkRateChange,
+            formatedRate: newItem.rate.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 2,
+            }),
+            formatedCap: formatMarketCap(newItem.cap),
+            formatedVolume: formatMarketCap(newItem.volume),
+          };
+        });
+
+        setCoins(updatedInfo);
+      }
+
+      localStorage.setItem("cryptoHistory", JSON.stringify(res));
+    } catch (error) {
+      console.error("Error fetching crypto data:", error);
+    } finally {
+      setLoading(false);
     }
-    localStorage.setItem("cryptoHistory", JSON.stringify(res));
-  };
+  }, []);
   useEffect(() => {
     setInterval(() => {
-      getApi();
-    }, 1000);
-  }, []);
-  // if (loading) {
-  //   return <div className={t.loading_screen}></div>;
-  // }
-  return (
+      getCurrentData();
+    }, 2500);
+  }, [getCurrentData]);
+  return loading ? (
+    <div className={t.loading_screen}></div>
+  ) : (
     <table id="table" className={t.table}>
       <TableHeaders />
       <tbody>
@@ -96,7 +106,7 @@ export const Table = () => {
               </div>
             </td>
             <td>
-              <span className={item.up ? t.price_up : t.price}>
+              <span className={item.up ? t.price : t.price_up}>
                 {item.formatedRate}
               </span>
             </td>
