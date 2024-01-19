@@ -1,10 +1,30 @@
 import React, { useCallback, useEffect, useState } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
-import { getCryptoList } from "../../service/api";
+import { getCryptoList, setSort } from "../../service/api";
+import { FilterIcon } from "../../icons/filterIcon";
+import { DropMenu } from "../dropDownBtnMenu";
 export const Table = () => {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dropMenu, showDropMenu] = useState(false);
+  const [dropMenuPos, setDropMenuPosition] = useState(null);
+  const filterType = ["> to <", "< to >", "all"];
+  const handleDropMenuClick = (event) => {
+    setTimeout(() => {
+      const btn = event.target;
+      const btnInfo = btn.getBoundingClientRect();
+      const top = btnInfo.top;
+      const left = btnInfo.left;
+      const width = btnInfo.width;
+      const height = btnInfo.height;
+      setDropMenuPosition({ top, left, width, height });
+    });
+    showDropMenu(!dropMenu);
+  };
+  const handleCloseDropDownMenu = () => {
+    showDropMenu(false);
+  };
   const formatMarketCap = (cap) => {
     if (cap >= 1e12) {
       return (
@@ -51,7 +71,6 @@ export const Table = () => {
       });
     }
   };
-
   const getCurrentData = useCallback(async () => {
     try {
       const res = await getCryptoList();
@@ -90,44 +109,64 @@ export const Table = () => {
       getCurrentData();
     }, 2500);
   }, [getCurrentData]);
-  return loading ? (
-    <div className={t.loading_screen}></div>
-  ) : (
-    <table id="table" className={t.table}>
-      <TableHeaders />
-      <tbody>
-        {coins?.map((item) => (
-          <tr key={item.id} className={t.coin_field}>
-            <td className={t.coins}>
-              <img src={item.webp64} alt="coinAvatar"></img>
-              <div className={t.coin_info}>
-                <h2 className={t.coin_code}>{item.code}</h2>
-                <h3 className={t.coin_name}>{item.name}</h3>
-              </div>
-            </td>
-            <td>
-              <span className={item.up ? t.price : t.price_up}>
-                {item.formatedRate}
-              </span>
-            </td>
-            <td>
-              <span className={t.otherInfo}>{item.formatedCap}</span>
-            </td>
-            <td>
-              <span className={t.otherInfo}>{item.formatedVolume}</span>
-            </td>
-            <td>
-              <span className={t.otherInfo}>
-                {"$" +
-                  item.allTimeHighUSD.toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-              </span>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  return (
+    <div add={dropMenu ? true : false} className={t.table_container}>
+      {dropMenuPos?.left && dropMenu && (
+        <DropMenu
+          data={filterType}
+          left={dropMenuPos.left}
+          width={dropMenuPos.width}
+          top={dropMenuPos.top}
+          height={dropMenuPos.height}
+          closeDropDownMenu={handleCloseDropDownMenu}
+          typeWhite
+        />
+      )}
+      <FilterIcon
+        style={dropMenu ? { width: "100px" } : null}
+        className={t.filter_icon}
+        onClick={(event) => handleDropMenuClick(event)}
+      />
+      {loading ? (
+        <div className={t.loading_screen}></div>
+      ) : (
+        <table id="table" className={t.table}>
+          <TableHeaders />
+          <tbody>
+            {coins?.map((item) => (
+              <tr key={item.id} className={t.coin_field}>
+                <td className={t.coins}>
+                  <img src={item.webp64} alt="coinAvatar"></img>
+                  <div className={t.coin_info}>
+                    <h2 className={t.coin_code}>{item.code}</h2>
+                    <h3 className={t.coin_name}>{item.name}</h3>
+                  </div>
+                </td>
+                <td>
+                  <span className={item.up ? t.price : t.price_up}>
+                    {item.formatedRate}
+                  </span>
+                </td>
+                <td>
+                  <span className={t.otherInfo}>{item.formatedCap}</span>
+                </td>
+                <td>
+                  <span className={t.otherInfo}>{item.formatedVolume}</span>
+                </td>
+                <td>
+                  <span className={t.otherInfo}>
+                    {"$" +
+                      item.allTimeHighUSD.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
 };

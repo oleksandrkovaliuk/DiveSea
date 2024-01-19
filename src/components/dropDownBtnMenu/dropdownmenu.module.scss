@@ -15,13 +15,28 @@
 
   border-radius: 10px;
   padding: 9px;
-  padding-top:11px;
+  padding-top: 11px;
   width: 100%;
   border-top-left-radius: unset;
   border-top-right-radius: unset;
   border-top: unset;
   transition: 0.3s;
-  z-index: 1;
+  z-index: 3;
+  &.typeWhite {
+    background-color: var(--color-neutrals8);
+    border: 2px solid var(--color-neutrals8);
+    .list_menu {
+      li {
+        button {
+          color: #000;
+          &:hover {
+            background-color: #000;
+            color: var(--color-white);
+          }
+        }
+      }
+    }
+  }
   .list_menu {
     list-style: none;
     li {
@@ -46,7 +61,7 @@
     border-top-left-radius: unset;
     border-top-right-radius: unset;
     padding: 6px;
-    padding-top:10px;
+    padding-top: 10px;
     .list_menu {
       li {
         button {

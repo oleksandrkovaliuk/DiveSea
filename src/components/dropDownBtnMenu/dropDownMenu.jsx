@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import d from "./dropdownmenu.module.scss";
-
+import classNames from "classnames";
 export const DropMenu = ({
   data,
   left,
@@ -9,7 +9,11 @@ export const DropMenu = ({
   height,
   selectFilter,
   closeDropDownMenu,
+  typeWhite,
 }) => {
+  const classes = classNames(d.dropmenu_wrap, {
+    [d.typeWhite]: typeWhite,
+  });
   let style = {
     left: `${left}px`,
     top: `calc(${top}px + ${height}px - 11px)`,
@@ -26,7 +30,7 @@ export const DropMenu = ({
   return (
     <>
       <div className={d.back_block} onClick={closeDropDownMenu} />
-      <div id="dropDown" className={d.dropmenu_wrap} style={style}>
+      <div id="dropDown" className={classes} style={style}>
         <ul className={d.list_menu}>
           {data.map((value) => {
             return (
