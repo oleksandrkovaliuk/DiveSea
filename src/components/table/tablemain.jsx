@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
 import { getCryptoList } from "../../service/api";
 import { FilterIcon } from "../../icons/filterIcon";
 import { DropMenu } from "../dropDownBtnMenu";
 import { DownSvg } from "../../icons/downSvg";
+import { initialState, reducer } from "./reducer/reducer";
+import { setCoins, setLoading } from "./reducer/actions";
 
 const formatMarketCap = (cap) => {
   if (cap >= 1e12) {
@@ -74,8 +76,8 @@ const formateRate = (coin) => {
 const filterType = ["price", "volume", "rank"];
 
 export const Table = () => {
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [{ coins, loading }, dispatchAction] = useReducer(reducer, initialState);
+
   const [dropMenu, showDropMenu] = useState(false);
   const [dropMenuSort, showDropMenuSort] = useState(false);
   const [dropMenuPos, setDropMenuPosition] = useState(null);
@@ -137,6 +139,7 @@ export const Table = () => {
   const getCurrentData = useCallback(
     async ({ sortFilter, orderFilter, signal }) => {
       try {
+        dispatchAction(setLoading(true))
         const savedCoins = JSON.parse(localStorage.getItem("cryptoHistory"));
         const res = await getCryptoList(sortFilter, orderFilter, signal);
 
@@ -154,7 +157,7 @@ export const Table = () => {
                 newItem.volume !== null ? formatMarketCap(newItem.volume) : "-",
             };
           });
-          setCoins(updatedInfo);
+          dispatchAction(setCoins(updatedInfo));
         }
         localStorage.setItem(
           "cryptoHistory",
@@ -163,7 +166,7 @@ export const Table = () => {
       } catch (error) {
         console.error("Error fetching crypto data:", error);
       } finally {
-        setLoading(false);
+        dispatchAction(setLoading(false))
       }
     },
     []
@@ -178,7 +181,7 @@ export const Table = () => {
     const apiCall = setInterval(() => {
       getCurrentData({ sortFilter, orderFilter, signal });
     }, 20000);
-    
+
     return () => {
       controller.abort();
       clearInterval(apiCall);
