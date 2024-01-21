@@ -9,25 +9,60 @@
   max-width: 1247px;
   width: 100%;
   margin: auto;
-  .filter_icon {
-    padding: 10px;
-    background-color: var(--color-neutrals8);
-    border: unset;
-    border-radius: 10px;
-    box-shadow: 0px 13px 48px -11px rgb(15, 15, 15);
-    width: unset;
-    transition: all 0.5s ease-in;
-    z-index:2;
-    position:relative;
-    svg {
-      width: 25px;
-      height: 25px;
-      pointer-events: none;
+  .cryptocurrency_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .filter_icon {
+      padding: 10px;
+      background-color: var(--color-neutrals8);
+      border: unset;
+      border-radius: 10px;
+      box-shadow: 0px 13px 48px -11px rgb(15, 15, 15);
+      width: unset;
+      z-index: 2;
+      transition: all 0.5s ease-in;
+      position: relative;
+      display: flex;
+      svg {
+        width: 25px;
+        height: 25px;
+        pointer-events: none;
+      }
+    }
+    .sortByButton {
+      padding: 10px;
+      background-color: var(--color-neutrals8);
+      border: unset;
+      border-radius: 10px;
+      width: unset;
+      z-index: 2;
+      transition: all 0.5s ease-in;
+      box-shadow: 0px 15px 48px -13px rgb(15, 15, 15);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      span {
+        color: var(--color-blueblack);
+        font-family: var(--font-Poppins);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        pointer-events: none;
+      }
+      svg {
+        width: 25px;
+        height: 25px;
+        pointer-events: none;
+      }
     }
   }
+
   .table {
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     tr {
       th {
         color: #93989a;
@@ -98,7 +133,7 @@
         padding-block: 23px 27px !important;
         border-bottom: 1.2px solid #ebe9e9;
 
-        .otherInfo {
+        span {
           color: #010101;
           font-family: var(--font-Poppins);
           font-size: 24.513px;
@@ -107,7 +142,7 @@
           line-height: 130%;
           letter-spacing: 0.245px;
         }
-        .price {
+        .price_down {
           color: #010101;
           font-family: var(--font-Poppins);
           font-size: 24.513px;

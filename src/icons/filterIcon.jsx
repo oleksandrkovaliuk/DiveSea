@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FilterIcon = ({ className, onClick ,style }) => {
+export const FilterIcon = ({ className, onClick, style, children }) => {
   const handleClick = (event) => {
     if (onClick) {
       onClick(event);
@@ -31,6 +31,7 @@ export const FilterIcon = ({ className, onClick ,style }) => {
           />
         </g>
       </svg>
+      {children ? children : ''}
     </button>
   );
 };

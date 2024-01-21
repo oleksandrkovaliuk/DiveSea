@@ -34,7 +34,7 @@ export const DropMenu = ({
         <ul className={d.list_menu}>
           {data.map((value) => {
             return (
-              <li key={value}>
+              <li>
                 <button onClick={() => selectFilter(value)}>{value}</button>
               </li>
             );

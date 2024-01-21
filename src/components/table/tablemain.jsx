@@ -1,29 +1,44 @@
 import React, { useCallback, useEffect, useState } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
-import { getCryptoList, setSort } from "../../service/api";
+import { getCryptoList } from "../../service/api";
 import { FilterIcon } from "../../icons/filterIcon";
 import { DropMenu } from "../dropDownBtnMenu";
+import { DownSvg } from "../../icons/downSvg";
 export const Table = () => {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dropMenu, showDropMenu] = useState(false);
+  const [dropMenuSort, showDropMenuSort] = useState(false);
   const [dropMenuPos, setDropMenuPosition] = useState(null);
-  const filterType = ["> to <", "< to >", "all"];
+  const [dropMenuPosSort, setDropMenuPositionSort] = useState(null);
+  const [sortFilter, setSortFilter] = useState("rank");
+  const [orderFilter, setOrderFilter] = useState("ascending");
+  const [filterSortType , setFilterSortType] = useState([])
+  const filterType = ["price", "volume", "rank"];
   const handleDropMenuClick = (event) => {
     setTimeout(() => {
-      const btn = event.target;
-      const btnInfo = btn.getBoundingClientRect();
-      const top = btnInfo.top;
-      const left = btnInfo.left;
-      const width = btnInfo.width;
-      const height = btnInfo.height;
+      const btn = event.target.getBoundingClientRect();
+      const top = btn.top;
+      const left = btn.left;
+      const width = btn.width * 2;
+      const height = btn.height;
       setDropMenuPosition({ top, left, width, height });
+      showDropMenu(!dropMenu);
     });
-    showDropMenu(!dropMenu);
+  };
+  const handleDropMenuClickSort = (event) => {
+    const btn = event.target.getBoundingClientRect();
+    const top = btn.top;
+    const left = btn.left;
+    const width = btn.width;
+    const height = btn.height;
+    setDropMenuPositionSort({ top, left, width, height });
+    showDropMenuSort(!dropMenuSort);
   };
   const handleCloseDropDownMenu = () => {
     showDropMenu(false);
+    showDropMenuSort(false);
   };
   const formatMarketCap = (cap) => {
     if (cap >= 1e12) {
@@ -63,19 +78,45 @@ export const Table = () => {
         }) + "K"
       );
     } else {
-      return cap.toLocaleString("en-US", {
+      return cap.toFixed().toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 1,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 5,
       });
     }
   };
+  const handleFilter = (filterItem) => {
+    if (filterItem === "volume") {
+      setSortFilter("volume");
+      getCurrentData();
+      setFilterSortType(["ascending","descending"])
+    } else if (filterItem === "rank") {
+      setOrderFilter("ascending");
+      setSortFilter("rank");
+      getCurrentData();
+      setFilterSortType(["ascending"])
+    } else if (filterItem === "price") {
+      setSortFilter("price");
+      getCurrentData();
+      setFilterSortType(["ascending","descending"])
+    }
+    showDropMenu(false);
+  };
+  const handleOrderFilter = (orderFilter) => {
+    if (orderFilter === "ascending") {
+      setOrderFilter("ascending");
+      getCurrentData();
+    } else if (orderFilter === "descending") {
+      setOrderFilter("descending");
+      getCurrentData();
+    }
+    showDropMenuSort(false);
+  };
   const getCurrentData = useCallback(async () => {
     try {
-      const res = await getCryptoList();
       const oldInfo = JSON.parse(localStorage.getItem("cryptoHistory"));
-
+      const res = await getCryptoList(sortFilter, orderFilter);
       if (oldInfo) {
         const updatedInfo = res.map((newItem) => {
           const oldItem = oldInfo.find((item) => item.name === newItem.name);
@@ -89,44 +130,72 @@ export const Table = () => {
               minimumFractionDigits: 1,
               maximumFractionDigits: 2,
             }),
-            formatedCap: formatMarketCap(newItem.cap),
-            formatedVolume: formatMarketCap(newItem.volume),
+            formatedCap:
+              newItem.cap !== null ? formatMarketCap(newItem.cap) : "-",
+            formatedVolume:
+              newItem.volume !== null ? formatMarketCap(newItem.volume) : "-",
           };
         });
-
         setCoins(updatedInfo);
       }
-
       localStorage.setItem("cryptoHistory", JSON.stringify(res));
     } catch (error) {
       console.error("Error fetching crypto data:", error);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [sortFilter, orderFilter]);
   useEffect(() => {
-    setInterval(() => {
+    getCurrentData();
+    const apiCall = setInterval(() => {
       getCurrentData();
-    }, 2500);
+    }, 1000);
+    return () => {
+      clearInterval(apiCall);
+    };
   }, [getCurrentData]);
   return (
     <div add={dropMenu ? true : false} className={t.table_container}>
-      {dropMenuPos?.left && dropMenu && (
-        <DropMenu
-          data={filterType}
-          left={dropMenuPos.left}
-          width={dropMenuPos.width}
-          top={dropMenuPos.top}
-          height={dropMenuPos.height}
-          closeDropDownMenu={handleCloseDropDownMenu}
-          typeWhite
-        />
-      )}
-      <FilterIcon
-        style={dropMenu ? { width: "100px" } : null}
-        className={t.filter_icon}
-        onClick={(event) => handleDropMenuClick(event)}
-      />
+      <div className={t.cryptocurrency_nav}>
+        {dropMenuPos?.top && dropMenu && (
+          <DropMenu
+            data={filterType}
+            left={dropMenuPos.left}
+            width={dropMenuPos.width}
+            top={dropMenuPos.top}
+            height={dropMenuPos.height}
+            closeDropDownMenu={handleCloseDropDownMenu}
+            selectFilter={handleFilter}
+            typeWhite
+          ></DropMenu>
+        )}
+        <div className={t.filterIcon}>
+          <FilterIcon
+            style={dropMenu ? { width: "calc(45px * 2)" } : null}
+            className={t.filter_icon}
+            onClick={(event) => handleDropMenuClick(event)}
+          ></FilterIcon>
+        </div>
+        {dropMenuPosSort?.top && dropMenuSort ? (
+          <DropMenu
+            data={filterSortType}
+            left={dropMenuPosSort.left}
+            width={dropMenuPosSort.width}
+            top={dropMenuPosSort.top}
+            height={dropMenuPosSort.height}
+            closeDropDownMenu={handleCloseDropDownMenu}
+            selectFilter={handleOrderFilter}
+            typeWhite
+          ></DropMenu>
+        ) : null}
+        <button
+          onClick={(event) => handleDropMenuClickSort(event)}
+          className={t.sortByButton}
+        >
+          <span>sort by</span>
+          <DownSvg />
+        </button>
+      </div>
       {loading ? (
         <div className={t.loading_screen}></div>
       ) : (
@@ -143,7 +212,7 @@ export const Table = () => {
                   </div>
                 </td>
                 <td>
-                  <span className={item.up ? t.price : t.price_up}>
+                  <span className={item.up ? t.price_up : t.price_down}>
                     {item.formatedRate}
                   </span>
                 </td>

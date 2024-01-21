@@ -29,9 +29,10 @@
       li {
         button {
           color: #000;
+          transition: all 0.2s ease-in;
           &:hover {
             background-color: #000;
-            color: var(--color-white);
+            color: var(--color-neutrals8);
           }
         }
       }
