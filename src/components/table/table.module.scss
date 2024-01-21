@@ -150,7 +150,7 @@
           font-weight: 500;
           line-height: 130%; /* 31.867px */
           letter-spacing: 0.245px;
-          animation: goDown 0.7s linear forwards;
+          animation: goDown 2s linear forwards infinite;
         }
         @keyframes goDown {
           0% {
@@ -171,7 +171,7 @@
           font-weight: 500;
           line-height: 130%;
           letter-spacing: 0.245px;
-          animation: goUp 0.7s linear forwards;
+          animation: goUp 2s linear forwards infinite;
         }
         @keyframes goUp {
           0% {
