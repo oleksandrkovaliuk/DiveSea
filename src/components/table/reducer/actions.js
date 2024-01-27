@@ -46,3 +46,7 @@ export const setPostsPerPage = (value) => ({
 	type:ActionTypes.POST_PER_PAGE,
 	payload:value,
 })
+export const setIsFirstRender = (value) => ({
+	type:ActionTypes.IS_FIRST_RENDER,
+	payload:value,
+})

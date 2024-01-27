@@ -12,6 +12,7 @@ export const initialState = {
   filterSortType: ["ascending"],
   postPerPage:10,
   currentPage:1,
+  isFirstRender: true,
 };
 
 export const reducer = (state, action) => {
@@ -79,6 +80,12 @@ export const reducer = (state, action) => {
     return{
       ...state,
       postPerPage:action.payload,
+    }
+  }
+  if(action.type === ActionTypes.IS_FIRST_RENDER){
+    return{
+      ...state,
+      isFirstRender:action.payload,
     }
   }
   throw Error("Unknown action.");

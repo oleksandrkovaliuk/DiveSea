@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import t from "./table.module.scss";
 import { TableHeaders } from "./tableheader";
 import { getCryptoList } from "../../service/api";
@@ -19,11 +19,13 @@ import {
   showDropDownMenuSort,
   setOrderFilter,
   setCurrentPages,
+  setIsFirstRender,
 } from "./reducer/actions";
 import { Pagination } from "../pagination";
 import { LeftArrowLined } from "../../icons/leftArrowLined";
 import { RightArrowLined } from "../../icons/rightArrowLined";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const createHashMapCoins = (coins) => {
   return coins.reduce((acc, curr) => {
     return {
@@ -33,6 +35,7 @@ const createHashMapCoins = (coins) => {
   }, {});
 };
 const filterType = ["price", "volume", "rank"];
+
 export const Table = () => {
   const [
     {
@@ -47,9 +50,12 @@ export const Table = () => {
       filterSortType,
       postPerPage,
       currentPage,
+      isFirstRender,
     },
     dispatchAction,
   ] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
+
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const handleDropMenuClick = (event) => {
@@ -106,9 +112,9 @@ export const Table = () => {
     dispatchAction(showDropDownMenuSort(dropMenuSort));
   };
   const getCurrentData = useCallback(
-    async ({ sortFilter, orderFilter, signal }) => {
+    async ({ sortFilter, orderFilter, signal, withLoading = true }) => {
       try {
-        dispatchAction(setLoading(true));
+        dispatchAction(setLoading(withLoading));
         const savedCoins = JSON.parse(localStorage.getItem("cryptoHistory"));
         const res = await getCryptoList(sortFilter, orderFilter, signal);
 
@@ -136,11 +142,14 @@ export const Table = () => {
       } catch (error) {
         console.error("Error fetching crypto data:", error);
       } finally {
+        console.log(" finally - withLoading");
         dispatchAction(setLoading(false));
       }
     },
     []
   );
+
+  const handleOpenCoinPage = (link) => navigate(link);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -149,16 +158,16 @@ export const Table = () => {
     getCurrentData({ sortFilter, orderFilter, signal });
 
     const apiCall = setInterval(() => {
-      getCurrentData({ sortFilter, orderFilter, signal });
+      getCurrentData({ sortFilter, orderFilter, signal, withLoading: false });
     }, 15000);
 
     return () => {
       controller.abort();
       clearInterval(apiCall);
     };
-  }, [getCurrentData, sortFilter, orderFilter]);
+  }, [getCurrentData, sortFilter, orderFilter, isFirstRender]);
   return (
-    <div add={dropMenu ? true : false} className={t.table_container}>
+    <div className={t.table_container}>
       <div className={t.cryptocurrency_nav}>
         {dropMenuPos?.top && dropMenu && (
           <DropMenu
@@ -199,7 +208,7 @@ export const Table = () => {
           <DownSvg />
         </button>
       </div>
-      {loading ? (
+      {loading || !coins?.length ? (
         <div className={t.loading_screen}></div>
       ) : (
         <>
@@ -207,18 +216,22 @@ export const Table = () => {
             <table id="table" className={t.table}>
               <TableHeaders />
               <tbody>
-                {coins.slice(firstPostIndex, lastPostIndex)?.map((item) => (
-                  <>
-                    <tr key={item.id} className={t.coin_field}>
-                      <Link to={`/product?coin=${item.name}`}>
-                        <td className={t.coins}>
-                          <img src={item.webp64} alt="coinAvatar"></img>
-                          <div className={t.coin_info}>
-                            <h2 className={t.coin_code}>{item.code}</h2>
-                            <h3 className={t.coin_name}>{item.name}</h3>
-                          </div>
-                        </td>
-                      </Link>
+                {coins.slice(firstPostIndex, lastPostIndex)?.map((item) => {
+                  return (
+                    <tr
+                      onClick={() =>
+                        handleOpenCoinPage(`/product?coin=${item.name}`)
+                      }
+                      key={item.name}
+                      className={t.coin_field}
+                    >
+                      <td className={t.coins}>
+                        <img src={item.webp64} alt="coinAvatar" />
+                        <div className={t.coin_info}>
+                          <h2 className={t.coin_code}>{item.code}</h2>
+                          <h3 className={t.coin_name}>{item.name}</h3>
+                        </div>
+                      </td>
                       <td>
                         <span className={item.up ? t.price_up : t.price_down}>
                           {item.formatedRate}
@@ -242,8 +255,8 @@ export const Table = () => {
                         </span>
                       </td>
                     </tr>
-                  </>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
