@@ -80,8 +80,8 @@
         line-height: 140% !important;
       }
       svg {
-        width: 12px!important;
-        height: 12px!important;
+        width: 12px !important;
+        height: 12px !important;
       }
     }
     .title {
@@ -98,8 +98,35 @@
       line-height: 140% !important;
     }
     svg {
-      width: 12px!important;
-      height: 12px!important;
+      width: 12px !important;
+      height: 12px !important;
+    }
+  }
+}
+@media (max-width: 1080px) {
+  .recent_view {
+    &.bestSell {
+      bottom: -12%;
+    }
+  }
+}
+@media (max-width: 460px) {
+  .recent_view {
+    &.pos {
+      right: 20px;
+      bottom: -100px;
+    }
+    &.bestSell {
+      padding: 11px 10px 8px;
+      left: -20%;
+      bottom:-7%;
+      max-width: 200px;
+      .title {
+        .main_text {
+          font-size: 8.86px;
+          line-height: 135%;
+        }
+      }
     }
   }
 }

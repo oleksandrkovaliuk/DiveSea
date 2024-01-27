@@ -42,7 +42,7 @@
     background-clip: text;
     animation: showText 2.2s linear forwards;
     animation-play-state: paused;
-    animation-range:contain;
+    animation-range: contain;
     &.par {
       display: inline;
       animation-play-state: running;
@@ -54,8 +54,18 @@
     }
   }
 }
-@media(max-width:1280px){
+@media (max-width: 768px) {
   .questions_list {
-    
+    padding-inline: 7px;
+    .question_btn {
+      .question {
+        font-size: 12.301px;
+        line-height: 20px;
+      }
+    }
+    p {
+      font-size: 12px;
+      line-height: 15.653px;
+    }
   }
 }

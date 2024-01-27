@@ -3,7 +3,7 @@ import React from "react";
 import s from "./secondSection.module.scss";
 import { Viewed } from "../../../../components/recentViewed";
 
-import { SimpleSLider } from "../../../../components/simpleSlider/simpleSlider";
+import { SimpleSLider } from "../../../../components/simpleSlider";
 
 export const SecondSectione = () => {
   return (

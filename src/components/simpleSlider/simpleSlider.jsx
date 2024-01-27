@@ -24,6 +24,15 @@ export const SimpleSLider = () => {
     slidesToShow: 6,
     slidesToScroll: 6,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+    ],
   };
 
   return (

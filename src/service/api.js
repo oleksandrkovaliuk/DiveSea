@@ -13,7 +13,7 @@ export const getCryptoList = async (setSort , setRank, signal) => {
       sort: setSort,
       order: setRank,
       offset: 0,
-      limit: 11,
+      limit: 100,
       meta: true,
     }),
   };

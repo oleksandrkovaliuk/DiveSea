@@ -38,19 +38,30 @@
     border-bottom: 1px solid #cbcbcb;
   }
 }
-@media(max-width:1280px){
+@media (max-width: 1280px) {
   .marketplace {
     .markeplace_nav {
       button {
         min-width: 31px;
-        svg{
-          width:17px;
-          height:17px;
-
+        svg {
+          width: 17px;
+          height: 17px;
         }
       }
     }
-    .productWrap {
+  }
+}
+@media (max-width: 768px) {
+  .marketplace {
+    padding-inline: 43px;
+    .main_text {
+      font-size: 30px;
+      line-height: 125%;
+    }
+    .markeplace_nav {
+      button:first-child {
+        display: none;
+      }
     }
   }
 }

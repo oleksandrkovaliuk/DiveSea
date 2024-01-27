@@ -76,6 +76,17 @@ export const FifthSectione = () => {
             <Viewed bestSellPos />
             <img className={f.dots} src="/images/Dots.png" alt="img" />
           </div>
+          <div className={f.exploreMore_mob}>
+          <Button
+              colors={ButtonColors.primary}
+              variants={ButtonVariants.contained}
+              size={ButtonSizes.medium}
+              onClick={() => exploreMoreClickHandler()}
+            >
+              Explore More
+              <ArrowRight />
+            </Button>
+          </div>
         </div>
       </div>
       {exploreMoreBtn && (

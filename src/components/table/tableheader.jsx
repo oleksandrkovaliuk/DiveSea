@@ -7,7 +7,7 @@ export const TableHeaders = () => {
       <tr className={t.titles}>
         <th>Coin</th>
         <th>Price</th>
-        <th>Market Cap</th>
+        <th id={t.marketCapHead}>Market Cap</th>
         <th>Volume 24h</th>
         <th>All-time High</th>
       </tr>

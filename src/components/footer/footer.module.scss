@@ -127,3 +127,29 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .footer_container {
+    padding: 52px 30px 36px;
+    position: relative;
+    .footerTop_section {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 58px;
+      margin-bottom: 26px;
+      padding-bottom: 32px;
+      .footer_nav {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+    .footerBottom_section {
+      justify-content: center;
+      .social_nav {
+        position: absolute;
+        top: 68px;
+        right: 30px;
+        max-width: 115px;
+      }
+    }
+  }
+}

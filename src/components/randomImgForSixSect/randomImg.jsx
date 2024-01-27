@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./randomImg.module.scss";
 import { cardInfo } from "../../shared/cardInfo";
 export const RandomImg = () => {

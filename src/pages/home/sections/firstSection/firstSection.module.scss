@@ -11,6 +11,29 @@
   .left_information {
     max-width: 567px;
     margin-right: auto;
+    .top_text_line {
+      display: flex;
+      align-items: center;
+      margin-bottom: 7px;
+      gap: 12px;
+      .line {
+        width: 138.681px;
+        height: 1px;
+        opacity: 0.2;
+        background-color: #201f1f;
+      }
+      span {
+        display: none;
+        color: #201f1f;
+
+        font-family: var(--font-Poppins);
+        font-size: 9.248px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 120%; /* 11.097px */
+        letter-spacing: 1.233px;
+      }
+    }
     .main_text {
       color: var(--text-grayblack);
 
@@ -83,10 +106,29 @@
       text-align: left;
     }
   }
+  .trustPilot {
+    display: none;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: center;
+    .starts_review {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      .review {
+        color: #334155;
+        font-family: var(--font-PlusJakarta);
+        font-size: 12.811px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19.216px;
+      }
+    }
+  }
 }
 @media (max-width: 1280px) {
   .homepage_wrap {
-    padding-bottom:unset;
+    padding-bottom: unset;
     .firstsection_wrap {
       padding-left: 70px;
       gap: 34px;
@@ -119,7 +161,7 @@
     }
     .explore_more {
       gap: 16px;
-      margin-bottom: 58px;
+      margin-bottom: 19px;
       .create_nft {
         padding-inline: 14px;
       }
@@ -141,6 +183,42 @@
         font-style: normal;
         font-weight: 500;
         line-height: 13.075px;
+      }
+    }
+  }
+}
+@media (max-width: 1080px) {
+  .homepage_wrap {
+    .firstsection_wrap {
+      padding: unset;
+      flex-direction: column;
+      justify-content: center;
+      .left_information {
+        margin: auto;
+        text-align: center;
+        .top_text_line {
+          justify-content: center;
+          .line {
+            width: 33.292px;
+          }
+          span {
+            display: block;
+          }
+        }
+        .discription {
+          margin: auto;
+          margin-bottom: 42px;
+          text-align: center;
+        }
+      }
+      .explore_more {
+        justify-content: center;
+      }
+      .achivments {
+        display: none;
+      }
+      .trustPilot {
+        display: flex;
       }
     }
   }

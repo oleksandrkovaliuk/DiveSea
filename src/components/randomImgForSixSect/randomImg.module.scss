@@ -38,3 +38,27 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .img {
+    transform: translateY(35%);
+    .main_img {
+      min-width: 369px;
+    }
+    .back_img{
+      min-width: 390px;
+    }
+  }
+}
+@media(max-width:500px){
+  .img {
+    transform: translateY(15%);
+  .main_img {
+    min-width: 252px;
+    max-height: 129px;
+  }
+  .back_img{
+    min-width: 266px;
+    max-height: 129px;
+  }
+}
+}

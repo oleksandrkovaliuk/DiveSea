@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600&family=Manrope:wght@600&family=Outfit:wght@600&family=Poppins:wght@400;500;600;700&family=Public+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600&family=Manrope:wght@600&family=Outfit:wght@600&family=Plus+Jakarta+Sans:wght@500&family=Poppins:wght@400;500;600;700&family=Public+Sans:wght@600&display=swap");
 :root {
   --font-Inter: "Inter", sans-serif;
   --font-Manrope: "Manrope", sans-serif;
   --font-Poppins: "Poppins", sans-serif;
   --font-PublicSans: "Public Sans", sans-serif;
-  --font-DmSans:'DM Sans' , sans-serif;
-  --font-Outfit:'Outfit', sans-serif;
+  --font-DmSans: "DM Sans", sans-serif;
+  --font-Outfit: "Outfit", sans-serif;
+  --font-PlusJakarta: "Plus Jakarta Sans", sans-serif;
   --text-grayblack: #141416;
   --color-blueblack: #12141d;
   --color-black: #000;

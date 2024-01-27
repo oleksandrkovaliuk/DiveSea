@@ -6,55 +6,24 @@ import { FilterIcon } from "../../icons/filterIcon";
 import { DropMenu } from "../dropDownBtnMenu";
 import { DownSvg } from "../../icons/downSvg";
 import { initialState, reducer } from "./reducer/reducer";
-import { setCoins, setLoading } from "./reducer/actions";
+import { formatMarketCap, formateRate } from "../../shared/formatMarketCap";
 
-const formatMarketCap = (cap) => {
-  if (cap >= 1e12) {
-    return (
-      (cap / 1e12).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 4,
-        maximumFractionDigits: 3,
-      }) + " T"
-    );
-  } else if (cap >= 1e9) {
-    return (
-      (cap / 1e9).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 3,
-        maximumFractionDigits: 3,
-      }) + " B"
-    );
-  } else if (cap >= 1e6) {
-    return (
-      (cap / 1e6).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 3,
-      }) + "M"
-    );
-  } else if (cap >= 1e3) {
-    return (
-      (cap / 1e3).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 3,
-      }) + "K"
-    );
-  } else {
-    return cap.toFixed().toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 5,
-    });
-  }
-};
-
+import {
+  setCoins,
+  setLoading,
+  setSortFilter,
+  setFilterSortType,
+  showDropDownMenu,
+  showDropDownMenuPos,
+  showDropDownMenuPosSort,
+  showDropDownMenuSort,
+  setOrderFilter,
+  setCurrentPages,
+} from "./reducer/actions";
+import { Pagination } from "../pagination";
+import { LeftArrowLined } from "../../icons/leftArrowLined";
+import { RightArrowLined } from "../../icons/rightArrowLined";
+import { Link } from "react-router-dom";
 const createHashMapCoins = (coins) => {
   return coins.reduce((acc, curr) => {
     return {
@@ -63,29 +32,26 @@ const createHashMapCoins = (coins) => {
     };
   }, {});
 };
-
-const formateRate = (coin) => {
-  return coin.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 2,
-  });
-};
-
 const filterType = ["price", "volume", "rank"];
-
 export const Table = () => {
-  const [{ coins, loading }, dispatchAction] = useReducer(reducer, initialState);
-
-  const [dropMenu, showDropMenu] = useState(false);
-  const [dropMenuSort, showDropMenuSort] = useState(false);
-  const [dropMenuPos, setDropMenuPosition] = useState(null);
-  const [dropMenuPosSort, setDropMenuPositionSort] = useState(null);
-  const [sortFilter, setSortFilter] = useState("rank");
-  const [orderFilter, setOrderFilter] = useState("ascending");
-  const [filterSortType, setFilterSortType] = useState([]);
-
+  const [
+    {
+      coins,
+      loading,
+      dropMenu,
+      dropMenuSort,
+      dropMenuPos,
+      dropMenuPosSort,
+      sortFilter,
+      orderFilter,
+      filterSortType,
+      postPerPage,
+      currentPage,
+    },
+    dispatchAction,
+  ] = useReducer(reducer, initialState);
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
   const handleDropMenuClick = (event) => {
     setTimeout(() => {
       const btn = event.target.getBoundingClientRect();
@@ -93,8 +59,8 @@ export const Table = () => {
       const left = btn.left;
       const width = btn.width * 2;
       const height = btn.height;
-      setDropMenuPosition({ top, left, width, height });
-      showDropMenu(!dropMenu);
+      dispatchAction(showDropDownMenuPos({ top, left, width, height }));
+      dispatchAction(showDropDownMenu(!dropMenu));
     });
   };
   const handleDropMenuClickSort = (event) => {
@@ -103,47 +69,50 @@ export const Table = () => {
     const left = btn.left;
     const width = btn.width;
     const height = btn.height;
-    setDropMenuPositionSort({ top, left, width, height });
-    showDropMenuSort(!dropMenuSort);
+    dispatchAction(showDropDownMenuPosSort({ top, left, width, height }));
+    dispatchAction(showDropDownMenuSort(!dropMenuSort));
   };
   const handleCloseDropDownMenu = () => {
-    showDropMenu(false);
-    showDropMenuSort(false);
+    if (dropMenu && dropMenuSort) {
+      dispatchAction(showDropDownMenu(!dropMenu));
+      dispatchAction(showDropDownMenuSort(!dropMenuSort));
+    } else if (dropMenuSort) {
+      dispatchAction(showDropDownMenuSort(!dropMenuSort));
+    } else if (dropMenu) {
+      dispatchAction(showDropDownMenu(!dropMenu));
+    }
   };
-
   const handleFilter = (filterItem) => {
     if (filterItem === "volume") {
-      setSortFilter("volume");
-
-      setFilterSortType(["ascending", "descending"]);
+      dispatchAction(setSortFilter("volume"));
+      dispatchAction(setFilterSortType(["ascending", "descending"]));
     } else if (filterItem === "rank") {
-      setOrderFilter("ascending");
-      setSortFilter("rank");
+      dispatchAction(setOrderFilter("ascending"));
+      dispatchAction(setSortFilter("rank"));
 
-      setFilterSortType(["ascending"]);
+      dispatchAction(setFilterSortType(["ascending"]));
     } else if (filterItem === "price") {
-      setSortFilter("price");
-
-      setFilterSortType(["ascending", "descending"]);
+      dispatchAction(setSortFilter("price"));
+      dispatchAction(setFilterSortType(["ascending", "descending"]));
     }
-    showDropMenu(false);
+    dispatchAction(showDropDownMenu(dropMenu));
   };
   const handleOrderFilter = (orderFilter) => {
     if (orderFilter === "ascending") {
-      setOrderFilter("ascending");
+      dispatchAction(setOrderFilter("ascending"));
     } else if (orderFilter === "descending") {
-      setOrderFilter("descending");
+      dispatchAction(setOrderFilter("descending"));
     }
-    showDropMenuSort(false);
+    dispatchAction(showDropDownMenuSort(dropMenuSort));
   };
   const getCurrentData = useCallback(
     async ({ sortFilter, orderFilter, signal }) => {
       try {
-        dispatchAction(setLoading(true))
+        dispatchAction(setLoading(true));
         const savedCoins = JSON.parse(localStorage.getItem("cryptoHistory"));
         const res = await getCryptoList(sortFilter, orderFilter, signal);
 
-        if (Object.keys(savedCoins)?.length) {
+        if (savedCoins && Object.keys(savedCoins)?.length) {
           const updatedInfo = res.map((newItem) => {
             const oldItem = savedCoins[newItem.name];
 
@@ -163,10 +132,11 @@ export const Table = () => {
           "cryptoHistory",
           JSON.stringify(createHashMapCoins(res))
         );
+        localStorage.setItem("cryptoHistoryFull", JSON.stringify(res));
       } catch (error) {
         console.error("Error fetching crypto data:", error);
       } finally {
-        dispatchAction(setLoading(false))
+        dispatchAction(setLoading(false));
       }
     },
     []
@@ -180,14 +150,13 @@ export const Table = () => {
 
     const apiCall = setInterval(() => {
       getCurrentData({ sortFilter, orderFilter, signal });
-    }, 20000);
+    }, 15000);
 
     return () => {
       controller.abort();
       clearInterval(apiCall);
     };
   }, [getCurrentData, sortFilter, orderFilter]);
-
   return (
     <div add={dropMenu ? true : false} className={t.table_container}>
       <div className={t.cryptocurrency_nav}>
@@ -233,42 +202,79 @@ export const Table = () => {
       {loading ? (
         <div className={t.loading_screen}></div>
       ) : (
-        <table id="table" className={t.table}>
-          <TableHeaders />
-          <tbody>
-            {coins?.map((item) => (
-              <tr key={item.id} className={t.coin_field}>
-                <td className={t.coins}>
-                  <img src={item.webp64} alt="coinAvatar"></img>
-                  <div className={t.coin_info}>
-                    <h2 className={t.coin_code}>{item.code}</h2>
-                    <h3 className={t.coin_name}>{item.name}</h3>
-                  </div>
-                </td>
-                <td>
-                  <span className={item.up ? t.price_up : t.price_down}>
-                    {item.formatedRate}
-                  </span>
-                </td>
-                <td>
-                  <span className={t.otherInfo}>{item.formatedCap}</span>
-                </td>
-                <td>
-                  <span className={t.otherInfo}>{item.formatedVolume}</span>
-                </td>
-                <td>
-                  <span className={t.otherInfo}>
-                    {"$" +
-                      item.allTimeHighUSD.toLocaleString("en-US", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <>
+          <div className={t.table_wrap}>
+            <table id="table" className={t.table}>
+              <TableHeaders />
+              <tbody>
+                {coins.slice(firstPostIndex, lastPostIndex)?.map((item) => (
+                  <>
+                    <tr key={item.id} className={t.coin_field}>
+                      <Link to={`/product?coin=${item.name}`}>
+                        <td className={t.coins}>
+                          <img src={item.webp64} alt="coinAvatar"></img>
+                          <div className={t.coin_info}>
+                            <h2 className={t.coin_code}>{item.code}</h2>
+                            <h3 className={t.coin_name}>{item.name}</h3>
+                          </div>
+                        </td>
+                      </Link>
+                      <td>
+                        <span className={item.up ? t.price_up : t.price_down}>
+                          {item.formatedRate}
+                        </span>
+                      </td>
+                      <td id={t.marketCupVolume}>
+                        <span className={t.otherInfo}>{item.formatedCap}</span>
+                      </td>
+                      <td>
+                        <span className={t.otherInfo}>
+                          {item.formatedVolume}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={t.otherInfo}>
+                          {"$" +
+                            item.allTimeHighUSD.toLocaleString("en-US", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })}
+                        </span>
+                      </td>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Pagination
+            allPost={coins.length}
+            postPerPage={postPerPage}
+            currentPage={currentPage}
+            setPage={(item) => dispatchAction(setCurrentPages(item))}
+          >
+            <button
+              className={t.rightPaginationButton}
+              onClick={() => dispatchAction(setCurrentPages(currentPage - 1))}
+              style={
+                currentPage === 1 ? { display: "none" } : { display: "flex" }
+              }
+            >
+              <LeftArrowLined />
+            </button>
+            <button
+              className={t.leftPaginationButton}
+              onClick={() => dispatchAction(setCurrentPages(currentPage + 1))}
+              style={
+                currentPage > coins.length / 10 - 1
+                  ? { display: "none" }
+                  : { display: "flex" }
+              }
+            >
+              <RightArrowLined />
+            </button>
+          </Pagination>
+        </>
       )}
     </div>
   );

@@ -30,3 +30,19 @@
     display: none;
   }
 }
+@media (max-width: 1080px) {
+  .weakly_top {
+    .main_text {
+      font-size: 32.003px;
+      line-height: 19.142px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .weakly_top {
+    .main_text {
+      font-size: 30px;
+      line-height: 26.916px;
+    }
+  }
+}

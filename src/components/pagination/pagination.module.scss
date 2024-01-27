@@ -1,0 +1,25 @@
+.pagination_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  max-width:330px;
+  margin:auto;
+  .pagination_buttons {
+    background-color: transparent;
+    padding: 5px;
+    padding-block: 2px;
+    border: unset;
+    font-family: var(--font-Poppins);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    transition: all 0.4s ease;
+    &:hover {
+      background-color: #000;
+      color: var(--color-neutrals8);
+    }
+  }
+}

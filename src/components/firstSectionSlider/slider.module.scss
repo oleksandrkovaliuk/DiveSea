@@ -26,11 +26,11 @@
     position: relative;
     .switcher_wrap {
       bottom: 22%;
-      left:20%;
+      left: 20%;
     }
     .arrow {
-      max-height:91px;
-      max-width:91px;
+      max-height: 91px;
+      max-width: 91px;
     }
     .slider_dots {
       max-width: 123.036px;
@@ -39,6 +39,27 @@
       position: absolute;
       top: -5px;
       right: 0;
+    }
+  }
+}
+@media (max-width: 1080px) {
+  .slider_container {
+    margin-left: auto;
+  }
+}
+@media (max-width: 578px) {
+  .slider_container {
+    max-width: 375px;
+    .switcher_wrap {
+      left: 19%;
+    }
+    .arrow {
+      right:19%;
+      max-height: 58px;
+      max-width: 58px;
+    }
+    .slider_dots{
+      display: none;
     }
   }
 }
