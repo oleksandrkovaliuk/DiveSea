@@ -26,7 +26,7 @@ export const Header = () => {
           </Link>
           <ul>
             <li className={s.head_nav}>
-              <Link to="/discover">Discover</Link>
+              <Link to="/discoverProduct">Discover</Link>
             </li>
             <li className={s.head_nav}>
               <Link to="/Creators">Creators</Link>

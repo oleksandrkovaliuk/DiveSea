@@ -13,38 +13,102 @@
     text-decoration: unset;
     margin-bottom: 59px;
   }
-  .coin_info_container {
-    padding: 35px;
-    border-radius: 24.423px;
-    max-width: 800px;
-    background: #fafafa;
-    box-shadow: 17.561px 17.561px 61.057px 0px rgba(0, 0, 0, 0.12);
-    .main_info {
-      display: flex;
-      gap: 50px;
-      align-items: center;
-      justify-content: flex-start;
-      margin-bottom: 15px;
-      .coins {
+  .coin_info_conrainer {
+    canvas {
+      max-height: 300px;
+      max-width: 800px;
+      padding: 15px;
+      border-radius: 24.423px;
+      background: #fafafa;
+      box-shadow: 17.561px 17.561px 41.057px 0px rgba(0, 0, 0, 0.12);
+      transform: translate(50%, -40px);
+      opacity: 0.9;
+    }
+    .coin_info_wrap {
+      padding: 35px;
+      border-radius: 24.423px;
+      max-width: 800px;
+      background: #fafafa;
+      box-shadow: 17.561px 17.561px 61.057px 0px rgba(0, 0, 0, 0.12);
+      .main_info {
         display: flex;
-        gap: 15px;
+        gap: 50px;
         align-items: center;
-        img {
-          width: 65px;
-          height: 65px;
-          flex-shrink: 0;
-        }
-        .coins_info {
-          .coin_code {
-            color: var(--text-grayblack);
+        justify-content: flex-start;
+        margin-bottom: 15px;
+        .coins {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+          img {
+            width: 65px;
+            height: 65px;
+            flex-shrink: 0;
+          }
+          .coins_info {
+            .coin_code {
+              color: var(--text-grayblack);
 
+              font-family: var(--font-Poppins);
+              font-size: 28.015px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 140%;
+            }
+            .coin_name {
+              color: var(--text-disbluegray);
+              font-family: var(--font-Poppins);
+              font-size: 22.762px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 150%;
+            }
+          }
+        }
+        .price_per_coin {
+          .price_down {
+            color: #010101;
             font-family: var(--font-Poppins);
-            font-size: 28.015px;
+            font-size: 24.513px;
             font-style: normal;
             font-weight: 500;
-            line-height: 140%;
+            line-height: 130%; /* 31.867px */
+            letter-spacing: 0.245px;
+            animation: goDown 2s linear forwards infinite;
           }
-          .coin_name {
+          @keyframes goDown {
+            0% {
+              color: #010101;
+            }
+            50% {
+              color: red;
+            }
+            100% {
+              color: #010101;
+            }
+          }
+          .price_up {
+            color: #010101;
+            font-family: var(--font-Poppins);
+            font-size: 24.513px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 130%;
+            letter-spacing: 0.245px;
+            animation: goUp 2s linear forwards infinite;
+          }
+          @keyframes goUp {
+            0% {
+              color: #010101;
+            }
+            50% {
+              color: green;
+            }
+            100% {
+              color: #010101;
+            }
+          }
+          .perPieace {
             color: var(--text-disbluegray);
             font-family: var(--font-Poppins);
             font-size: 22.762px;
@@ -54,83 +118,31 @@
           }
         }
       }
-      .price_per_coin {
-        .price_down {
-          color: #010101;
-          font-family: var(--font-Poppins);
-          font-size: 24.513px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 130%; /* 31.867px */
-          letter-spacing: 0.245px;
-          animation: goDown 2s linear forwards infinite;
-        }
-        @keyframes goDown {
-          0% {
-            color: #010101;
-          }
-          50% {
-            color: red;
-          }
-          100% {
-            color: #010101;
-          }
-        }
-        .price_up {
-          color: #010101;
-          font-family: var(--font-Poppins);
-          font-size: 24.513px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 130%;
-          letter-spacing: 0.245px;
-          animation: goUp 2s linear forwards infinite;
-        }
-        @keyframes goUp {
-          0% {
-            color: #010101;
-          }
-          50% {
-            color: green;
-          }
-          100% {
-            color: #010101;
-          }
-        }
-        .perPieace {
-          color: var(--text-disbluegray);
-          font-family: var(--font-Poppins);
-          font-size: 22.762px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 150%;
-        }
-      }
-    }
-    .restInfo {
-      display: flex;
-      gap: 50px;
-      align-items: center;
-      justify-content: flex-start;
-      .restInfoBlocks {
+      .restInfo {
         display: flex;
-        flex-direction: column;
-        .title {
-          color: var(--text-disbluegray);
-          font-family: var(--font-Poppins);
-          font-size: 22.762px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 150%;
-        }
-        .value {
-          color: var(--text-grayblack);
+        gap: 50px;
+        align-items: center;
+        justify-content: flex-start;
+        .restInfoBlocks {
+          display: flex;
+          flex-direction: column;
+          .title {
+            color: var(--text-disbluegray);
+            font-family: var(--font-Poppins);
+            font-size: 22.762px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+          }
+          .value {
+            color: var(--text-grayblack);
 
-          font-family: var(--font-Poppins);
-          font-size: 28.015px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 140%;
+            font-family: var(--font-Poppins);
+            font-size: 28.015px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+          }
         }
       }
     }
