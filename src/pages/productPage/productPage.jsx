@@ -86,7 +86,7 @@ export const ProductPage = () => {
   }, []);
   const labels = timeArray;
   const coinRate = coin.map((item) => parseInt(item.rate)).slice(0.6);
-  const mapValue = labels.map(() => faker.number.int({ max: coinRate }));
+  const mapValue = labels.map(() => faker.number.int({max: coinRate }));
   const data = {
     labels,
     datasets: [
@@ -116,7 +116,7 @@ export const ProductPage = () => {
         <div className={p.coin_info_conrainer}>
           {coin.map((item) => {
             return (
-              <div className={p.coin_info_wrap}>
+              <div key={item.name} className={p.coin_info_wrap}>
                 <div className={p.main_info}>
                   <div className={p.coins}>
                     <img src={item.webp64} alt="coinAvatar"></img>

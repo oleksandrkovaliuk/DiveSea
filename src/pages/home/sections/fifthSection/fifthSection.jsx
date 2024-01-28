@@ -26,7 +26,7 @@ export const FifthSectione = () => {
         <div className={f.fifth_section_wrap}>
           <div className={f.left_block}>
             <h1 className={f.main_title}>
-              <h2>Just Unleash -</h2>
+              <span>Just Unleash -</span>
               Your Inner Collector
             </h1>
             <ul>

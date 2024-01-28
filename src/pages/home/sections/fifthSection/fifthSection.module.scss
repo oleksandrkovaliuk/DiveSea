@@ -26,7 +26,9 @@
           line-height: 54.4px;
           text-transform: capitalize;
           margin-bottom: 45px;
-          h2 {
+          display:flex;
+          flex-direction: column;
+          span {
             color: #c5c5c5;
             font-family: var(--font-Poppins);
             font-size: 45px;
