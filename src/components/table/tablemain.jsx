@@ -25,6 +25,7 @@ import { Pagination } from "../pagination";
 import { LeftArrowLined } from "../../icons/leftArrowLined";
 import { RightArrowLined } from "../../icons/rightArrowLined";
 import { useNavigate } from "react-router-dom";
+import { SearchingApi } from "../searchingApi/searchingApi";
 
 const createHashMapCoins = (coins) => {
   return coins.reduce((acc, curr) => {
@@ -181,12 +182,15 @@ export const Table = () => {
             typeWhite
           />
         )}
-        <div className={t.filterIcon}>
-          <FilterIcon
-            style={dropMenu ? { width: "calc(45px * 2)" } : null}
-            className={t.filter_icon}
-            onClick={(event) => handleDropMenuClick(event)}
-          />
+        <div className={t.filter_icon_n_search}>
+          <div className={t.filterIcon}>
+            <FilterIcon
+              style={dropMenu ? { width: "calc(45px * 2)" } : null}
+              className={t.filter_icon}
+              onClick={(event) => handleDropMenuClick(event)}
+            />
+          </div>
+          <SearchingApi />
         </div>
         {dropMenuPosSort?.top && dropMenuSort ? (
           <DropMenu

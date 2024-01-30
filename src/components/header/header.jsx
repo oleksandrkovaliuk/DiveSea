@@ -26,7 +26,7 @@ export const Header = () => {
           </Link>
           <ul>
             <li className={s.head_nav}>
-              <Link to="/discoverProduct">Discover</Link>
+              <Link to="/discover">Discover</Link>
             </li>
             <li className={s.head_nav}>
               <Link to="/Creators">Creators</Link>
@@ -40,20 +40,6 @@ export const Header = () => {
           </ul>
         </div>
         <div className={s.search_connectWallet}>
-          {/* <div className={s.searching}>
-            <input
-              placeholder=" "
-              type="text"
-              id="search"
-              name="search"
-              className={s.search_input}
-            ></input>
-            <label htmlFor="search" className={s.search_label}>
-              <SearchIcon />
-              Search Art Work / Creator
-            </label>
-          </div> */}
-          <SearchInput />
           <Button
             size={ButtonSizes.medium}
             colors={ButtonColors.primary}
