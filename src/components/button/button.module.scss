@@ -52,7 +52,7 @@
     }
   }
   &.secondary {
-    background-color: #fff;
+    background-color: var(--background-white);
     color: #000;
     &:hover {
       color: #fff;
@@ -94,6 +94,14 @@
   &.focus {
     color: #fff;
     background-color: #000;
+  }
+  &.focusStroke {
+    color: #fff;
+    background-color: #000;
+    svg path{
+      fill:transparent;
+      stroke:#fff;
+    }
   }
   &.focus svg path {
     fill: var(--color-white);

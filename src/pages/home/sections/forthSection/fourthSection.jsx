@@ -12,19 +12,27 @@ import {
   ButtonSizes,
   ButtonVariants,
 } from "../../../../shared/enums";
+import { ExploreMore } from "../../../../components/exploreMore";
+import { SearchIcon } from "../../../../icons/search";
+import { useDebouce } from "../../../../hooks/useDebouce";
+import { EthValue } from "../../../../components/value";
+import { useNavigate } from "react-router-dom";
 
-export const FourthSectione = () => {
+export const FourthSectione = ({ full }) => {
   const [filteredData, setFilteredData] = useState(cardInfo);
   const [dropMenuPosition, setDropMenudPosition] = useState(null);
   const [dropdownContent, setDropDownContent] = useState(null);
+  const [searchingInput, showSearchingInput] = useState(false);
+  const [searchingResult, setSearchingResult] = useState([]);
+  const [resultValue, setResultValue] = useState("");
   const [focusBtn, setFocusBtn] = useState(false);
+  const navigation = useNavigate();
   const price = ["> to <", "< to >", "all"];
   const handleOpenDropdownFilter = (event, categoryKind) => {
-    if (categoryKind === "categoryName") {
+    if (categoryKind === "creatorName") {
       setDropDownContent(
         Array.from(new Set(cardInfo.map((item) => item[categoryKind])))
       );
-
       setFocusBtn(categoryKind);
     }
 
@@ -50,16 +58,18 @@ export const FourthSectione = () => {
   const handleSelectSubFilterItem = (filterItem) => {
     const arr = [...cardInfo];
     const data = cardInfo.filter((item) =>
-      item.title === filterItem ? item : item.collectionType === filterItem
+      item.creatorName === filterItem
+        ? item
+        : item.collectionType === filterItem
     );
     if (filterItem === "all") {
-      setFilteredData(arr);
+      setFilteredData(cardInfo);
     } else if (filterItem === "> to <") {
-      arr.sort((a, b) => a.value - b.value);
-      setFilteredData(arr);
+      filteredData.sort((a, b) => a.value - b.value);
+      setFilteredData(filteredData);
     } else if (filterItem === "< to >") {
-      arr.sort((a, b) => b.value - a.value);
-      setFilteredData(arr);
+      filteredData.sort((a, b) => b.value - a.value);
+      setFilteredData(filteredData);
     } else {
       setFilteredData(data);
     }
@@ -74,6 +84,26 @@ export const FourthSectione = () => {
     setDropMenudPosition(null);
     setFocusBtn("all");
   };
+  const handleOpenSearchingInput = () => {
+    showSearchingInput(!searchingInput);
+  };
+  const checkValueAndSetResult = () => {
+    const filteredCardForSearching = cardInfo.filter((item) => {
+      if (resultValue?.length) {
+        const productName = item.title.toLowerCase();
+        const value = resultValue.toLocaleLowerCase();
+        return productName.startsWith(value) || productName === value;
+      }
+    });
+    setSearchingResult(filteredCardForSearching);
+  };
+  const getResult = useDebouce(checkValueAndSetResult, 300);
+
+  const setFinallResult = (event) => {
+    getResult();
+    setResultValue(event.target.value);
+  };
+  const navigateToProduct = (link) => navigation(link);
   return (
     <div className={f.marketplace}>
       <h2 className={f.main_text}>Explore Marketplace</h2>
@@ -102,20 +132,19 @@ export const FourthSectione = () => {
           All
         </Button>
         <Button
-          focus={focusBtn === "categoryName"}
           onClick={(event) => {
-            handleOpenDropdownFilter(event, "categoryName");
+            handleOpenDropdownFilter(event, "creatorName");
           }}
           size={ButtonSizes.small}
           variants={ButtonVariants.outlined}
           colors={
-            focusBtn === "categoryName"
+            focusBtn === "creatorName"
               ? `${ButtonColors.focused}`
               : `${ButtonColors.secondary}`
           }
         >
           <Category />
-          Category
+          Creators
         </Button>
         <Button
           onClick={(event) => {
@@ -145,14 +174,80 @@ export const FourthSectione = () => {
           <Price />
           Price
         </Button>
+        {full && (
+          <div className={f.seraching_wrap}>
+            <Button
+              size={ButtonSizes.small}
+              colors={
+                searchingInput
+                  ? `${ButtonColors.focusStroke}`
+                  : `${ButtonColors.secondary}`
+              }
+              className={f.searching}
+              onClick={() => handleOpenSearchingInput()}
+            >
+              <SearchIcon />
+            </Button>
+            <input
+              placeholder=" "
+              type="text"
+              name="nftSearchingInput"
+              className={f.searching_input}
+              onChange={setFinallResult}
+              style={
+                searchingInput
+                  ? {
+                      width: window.innerWidth > 1080 ? "200px" : "130px",
+                      left: window.innerWidth > 1080 ? "35px" : "20px",
+                      paddingLeft: "20px",
+                      backgroundColor: "#000",
+                      color: "white",
+                    }
+                  : { width: "0%" }
+              }
+            ></input>
+            {searchingResult && (
+              <ul
+                className={f.nftProductResult}
+                style={
+                  searchingResult?.length && searchingInput
+                    ? {
+                        width: window.innerWidth > 1080 ? "200px" : "130px",
+                        left: window.innerWidth > 1080 ? "35px" : "20px",
+                        display: "block",
+                      }
+                    : { display: "none" }
+                }
+              >
+                {searchingResult?.map((item) => {
+                  return (
+                    <li
+                      className={f.resultWithProduct}
+                      onClick={() =>
+                        navigateToProduct(`/nftproductIndividual?id=${item.id}`)
+                      }
+                    >
+                      <img src={item.img} alt="productImg" />
+                      <div className={f.discription_aboutProduct}>
+                        <span className={f.cardName}>{item.title}</span>
+                        <EthValue value={item.value} />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        )}
       </div>
       <div className={f.productWrap}>
-        {filteredData.length > 8
-          ? filteredData
+        {full
+          ? filteredData?.map((card) => <BigCard key={card.id} card={card} />)
+          : filteredData
               .slice(0, 8)
-              .map((card) => <BigCard key={card.id} card={card} />)
-          : filteredData?.map((card) => <BigCard key={card.id} card={card} />)}
+              .map((card) => <BigCard key={card.id} card={card} />)}
       </div>
+      {!full && <ExploreMore directTo={"/nftproductfull"} />}
     </div>
   );
 };

@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import s from "./searchingApi.module.scss";
 import { useDebouce } from "../../hooks/useDebouce";
-import classNames from "classnames";
 import { formateRate } from "../../shared/formatMarketCap";
 import { useNavigate } from "react-router-dom";
 
 export const SearchingApi = () => {
   const [searchingResult, setSearchingResult] = useState([]);
+  const [resultValue, setResultValue] = useState('');
   const navigateTo = useNavigate();
-  const checkSearchingRequest = (value) => {
+  const checkSearchingRequest = () => {
     const currentData = JSON.parse(localStorage.getItem("cryptoHistoryFull"));
     const filteredSearchingResult = currentData.filter((item) => {
-      if (value.target.value?.length) {
+      if (resultValue?.length) {
         const itemName = item.name.toLowerCase();
-        const valueName = value.target.value.toLowerCase();
+        const valueName = resultValue.toLowerCase();
 
         return itemName.startsWith(valueName) || itemName === valueName;
       }
@@ -23,8 +23,12 @@ export const SearchingApi = () => {
   const closeDropDownMenu = () => {
     setSearchingResult([]);
   };
-  const giveResult = useDebouce(checkSearchingRequest, 300);
 
+  const getResult = useDebouce(checkSearchingRequest, 300);
+  const getResultWithDebounce = (event) => {
+    getResult();
+    setResultValue(event.target.value);
+  };
   const navigateToCoin = (link) => navigateTo(link);
   return (
     <>
@@ -42,9 +46,7 @@ export const SearchingApi = () => {
           id="search"
           name="search"
           className={s.search_input}
-          onChange={(event) => {
-            giveResult(event);
-          }}
+          onChange={getResultWithDebounce} 
         ></input>
         <label htmlFor="search" className={s.search_label}>
           Search coin

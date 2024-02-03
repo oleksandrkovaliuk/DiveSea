@@ -10,11 +10,12 @@ import { cardInfo } from "../../shared/cardInfo";
 import "./custom-styles-slider.scss";
 import { SliderArrow } from "../../icons/sliderArrow";
 import { SliderDots } from "../../icons/sliderDots";
+import { useNavigate } from "react-router-dom";
 
 export const SliderComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
-
+  const navigation = useNavigate();
   const next = () => {
     sliderRef.current.slickNext();
   };
@@ -34,10 +35,10 @@ export const SliderComponent = () => {
     arrows: false,
     beforeChange: handleBeforeChange,
   };
-
+  const navigateToProduct = (link) => navigation(link);
   return (
     <div className={`${s.slider_container} custom-slider-container`}>
-     <SliderDots className={s.slider_dots}/>
+      <SliderDots className={s.slider_dots} />
       <SliderArrow className={s.arrow} />
       <Slider ref={sliderRef} {...settings}>
         {cardInfo.map((item, index) => {
@@ -47,7 +48,12 @@ export const SliderComponent = () => {
           return (
             <div className={s.slid_wrap} key={item.id}>
               <div className={sliderClassNames}>
-                <div className="imgs">
+                <div
+                  onClick={() =>
+                    navigateToProduct(`/nftproductIndividual?id=${item.id}`)
+                  }
+                  className="imgs"
+                >
                   <img src={item.img} className="main-img" alt="img of slide" />
                   <img src={item.img} className="bloor" alt="img of slide" />
                 </div>

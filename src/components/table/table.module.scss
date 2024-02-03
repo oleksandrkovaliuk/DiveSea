@@ -323,6 +323,13 @@
 @media (max-width: 768px) {
   .table_container {
     padding-inline: 10px;
+    .cryptocurrency_nav{
+      align-items: end;
+      .filter_icon_n_search{
+        flex-direction: column;
+        gap:7px;
+      }
+    }
     .table_wrap {
       .table {
         tr {

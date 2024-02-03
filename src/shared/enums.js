@@ -6,8 +6,10 @@ export const ButtonVariants = {
 };
 export const ButtonColors = {
   focused: "focus",
+  focusStroke:"focusStroke",
   primary: "primary",
   secondary: "secondary",
+
 };
 
 export const ButtonSizes = {

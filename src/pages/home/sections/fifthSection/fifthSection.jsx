@@ -10,6 +10,7 @@ import { Collaps } from "../../../../components/collaps";
 import { FollowBtn } from "../../../../components/followBtn";
 import { ButtonColors, ButtonSizes, ButtonVariants } from "../../../../shared/enums";
 import { NewBit } from "../../../../components/newBit";
+import { cardInfo } from "../../../../shared/cardInfo";
 export const FifthSectione = () => {
   const [exploreMoreBtn, setExploreBtn] = useState(false);
   const exploreMoreClickHandler = () => {
@@ -95,7 +96,7 @@ export const FifthSectione = () => {
             <div className={f.smaller_Eclipse}>
               <div className={f.eclipse}>
                 <img src="/images/SmallestEclipse.png" alt="smalEclips"></img>
-                {userData.slice(0, 4).map((item, index) => (
+                {cardInfo.slice(10,14).map((item, index) => (
                   <img
                     key={item.id}
                     className={f.profile}
@@ -109,7 +110,7 @@ export const FifthSectione = () => {
             <div className={f.bigger_Eclipse}>
               <div className={f.eclipse}>
                 <img src="/images/BiggestEclipse.png" alt="bigEclips"></img>
-                {userData.slice(0, 5).map((item, index) => (
+                {cardInfo.slice(21,26).map((item, index) => (
                   <img
                     key={item.id}
                     className={f.profile}

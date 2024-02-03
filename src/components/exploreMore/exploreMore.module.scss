@@ -1,0 +1,22 @@
+.exploreMore {
+  display: flex;
+  align-items: center;
+  gap:16px;
+  width: 100%;
+  justify-content: flex-end;
+  background-color: unset;
+  border: none;
+  color: #acadb9;
+  font-family: var(--font-Poppins);
+  font-size: 17.67px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 39.92px;
+  letter-spacing: -0.088px;
+  cursor: pointer;
+  svg {
+    path{
+        stroke: #acadb9;
+    }
+  }
+}

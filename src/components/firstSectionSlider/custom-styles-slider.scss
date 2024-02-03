@@ -12,6 +12,7 @@
     .slides {
       z-index: 2;
       min-height: 560px;
+      cursor: pointer;
       .imgs {
         transform: translate(-45%, 60%);
         transition: all 0.5s;

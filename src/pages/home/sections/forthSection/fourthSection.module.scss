@@ -1,6 +1,8 @@
 .marketplace {
-  padding-inline: 70px 70px;
+  margin-inline: 70px;
   margin-bottom: 120px;
+  padding-bottom: 70px;
+  border-bottom: 1px solid #cbcbcb;
   .main_text {
     color: var(--text-grayblack);
 
@@ -19,14 +21,98 @@
     justify-content: center;
     margin-bottom: 71px;
     position: relative;
+    flex-wrap: wrap;
     button {
       min-width: 51px;
       border: 2.2px solid #000;
-      font-weight: 500;
       display: flex;
       gap: 7px;
       align-items: center;
       justify-content: center;
+    }
+    .seraching_wrap {
+      position: relative;
+      button {
+        max-height: 51px;
+        &:hover {
+          background-color: #000;
+          svg {
+            path {
+              stroke: var(--background-white);
+              fill: transparent;
+            }
+          }
+        }
+      }
+
+      .searching_input {
+        transition: all 1s ease;
+        padding: 13px;
+        font-family: var(--font-Poppins);
+        font-size: 14.115px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+        letter-spacing: 0.118px;
+        border: 2.2px solid #000;
+        border-radius: 11px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+      }
+      .searching_input:active,
+      .searching_input:focus,
+      .searching_input:not(:placeholder-shown) {
+        outline: none;
+      }
+      .nftProductResult {
+        position: absolute;
+        padding: 13px;
+        padding-top: 20px;
+        top: 75%;
+        left: 100%;
+        background-color: #000;
+        display: block;
+        border-radius: 11px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        transition: all 0.4s ease;
+        z-index: 3;
+        .resultWithProduct {
+          display: flex;
+          justify-content: space-between;
+          cursor: pointer;
+          &:not(:last-child){
+            margin-bottom:10px;
+          }
+          img {
+            width: 45px;
+            height: 45px;
+            border-radius: 11px;
+          }
+          .discription_aboutProduct {
+            text-align: right;
+            svg path{
+              fill:var(--background-white);
+            }
+            h4{
+              color: var(--background-white);
+              line-height: unset;
+            }
+            .cardName {
+              color: var(--background-white);
+              font-family: var(--font-Poppins);
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 140%;
+              margin-bottom: 7px;
+            }
+            
+          }
+        }
+      }
     }
   }
   .productWrap {
@@ -34,8 +120,7 @@
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
-    padding-bottom: 70px;
-    border-bottom: 1px solid #cbcbcb;
+    margin-bottom: 70px;
   }
 }
 @media (max-width: 1280px) {
@@ -62,6 +147,19 @@
       button:first-child {
         display: none;
       }
+      .seraching_wrap {
+        button {
+          height: 35px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 450px) {
+  .marketplace {
+    .markeplace_nav {
+      flex-direction: column;
     }
   }
 }

@@ -1,0 +1,1 @@
+export { NftIndividualPage } from "./nftIndividualProductPage";

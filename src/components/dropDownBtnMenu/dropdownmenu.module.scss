@@ -25,6 +25,7 @@
   &.typeWhite {
     background-color: var(--color-neutrals8);
     border: 2px solid var(--color-neutrals8);
+    z-index:5;
     .list_menu {
       li {
         button {

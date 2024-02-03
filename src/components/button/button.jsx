@@ -11,6 +11,7 @@ export const Button = ({ size, variants, colors, children, onClick }) => {
     [styles.outlined]: variants === ButtonVariants.outlined,
     [styles.filled]: variants === ButtonVariants.contained,
     [styles.focus]: colors === ButtonColors.focused,
+    [styles.focusStroke]: colors === ButtonColors.focusStroke,
     [styles.primary]: colors === ButtonColors.primary,
     [styles.secondary]: colors === ButtonColors.secondary,
     [styles.outlinedWhite]: variants === ButtonVariants.outlinedWhite,

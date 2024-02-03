@@ -31,7 +31,6 @@ export const MobileMenu = ({ closeMobileMenu }) => {
           </li>
           
         </ul>
-        <SearchInput mobile/>
         <Link to="/">Connect wallet</Link>
       </div>
     </>
