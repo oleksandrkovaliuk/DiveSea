@@ -77,9 +77,11 @@
   .sixthSection_container {
     padding-inline: 50px;
     .sixSection_wrap {
-      padding-inline:40px;
+      gap: 40px;
       max-height:300px;
+      padding-inline:40px;
       flex-direction: column;
+
       .left_block{
         text-align: center;
         .buttons{

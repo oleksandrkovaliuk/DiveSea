@@ -1,5 +1,4 @@
 import React from "react";
-import { cardInfo } from "../../../../shared/cardInfo";
 import { Button } from "../../../../components/button";
 
 import s from "./sixthSection.module.scss";

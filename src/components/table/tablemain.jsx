@@ -217,7 +217,7 @@ export const Table = () => {
       ) : (
         <>
           <div className={t.table_wrap}>
-            <table id="table" className={t.table}>
+            <table className={t.table}>
               <TableHeaders />
               <tbody>
                 {coins.slice(firstPostIndex, lastPostIndex)?.map((item) => {

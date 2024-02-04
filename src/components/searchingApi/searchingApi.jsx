@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const SearchingApi = () => {
   const [searchingResult, setSearchingResult] = useState([]);
-  const [resultValue, setResultValue] = useState('');
+  const [resultValue, setResultValue] = useState("");
   const navigateTo = useNavigate();
   const checkSearchingRequest = () => {
     const currentData = JSON.parse(localStorage.getItem("cryptoHistoryFull"));
@@ -46,7 +46,7 @@ export const SearchingApi = () => {
           id="search"
           name="search"
           className={s.search_input}
-          onChange={getResultWithDebounce} 
+          onChange={getResultWithDebounce}
         ></input>
         <label htmlFor="search" className={s.search_label}>
           Search coin
@@ -63,10 +63,12 @@ export const SearchingApi = () => {
             {searchingResult.map((item) => {
               return (
                 <li
+                  role="button"
                   onClick={() => {
                     navigateToCoin(`/product?coin=${item.name}`);
                   }}
                   className={s.resultCoins}
+                  key={item.name}
                 >
                   <div className={s.coins}>
                     <img src={item.webp64} alt="coinAvatar"></img>

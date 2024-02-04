@@ -48,13 +48,13 @@ export const NewBit = () => {
             <span className={f.rotation}>Rotation</span>
           </div>
           {filteredNftInfo.map((item) => (
-            <h2>{item.value} ETH</h2>
+            <h2 key={item.value}>{item.value} ETH</h2>
           ))}
           <h3 className={f.date}>{formatDate(new Date())}</h3>
         </div>
       </div>
       {filteredNftInfo.map((item) => (
-        <img className={f.nft_img} src={item.img} alt="nftImg" />
+        <img key={item.img} className={f.nft_img} src={item.img} alt="nftImg" />
       ))}
     </div>
   ));

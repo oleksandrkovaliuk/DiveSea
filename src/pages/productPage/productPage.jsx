@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { formatMarketCap, formateRate } from "../../shared/formatMarketCap";
 import p from "./productPage.module.scss";
 import { BackArrow } from "../../icons/backArrow";
@@ -16,6 +16,15 @@ import {
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { Footer } from "../../components/footer";
+
+const options = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+};
+
 export const ProductPage = () => {
   ChartJS.register(
     CategoryScale,
@@ -26,14 +35,12 @@ export const ProductPage = () => {
     Filler,
     Legend
   );
+  const navigation = useNavigate();
   const [coin, setCoin] = useState([]);
   const [searchParams] = useSearchParams();
   const [timeArray, setTimeArray] = useState([]);
   const checkCoin = searchParams.get("coin");
-  const checkPach = window.location.pathname === "/product";
-  if(checkPach){
-    window.scrollTo(0,0)
-  }
+
   const checkCurrentTime = () => {
     const current_time = new Date();
     const newTimeArray = Array.from({ length: 16 }, (_, index) => {
@@ -60,9 +67,9 @@ export const ProductPage = () => {
         .toString()
         .padStart(2, "0")}`;
     }
-    setTimeArray(newTimeArray.reverse().sort((a,b) => a - b));
+    setTimeArray(newTimeArray.reverse().sort((a, b) => a - b));
   };
-  const getCurrentCoin = () => {
+  const getCurrentCoin = useCallback(() => {
     const allCoins = JSON.parse(
       localStorage.getItem("cryptoHistoryFull")
     ).filter((item) => item.name === checkCoin);
@@ -78,19 +85,11 @@ export const ProductPage = () => {
       };
     });
     setCoin(updatedCoin);
-  };
-  useEffect(() => {
-    getCurrentCoin();
-    checkCurrentTime();
-    const checkApi = setInterval(() => {
-      getCurrentCoin();
-      checkCurrentTime();
-    }, 10000);
-    return () => clearInterval(checkApi);
-  }, []);
+  }, [checkCoin]);
+
   const labels = timeArray;
   const coinRate = coin.map((item) => parseInt(item.rate)).slice(0.6);
-  const mapValue = labels.map(() => faker.number.int({max: coinRate }));
+  const mapValue = labels.map(() => faker.number.int({ max: coinRate }));
   const data = {
     labels,
     datasets: [
@@ -103,20 +102,24 @@ export const ProductPage = () => {
       },
     ],
   };
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
+
+  useEffect(() => {
+    getCurrentCoin();
+    checkCurrentTime();
+    const checkApi = setInterval(() => {
+      getCurrentCoin();
+      checkCurrentTime();
+    }, 10000);
+    return () => clearInterval(checkApi);
+  }, [getCurrentCoin]);
+
   return (
     <>
       <div className={p.productPage_container}>
-        <Link className={p.back_to_table} to="/">
+        <button className={p.back_to_table} onClick={() => navigation(-1)}>
           <BackArrow />
           Back To Table
-        </Link>
+        </button>
         <div className={p.coin_info_conrainer}>
           {coin.map((item) => {
             return (

@@ -20,10 +20,6 @@ export const NftIndividualPage = () => {
   ).rate;
   const convertedValue =
     "$" + (selectedItem.value * currentEthPrice).toFixed(2);
-  const checkPach = window.location.pathname === "/nftproductIndividual";
-  if (checkPach) {
-    window.scrollTo(0, 0);
-  }
   return (
     <>
       <div className={i.individualProductBlock}>

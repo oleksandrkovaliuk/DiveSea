@@ -13,16 +13,13 @@ export const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-        <Route path="/discover" element={<Discover />}></Route>
-        <Route path="/product" element={<ProductPage />}></Route>
-        <Route path="/nftproductfull" element={<NftProductPage />}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="/nftproductfull" element={<NftProductPage />} />
         <Route path="/creators" element={<Creators />}></Route>
-        <Route
-          path="/nftproductIndividual"
-          element={<NftIndividualPage />}
-        ></Route>
+        <Route path="/nftproductIndividual" element={<NftIndividualPage />} />
       </Routes>
     </>
   );

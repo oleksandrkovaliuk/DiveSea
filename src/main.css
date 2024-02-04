@@ -31,6 +31,7 @@
 }
 body {
   margin: auto;
+  scroll-behavior: smooth;
   background-color: var(--background-white);
 }
 body::-webkit-scrollbar {
