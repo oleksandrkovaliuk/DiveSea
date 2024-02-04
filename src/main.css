@@ -36,6 +36,9 @@ body {
 body::-webkit-scrollbar {
   width: 0;
 }
+.scroll-animation {
+  transition: scroll-behavior 0.5s ease-in-out;
+}
 .disable-scroll-page {
   overflow: hidden;
   height: 100%;

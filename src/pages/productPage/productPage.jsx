@@ -30,6 +30,10 @@ export const ProductPage = () => {
   const [searchParams] = useSearchParams();
   const [timeArray, setTimeArray] = useState([]);
   const checkCoin = searchParams.get("coin");
+  const checkPach = window.location.pathname === "/product";
+  if(checkPach){
+    window.scrollTo(0,0)
+  }
   const checkCurrentTime = () => {
     const current_time = new Date();
     const newTimeArray = Array.from({ length: 16 }, (_, index) => {

@@ -56,8 +56,7 @@ export const FourthSectione = ({ full }) => {
   };
 
   const handleSelectSubFilterItem = (filterItem) => {
-    const arr = [...cardInfo];
-    const data = cardInfo.filter((item) =>
+    const data = [...cardInfo].filter((item) =>
       item.creatorName === filterItem
         ? item
         : item.collectionType === filterItem

@@ -79,12 +79,24 @@
         border-top-right-radius: 0px;
         transition: all 0.4s ease;
         z-index: 3;
+        height: 300px;
+        overflow: auto;
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--text-grayblack);
+          border-radius: 4px;
+        }
         .resultWithProduct {
           display: flex;
           justify-content: space-between;
           cursor: pointer;
-          &:not(:last-child){
-            margin-bottom:10px;
+          &:not(:last-child) {
+            margin-bottom: 10px;
           }
           img {
             width: 45px;
@@ -93,10 +105,10 @@
           }
           .discription_aboutProduct {
             text-align: right;
-            svg path{
-              fill:var(--background-white);
+            svg path {
+              fill: var(--background-white);
             }
-            h4{
+            h4 {
               color: var(--background-white);
               line-height: unset;
             }
@@ -109,7 +121,6 @@
               line-height: 140%;
               margin-bottom: 7px;
             }
-            
           }
         }
       }

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./header.module.scss";
 import "./burger.scss";
 import { Logo } from "../../icons/Logo";
 import { Button } from "../button/button";
-import { SearchIcon } from "../../icons/search";
 import { Link } from "react-router-dom";
 import { ButtonColors, ButtonSizes, ButtonVariants } from "../../shared/enums";
 import { MobileMenu } from "../mobileMenu";
-import { SearchInput } from "../searchInput";
 export const Header = () => {
   const [mobileMenu, showMobileMenu] = useState(false);
   const openMobileMenu = () => {

@@ -1,0 +1,77 @@
+.discoverResult{
+    margin-bottom: 100px;
+}
+.discoverProduct {
+  margin-inline: 100px;
+  .main_text {
+    color: #18181b;
+    font-family: var(--font-Poppins);
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 54.4px;
+    text-transform: capitalize;
+    margin-bottom: 45px;
+    width: 100%;
+    text-align: center;
+  }
+  .discoverNavBar {
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #cbcbcb;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    button,
+    .focused {
+      cursor: pointer;
+      background-color: transparent;
+      border: unset;
+      color: #000;
+      font-family: var(--font-Inter);
+      font-size: 17.829px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 26.743px;
+      text-transform: uppercase;
+      text-decoration: unset;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      transition: all 0.5s ease;
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: -27px;
+        width: 100%;
+        height: 4px;
+        background-color: #000;
+        transform-origin: left;
+        transform: scaleX(0.5);
+        transition: all 0.4s ease;
+      }
+      svg {
+        width: 40px;
+        height: 40px;
+        transition: all 0.4s ease;
+      }
+      &:hover {
+        svg {
+          transform: scale(1.1);
+        }
+        &::before {
+          transform: scaleX(1);
+        }
+      }
+    }
+    .focused {
+      svg {
+        transform: scale(1.1);
+      }
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

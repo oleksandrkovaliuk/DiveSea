@@ -3,8 +3,10 @@ import f from "./newBig.module.scss";
 import { VerifiedUser } from "../../icons/verifiedUser";
 import { Dot } from "../../icons/dot";
 import { userData } from "../../shared/userData";
+import { cardInfo } from "../../shared/cardInfo";
 export const NewBit = () => {
-  const [filteredData, setFilterData] = useState([userData[1]]);
+  const [filteredUserData, setFilterUserData] = useState([userData[1]]);
+  const [filteredNftInfo, setNftInfo] = useState([cardInfo[1]]);
   const formatDate = (date) => {
     const day = date.getDate();
     const month = date.toLocaleString("default", { month: "long" }); // назва місяця
@@ -23,12 +25,14 @@ export const NewBit = () => {
     const intervalForItem = setInterval(() => {
       const generateRandomIndex = Math.floor(Math.random() * 14) + 1;
       const newItem = [userData[generateRandomIndex]];
-      setFilterData(newItem);
+      const newImg = [cardInfo[generateRandomIndex]];
+      setFilterUserData(newItem);
+      setNftInfo(newImg);
     }, 4000);
 
     return () => clearInterval(intervalForItem);
   }, []);
-  return filteredData.map((item) => (
+  return filteredUserData.map((item) => (
     <div key={item.id} className={f.new_bit}>
       <div className={f.user_bit_wrap}>
         <div className={f.user_img_wrap}>
@@ -43,11 +47,15 @@ export const NewBit = () => {
             <span>New Bid</span>
             <span className={f.rotation}>Rotation</span>
           </div>
-          <h2>{item.volume} ETH</h2>
+          {filteredNftInfo.map((item) => (
+            <h2>{item.value} ETH</h2>
+          ))}
           <h3 className={f.date}>{formatDate(new Date())}</h3>
         </div>
       </div>
-      <img className={f.nft_img} src={item.img} alt="nftImg"></img>
+      {filteredNftInfo.map((item) => (
+        <img className={f.nft_img} src={item.img} alt="nftImg" />
+      ))}
     </div>
   ));
 };
