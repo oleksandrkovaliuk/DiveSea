@@ -4,11 +4,16 @@ import { creators } from "../../shared/creators";
 import { TopBottomFilterArrow } from "../../icons/topBottomFIlterArrow";
 import { Verified } from "../../icons/verified";
 import { Footer } from "../../components/footer";
-import { BackArrow } from "../../icons/backArrow";
-import { DownSvg } from "../../icons/downSvg";
+import { TopSvg } from "../../icons/topSvg";
+import { PreviewNftMenu } from "../../components/priviewNftMenu/previewMenu";
 export const Creators = () => {
-  const [creatorsList, setCreatorsList] = useState([] || 0);
-  const [filterCreatorsInfoBy, setFilterCreatorInfo] = useState(null);
+  const [creatorsList, setCreatorsList] = useState([]);
+  const [categoryKind, setKategoryKind] = useState("volume");
+  const [clicked, setClick] = useState(false);
+  const [activeFilter, setActiveFilter] = useState(false);
+  const [infoForCreatorMenu, setInfoForCreatorMenu] = useState(null);
+  const [closeMenu, setCloseMenu] = useState(true);
+  const [creatorHovered, setCreatorHovered] = useState(false);
   const setDefaultCreators = () => {
     const defaultArr = creators.sort((a, b) => {
       return parseFloat(a.volume) - parseFloat(b.volume);
@@ -16,27 +21,114 @@ export const Creators = () => {
     setCreatorsList(defaultArr);
   };
 
-  const sortByVolume = () => {
-    if (filterCreatorsInfoBy) {
-      const sortedCreatorsLowToHight = creators.sort((a, b) => {
+  const sortBy = (category) => {
+    if (
+      category === "volume" ||
+      category === "floorPrice" ||
+      category === "bestOffer" ||
+      category === "owners" ||
+      category === "listed"
+    ) {
+      setKategoryKind(category);
+      setActiveFilter(true);
+    } else {
+      setKategoryKind(null);
+      setClick(false);
+      setActiveFilter(false);
+    }
+    if (category === "floorPrice" && !clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(b.floorPrice) - parseFloat(a.floorPrice);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(true);
+    } else if (category === "floorPrice" && clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(a.floorPrice) - parseFloat(b.floorPrice);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(false);
+    }
+    if (category === "volume" && !clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
         return parseFloat(b.volume) - parseFloat(a.volume);
       });
-      setCreatorsList(sortedCreatorsLowToHight);
-      setFilterCreatorInfo(false);
-    } else {
-      const sortedCreatorsHightToLow = creators.sort((a, b) => {
+      setCreatorsList(sortedByNumber);
+      setClick(true);
+    } else if (category === "volume" && clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
         return parseFloat(a.volume) - parseFloat(b.volume);
       });
-      setCreatorsList(sortedCreatorsHightToLow);
-      setFilterCreatorInfo(true);
+      setCreatorsList(sortedByNumber);
+      setClick(false);
     }
+    if (category === "bestOffer" && !clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(b.bestOffer) - parseFloat(a.bestOffer);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(true);
+    } else if (category === "bestOffer" && clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(a.bestOffer) - parseFloat(b.bestOffer);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(false);
+    }
+    if (category === "owners" && !clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(b.Owners) - parseFloat(a.Owners);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(true);
+    } else if (category === "owners" && clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(a.Owners) - parseFloat(b.Owners);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(false);
+    }
+    if (category === "listed" && !clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(b.listed) - parseFloat(a.listed);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(true);
+    } else if (category === "listed" && clicked) {
+      const sortedByNumber = creatorsList.sort((a, b) => {
+        return parseFloat(a.listed) - parseFloat(b.listed);
+      });
+      setCreatorsList(sortedByNumber);
+      setClick(false);
+    }
+  };
+  const getInfoOnMouseOver = (event, name) => {
+    const currentCreator = event.target.getBoundingClientRect();
+    const top = currentCreator.top;
+    const left = currentCreator.left;
+    const height = currentCreator.height;
+    setInfoForCreatorMenu({ top, left, height, name });
+    setCloseMenu(false);
+  };
+  const handleMouseOut = () => {
+    setCloseMenu(true);
   };
   useEffect(() => {
     setDefaultCreators();
+    window.addEventListener("scroll", handleMouseOut);
+    return () => window.removeEventListener("scroll", handleMouseOut);
   }, []);
   return (
     <>
-      {" "}
+      {infoForCreatorMenu?.left && !closeMenu && (
+        <PreviewNftMenu
+          left={infoForCreatorMenu.left}
+          top={infoForCreatorMenu.top}
+          height={infoForCreatorMenu.height}
+          creator={infoForCreatorMenu.name}
+          closeMenu={handleMouseOut}
+        />
+      )}
       <div className={c.creators_container}>
         <h1 className={c.main_text}>Creators</h1>
         <table className={c.table_wrap}>
@@ -46,41 +138,118 @@ export const Creators = () => {
               <th className={c.collection}>Colletion</th>
               <th>
                 <div
-                  onClick={(event) => sortByVolume(event, "Volume")}
+                  onClick={() => sortBy("volume")}
                   className={
-                    filterCreatorsInfoBy ? c.th_with_svg_active : c.th_with_svg
+                    categoryKind === "volume"
+                      ? c.th_with_svg_active
+                      : c.th_with_svg
                   }
                 >
                   <span>Volume</span>
-                  {filterCreatorsInfoBy === null ? (
-                    <TopBottomFilterArrow />
-                  ) : "" || filterCreatorsInfoBy ? (
-                    <BackArrow />
-                  ) : "" || !filterCreatorsInfoBy ? (
-                    <DownSvg />
-                  ) : (
-                    ""
-                  )}
+                  <TopBottomFilterArrow
+                    className={activeFilter ? c.hide : c.hide}
+                  />
+
+                  {(activeFilter && categoryKind === "volume") ||
+                  categoryKind === "volume" ? (
+                    clicked ? (
+                      <TopSvg style={{ rotate: "180deg" }} />
+                    ) : (
+                      <TopSvg />
+                    )
+                  ) : null}
                 </div>
               </th>
               <th>
-                <div className={c.th_with_svg}>
-                  <span>Floor Price</span> <TopBottomFilterArrow />
+                <div
+                  onClick={() => sortBy("floorPrice")}
+                  className={
+                    categoryKind === "floorPrice"
+                      ? c.th_with_svg_active
+                      : c.th_with_svg
+                  }
+                >
+                  <span>Floor Price</span>
+                  <TopBottomFilterArrow
+                    className={activeFilter ? c.hide : c.hide}
+                  />
+                  {(activeFilter && categoryKind === "floorPrice") ||
+                  categoryKind === "floorPrice" ? (
+                    clicked ? (
+                      <TopSvg style={{ rotate: "180deg" }} />
+                    ) : (
+                      <TopSvg />
+                    )
+                  ) : null}
                 </div>
               </th>
               <th>
-                <div className={c.th_with_svg}>
-                  <span>Best Offer</span> <TopBottomFilterArrow />
+                <div
+                  onClick={() => sortBy("bestOffer")}
+                  className={
+                    categoryKind === "bestOffer"
+                      ? c.th_with_svg_active
+                      : c.th_with_svg
+                  }
+                >
+                  <span>Best Offer</span>{" "}
+                  <TopBottomFilterArrow
+                    className={activeFilter ? c.hide : c.hide}
+                  />
+                  {(activeFilter && categoryKind === "bestOffer") ||
+                  categoryKind === "bestOffer" ? (
+                    clicked ? (
+                      <TopSvg style={{ rotate: "180deg" }} />
+                    ) : (
+                      <TopSvg />
+                    )
+                  ) : null}
                 </div>
               </th>
               <th>
-                <div className={c.th_with_svg}>
-                  <span>Owners</span> <TopBottomFilterArrow />
+                <div
+                  onClick={() => sortBy("owners")}
+                  className={
+                    categoryKind === "owners"
+                      ? c.th_with_svg_active
+                      : c.th_with_svg
+                  }
+                >
+                  <span>Owners</span>{" "}
+                  <TopBottomFilterArrow
+                    className={activeFilter ? c.hide : c.hide}
+                  />
+                  {(activeFilter && categoryKind === "owners") ||
+                  categoryKind === "owners" ? (
+                    clicked ? (
+                      <TopSvg style={{ rotate: "180deg" }} />
+                    ) : (
+                      <TopSvg />
+                    )
+                  ) : null}
                 </div>
               </th>
               <th>
-                <div className={c.th_with_svg}>
-                  <span>% Listed</span> <TopBottomFilterArrow />
+                <div
+                  onClick={() => sortBy("listed")}
+                  className={
+                    categoryKind === "listed"
+                      ? c.th_with_svg_active
+                      : c.th_with_svg
+                  }
+                >
+                  <span>% Listed</span>{" "}
+                  <TopBottomFilterArrow
+                    className={activeFilter ? c.hide : c.hide}
+                  />
+                  {activeFilter &&
+                  (categoryKind === "listed") | (categoryKind === "listed") ? (
+                    clicked ? (
+                      <TopSvg style={{ rotate: "180deg" }} />
+                    ) : (
+                      <TopSvg />
+                    )
+                  ) : null}
                 </div>
               </th>
             </tr>
@@ -92,7 +261,12 @@ export const Creators = () => {
                   <td>
                     <span>{[index + 1]}</span>
                   </td>
-                  <td className={c.creator_name}>
+                  <td
+                    onMouseOver={(event) =>
+                      getInfoOnMouseOver(event, item.name)
+                    }
+                    className={c.creator_name}
+                  >
                     <span>
                       {item.name}
                       {item.verified ? <Verified /> : ""}
@@ -108,7 +282,11 @@ export const Creators = () => {
                     <span>{item.bestOffer} WETH</span>
                   </td>
                   <td>
-                    <span>{item.Owners}</span>
+                    <span>
+                      {item.Owners.length >= 4
+                        ? `${item.Owners.replace(/\d/, "$&.")}`
+                        : `${item.Owners}`}
+                    </span>
                   </td>
                   <td>
                     <span>{item.listed}%</span>

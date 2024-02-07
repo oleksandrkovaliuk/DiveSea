@@ -1,0 +1,36 @@
+.b {
+  .backgroud {
+    position: absolute;
+    width: 12%;
+    height: 20%;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  .creatorProduct {
+    position: fixed;
+    display: flex;
+    gap: 2px;
+    list-style: none;
+    padding: 3px;
+    background-color: var(--color-neutrals8);
+    border-radius: 11px;
+    box-shadow: 38.817px 11.763px 58.813px 0px rgba(199, 199, 199, 0.6);
+    transition: all 0.5s ease;
+    z-index: 5;
+    .products {
+      img {
+        width: 65px;
+        height: 65px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+  .hide {
+    opacity: 0;
+    transition: all 0.5s;
+  }
+}

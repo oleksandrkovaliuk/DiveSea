@@ -19,7 +19,8 @@ import { EthValue } from "../../../../components/value";
 import { useNavigate } from "react-router-dom";
 
 export const FourthSectione = ({ full }) => {
-  const [filteredData, setFilteredData] = useState(cardInfo);
+  const cardInfoCopy = [...cardInfo];
+  const [filteredData, setFilteredData] = useState(cardInfoCopy);
   const [dropMenuPosition, setDropMenudPosition] = useState(null);
   const [dropdownContent, setDropDownContent] = useState(null);
   const [searchingInput, showSearchingInput] = useState(false);
@@ -56,19 +57,19 @@ export const FourthSectione = ({ full }) => {
   };
 
   const handleSelectSubFilterItem = (filterItem) => {
-    const data = [...cardInfo].filter((item) =>
+    const data = cardInfo.filter((item) =>
       item.creatorName === filterItem
         ? item
         : item.collectionType === filterItem
     );
     if (filterItem === "all") {
-      setFilteredData(cardInfo);
+      setFilteredData(cardInfoCopy);
     } else if (filterItem === "> to <") {
-      filteredData.sort((a, b) => a.value - b.value);
-      setFilteredData(filteredData);
+      const sortedData = [...filteredData].sort((a, b) => a.value - b.value);
+      setFilteredData(sortedData);
     } else if (filterItem === "< to >") {
-      filteredData.sort((a, b) => b.value - a.value);
-      setFilteredData(filteredData);
+      const sortedData = [...filteredData].sort((a, b) => b.value - a.value);
+      setFilteredData(sortedData);
     } else {
       setFilteredData(data);
     }

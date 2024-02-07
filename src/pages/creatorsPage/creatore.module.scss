@@ -31,13 +31,13 @@
           font-weight: 500;
           line-height: 130%;
           letter-spacing: 0.22px;
-          cursor: pointer;
           .th_with_svg,
           .th_with_svg_active {
             display: flex;
             align-items: center;
             justify-content: flex-end;
             gap: 2px;
+            cursor: pointer;
             svg {
               width: 13px;
               height: 13px;
@@ -51,14 +51,26 @@
             svg path {
               fill: #000;
             }
+            .hide {
+              display: none;
+            }
+            .fil {
+              rotate: 90deg;
+            }
           }
           &:first-child {
             width: 10px;
             padding-right: 20px;
+            span {
+              pointer-events: none;
+            }
           }
           .collection {
             width: 150px;
             width: 100%;
+            span {
+              pointer-events: none;
+            }
           }
           &:not(:last-child) {
             text-align: left;
@@ -89,10 +101,21 @@
         }
         .creator_name {
           text-align: left;
+          cursor: pointer;
+          z-index:4;
+          position: relative;
           span {
             display: flex;
             align-items: center;
             gap: 4px;
+          }
+          svg{
+            pointer-events: none;
+          }
+          &:hover {
+            span {
+              color: #007aff;
+            }
           }
         }
       }
