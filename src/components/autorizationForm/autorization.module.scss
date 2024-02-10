@@ -1,0 +1,203 @@
+.blurBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000000f;
+  z-index: 5;
+}
+.autorizationForm {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  background-color: var(--text-grayblack);
+  padding: 20px;
+  padding-top: unset;
+  max-height: 600px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: auto;
+  overflow: hidden;
+  .autorTopSection {
+    padding-top: 80px;
+    margin-bottom: 20px;
+    position: relative;
+    svg {
+      background-color: var(--background-white);
+      border: 3px solid var(--text-grayblack);
+      padding: 8px;
+      border-radius: 50%;
+      z-index: 2;
+      position: relative;
+      width: 70px;
+      height: 70px;
+      path {
+        fill: var(--text-grayblack);
+      }
+    }
+    img {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      border-radius: 10px;
+      rotate: -40deg;
+      z-index: 1;
+      animation: img1 0.3s linear forwards;
+      &:nth-child(1) {
+        top: -20px;
+        left: -41px;
+        transform:  translateY(-110px);
+      }
+      &:nth-child(2) {
+        top: -110px;
+        left: 52px;
+        transform: translateY(-40px);
+      }
+      &:nth-child(3) {
+        top: -10px;
+        left: 135px;
+        transform: translateY(-170px);
+        animation: img1 0.4s linear forwards;
+      }
+      &:nth-child(4) {
+        top: -120px;
+        right: 129px;
+        transform: translateY(-30px);
+      }
+      &:nth-child(5) {
+        top: -22px;
+        right: 46px;
+        transform: translateY(-170px);
+        animation: img1 0.4s linear forwards;
+      }
+      &:nth-child(6) {
+        top: -100px;
+        right: -57px;
+        transform: translateY(-30px);
+      }
+      @keyframes img1 {
+        to{
+          transform: translateY(0);
+        }
+      }
+    }
+    button {
+      border: none;
+      padding: 10px;
+      padding-bottom: 8px;
+      border-radius: 50%;
+      position: relative;
+      background-color: var(--background-white);
+      border: 3px solid var(--text-grayblack);
+      position: absolute;
+      right: 0px;
+      top: 10px;
+      z-index: 3;
+      svg {
+        background-color: transparent;
+        border: unset;
+        width: 17px;
+        height: 16px;
+        padding: unset;
+        border-radius: unset;
+        opacity: 1;
+        path {
+          fill: var(--text-grayblack);
+        }
+      }
+    }
+  }
+  .title {
+    color: var(--background-white);
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-Poppins);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .inputWrap {
+    position: relative;
+    max-width: 300px;
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+    .autorizeInput {
+      width: 100%;
+      padding: 11px 12px;
+      background-color: var(--text-grayblack);
+      border: 1.5px solid var(--text-darkgray);
+      border-radius: 12px;
+      cursor: pointer;
+
+      color: var(--text-darkgray);
+      font-family: var(--font-Poppins);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .autorizeInput:active,
+    .autorizeInput:focus,
+    .autorizeInput:not(:placeholder-shown) {
+      outline: none;
+    }
+    .autorizeInput:active + .autorizeLabel,
+    .autorizeInput:focus + .autorizeLabel,
+    .autorizeInput:not(:placeholder-shown) + .autorizeLabel {
+      display: none;
+    }
+    .autorizeLabel {
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      color: var(--text-darkgray);
+      font-family: var(--font-Poppins);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 400;
+      pointer-events: none;
+    }
+    p {
+      color: var(--text-gray);
+      font-family: var(--font-Inter);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 125%;
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+  .submitAutorization {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 11px;
+    background-color: var(--background-white);
+    border-radius: 12px;
+    border: unset;
+
+    color: var(--text-darkgray);
+    font-family: var(--font-Poppins);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  // .autorizationWithGoggleOrFacebook{
+    
+  //   span{
+  //       color: var(--background-white);
+  //       font-family: var(--font-Poppins);
+  //       font-size: 16px;
+  //       font-style: normal;
+  //       font-weight: 600;
+  //       text-align: center;
+  //   }
+  // }
+}

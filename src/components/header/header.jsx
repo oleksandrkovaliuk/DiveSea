@@ -6,6 +6,8 @@ import { Button } from "../button/button";
 import { Link } from "react-router-dom";
 import { ButtonColors, ButtonSizes, ButtonVariants } from "../../shared/enums";
 import { MobileMenu } from "../mobileMenu";
+import { LogInSignIn } from "../logInandSignIn";
+import { Autorization } from "../autorizationForm";
 export const Header = () => {
   const [mobileMenu, showMobileMenu] = useState(false);
   const openMobileMenu = () => {
@@ -30,21 +32,13 @@ export const Header = () => {
               <Link to="/Creators">Creators</Link>
             </li>
             <li className={s.head_nav}>
-              <Link to="/Sell">Sell</Link>
-            </li>
-            <li className={s.head_nav}>
-              <Link to="/Stats">Stats</Link>
+              <Link to="/Create">Create</Link>
             </li>
           </ul>
         </div>
         <div className={s.search_connectWallet}>
-          <Button
-            size={ButtonSizes.medium}
-            colors={ButtonColors.primary}
-            variants={ButtonVariants.contained}
-          >
-            Connect Wallet
-          </Button>
+          <LogInSignIn />
+          <Autorization />
           <button
             onClick={() => openMobileMenu()}
             className={mobileMenu ? "burger active" : "burger"}

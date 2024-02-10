@@ -1,0 +1,1 @@
+export { CreatorIndividualPage } from "./creatorsindividual";

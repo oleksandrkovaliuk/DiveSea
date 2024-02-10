@@ -6,6 +6,7 @@ import { Verified } from "../../icons/verified";
 import { Footer } from "../../components/footer";
 import { TopSvg } from "../../icons/topSvg";
 import { PreviewNftMenu } from "../../components/priviewNftMenu/previewMenu";
+import { useNavigate } from "react-router-dom";
 export const Creators = () => {
   const [creatorsList, setCreatorsList] = useState([]);
   const [categoryKind, setKategoryKind] = useState("volume");
@@ -13,7 +14,7 @@ export const Creators = () => {
   const [activeFilter, setActiveFilter] = useState(false);
   const [infoForCreatorMenu, setInfoForCreatorMenu] = useState(null);
   const [closeMenu, setCloseMenu] = useState(true);
-  const [creatorHovered, setCreatorHovered] = useState(false);
+  const navigateTo = useNavigate();
   const setDefaultCreators = () => {
     const defaultArr = creators.sort((a, b) => {
       return parseFloat(a.volume) - parseFloat(b.volume);
@@ -113,6 +114,7 @@ export const Creators = () => {
   const handleMouseOut = () => {
     setCloseMenu(true);
   };
+  const navigateToCreator = (link) => navigateTo(link);
   useEffect(() => {
     setDefaultCreators();
     window.addEventListener("scroll", handleMouseOut);
@@ -266,6 +268,11 @@ export const Creators = () => {
                       getInfoOnMouseOver(event, item.name)
                     }
                     className={c.creator_name}
+                    onClick={() =>
+                      navigateToCreator(
+                        `/creatorIndividualPage?name=${item.name}`
+                      )
+                    }
                   >
                     <span>
                       {item.name}

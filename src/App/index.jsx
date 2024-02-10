@@ -8,6 +8,7 @@ import { NftProductPage } from "../pages/nftProductPageFull";
 import { NftIndividualPage } from "../pages/nftProductIndividualPage";
 import { Discover } from "../pages/discoverProducts";
 import { Creators } from "../pages/creatorsPage";
+import { CreatorIndividualPage } from "../pages/creatorsIndividualPage";
 export const App = () => {
   return (
     <>
@@ -20,6 +21,10 @@ export const App = () => {
         <Route path="/nftproductfull" element={<NftProductPage />} />
         <Route path="/creators" element={<Creators />}></Route>
         <Route path="/nftproductIndividual" element={<NftIndividualPage />} />
+        <Route
+          path="/creatorIndividualPage"
+          element={<CreatorIndividualPage />}
+        />
       </Routes>
     </>
   );

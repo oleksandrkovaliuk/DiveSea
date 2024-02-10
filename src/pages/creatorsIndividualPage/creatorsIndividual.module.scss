@@ -1,0 +1,112 @@
+.creatorPage {
+  .creatorMainInfo {
+    padding-inline: 100px;
+    padding-bottom: 100px;
+    position: relative;
+    z-index: 3;
+    .creatorInfoBlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      .creatorLeftSideInfo {
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+        .creatorName {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          color: var(--text-grayblack);
+          font-family: var(--font-Poppins);
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 100%;
+          letter-spacing: 0.245px;
+          position: relative;
+          &:before {
+            content: "";
+            height: 90%;
+            width: 1.5px;
+            background-color: var(--text-grayblack);
+            position: absolute;
+            right: -20px;
+          }
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        .social {
+          display: flex;
+          list-style: none;
+          align-items: center;
+          gap: 20px;
+          li {
+            svg {
+              width: 20px;
+              height: 20px;
+              path {
+                fill: #000;
+              }
+            }
+          }
+        }
+      }
+      .creatorRightSideInfo {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        list-style: none;
+        .creatorsInfoBlock {
+          display: flex;
+          flex-direction: column;
+          gap: 9px;
+          align-items: flex-start;
+          span {
+            font-family: var(--font-Poppins);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%;
+            letter-spacing: 0.245px;
+            &:first-child {
+              color: var(--text-grayblack);
+              font-size: 20px;
+            }
+            &:not(:first-child) {
+              color: var(--text-darkgray);
+              font-size: 17px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .cretorProducts {
+    background-color: var(--text-grayblack);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    position: relative;
+    height: 100%;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(
+        to bottom,
+        var(--background-white) 0%,
+        var(--background-white) 20%,
+        var(--text-grayblack) 100%
+      );
+    }
+    div {
+      box-shadow: unset;
+      z-index: 3;
+    }
+  }
+}
