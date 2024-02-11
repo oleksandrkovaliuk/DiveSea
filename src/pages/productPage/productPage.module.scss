@@ -150,3 +150,63 @@
     }
   }
 }
+@media (max-width: 1280px) {
+  .productPage_container {
+    padding-inline: 40px;
+    .coin_info_conrainer {
+      canvas {
+        transform: unset;
+        margin-block: 40px;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .productPage_container {
+    padding-inline: 30px;
+    .back_to_table {
+      gap:15px;
+    }
+    .coin_info_conrainer {
+      canvas {
+        height: 200px;
+      }
+      .coin_info_wrap {
+        padding: 20px;
+        .main_info {
+          gap: 15px;
+        }
+        .restInfo {
+          gap: 15px;
+          .restInfoBlocks {
+            .title {
+              font-size: 17px;
+            }
+            .value {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width:500px){
+  .productPage_container {
+    padding-inline:5px;
+    .coin_info_conrainer {
+      canvas{
+        padding-inline:10px;
+      }
+      .coin_info_wrap {
+        padding: 15px;
+        .main_info {
+          gap: 10px;
+        }
+        .restInfo {
+          gap: 10px;
+        }
+      }
+    }
+  }
+}

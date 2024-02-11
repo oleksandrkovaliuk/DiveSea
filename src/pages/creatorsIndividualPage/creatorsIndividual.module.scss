@@ -87,6 +87,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 40px;
     gap: 60px;
     position: relative;
     height: 100%;
@@ -107,6 +108,38 @@
     div {
       box-shadow: unset;
       z-index: 3;
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .creatorPage {
+    .creatorMainInfo {
+      padding-inline: 40px;
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .creatorPage {
+    .creatorMainInfo {
+      padding-inline: 30px;
+      padding-bottom: 40px;
+
+      .creatorInfoBlock {
+        flex-direction: column;
+        gap: 30px;
+        .creatorRightSideInfo {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+    }
+    .cretorProducts{
+      padding-inline:10px;
+      &::before{
+        margin-top:-1px;
+      }
     }
   }
 }

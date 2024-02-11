@@ -10,7 +10,7 @@
       max-width: 800px;
       img {
         border-radius: 15px;
-        padding-top: 28px;
+        padding-top: 20px;
       }
       .imgTopBar {
         position: absolute;
@@ -122,7 +122,7 @@
             line-height: 100%;
             letter-spacing: 0.118px;
           }
-          margin-bottom:10px;
+          margin-bottom: 10px;
         }
         .supportCreator {
           display: flex;
@@ -146,6 +146,43 @@
           span {
             color: var(--background-white);
             font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1080px) {
+  .individualProductBlock {
+    padding-inline: 40px;
+    .infoAboutProduct {
+      flex-direction: column;
+      gap: 40px;
+      .imgWithProduct {
+        img {
+          padding-top: 19px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .individualProductBlock {
+    padding-inline: 30px;
+    .infoAboutProduct {
+      .productDiscription {
+        .priceBlock {
+          .supportCreator {
+            align-items: flex-start;
+            svg {
+              width: 20px;
+              height: 20px;
+              flex-shrink: 0;
+            }
+            p,
+            span {
+              font-size: 15px;
+            }
           }
         }
       }

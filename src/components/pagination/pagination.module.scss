@@ -4,13 +4,14 @@
   justify-content: center;
   gap: 8px;
   position: relative;
-  max-width:330px;
-  margin:auto;
+  max-width: 330px;
+  margin: auto;
   .pagination_buttons {
     background-color: transparent;
     padding: 5px;
     padding-block: 2px;
     border: unset;
+    color: #000;
     font-family: var(--font-Poppins);
     font-size: 17px;
     font-style: normal;

@@ -133,7 +133,8 @@ export const Creators = () => {
       )}
       <div className={c.creators_container}>
         <h1 className={c.main_text}>Creators</h1>
-        <table className={c.table_wrap}>
+        <div className={c.table_wrap}>
+        <table>
           <thead>
             <tr>
               <th>#</th>
@@ -303,6 +304,7 @@ export const Creators = () => {
             })}
           </tbody>
         </table>
+        </div>
       </div>
       <Footer />
     </>
