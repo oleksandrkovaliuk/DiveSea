@@ -1,9 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import a from "./autorization.module.scss";
 import { Logo } from "../../icons/Logo";
 import { Close } from "../../icons/closeBtn";
 
 export const Autorization = ({ show, signIn, closeMenu }) => {
+  const reqForSignIn = (event) => {
+    const userName = document.querySelector("#username").value;
+    const emailValue = document.querySelector("#email").value;
+    fetch("http://localhost:3000/users/SignInUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailValue,
+        userName: userName,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    event.preventDefault();
+  };
+  const reqForLoginIn = (event) => {
+    event.preventDefault();
+    const emailValue = document.querySelector("#email").value;
+    fetch("http://localhost:3000/users/loginUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailValue,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    show = false;
+  };
   useEffect(() => {
     const body = document.body;
     if (show) {
@@ -104,20 +145,27 @@ export const Autorization = ({ show, signIn, closeMenu }) => {
               and Privy's <span>Terms.</span>
             </p>
           </div>
-          <button className={a.submitAutorization}>
+          <button
+            onClick={
+              signIn
+                ? (event) => reqForSignIn(event)
+                : (event) => reqForLoginIn(event)
+            }
+            className={a.submitAutorization}
+          >
             {signIn ? "Register" : "Log In"}
           </button>
           {/* <div className={a.autorizationWithGoggleOrFacebook}>
-            <span>Or</span>
-            <div className={a.googleFacebookBtn}>
-                <button>
+              <span>Or</span>
+              <div className={a.googleFacebookBtn}>
+                  <button>
 
-                </button>
-                <button>
-                    
-                    </button>
-            </div>
-          </div> */}
+                  </button>
+                  <button>
+                      
+                      </button>
+              </div>
+            </div> */}
         </div>
       </form>
     </div>
