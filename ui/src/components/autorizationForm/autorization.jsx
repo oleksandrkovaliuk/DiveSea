@@ -1,20 +1,42 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import a from "./autorization.module.scss";
 import { Logo } from "../../icons/Logo";
 import { Close } from "../../icons/closeBtn";
-
+import { InputValidationTrue } from "../../icons/inputvalidationtrue";
+import { InputValidationFalse } from "../../icons/inputvalidationfalse";
 export const Autorization = ({ show, signIn, closeMenu }) => {
+  const [emailvalidation, checkEmailValidation] = useState(null);
+  const [userNamevalidation, checkUserName] = useState(null);
+  const userName = document.querySelector("#username");
+const emailValue = document.querySelector("#email");
+  const emailValidation = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+  const checkIfEmailValid = (event) => {
+    if (emailValidation(event.target.value)) {
+      checkEmailValidation(true);
+    } else {
+      checkEmailValidation(false);
+    }
+  };
+  const checkIfUserNameValid = (event) => {
+    console.log(event.target.value.length > 3);
+    if (event.target.value.length > 3) {
+      checkUserName(true);
+    } else {
+      checkUserName(false);
+    }
+  };
   const reqForSignIn = (event) => {
-    const userName = document.querySelector("#username").value;
-    const emailValue = document.querySelector("#email").value;
-    fetch("http://localhost:3000/users/SignInUser", {
+    fetch("http://localhost:3004/users/SignInUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: emailValue,
-        userName: userName,
+        email: emailValue.value,
+        userName: userName.value,
       }),
     })
       .then((res) => {
@@ -28,13 +50,14 @@ export const Autorization = ({ show, signIn, closeMenu }) => {
   const reqForLoginIn = (event) => {
     event.preventDefault();
     const emailValue = document.querySelector("#email").value;
-    fetch("http://localhost:3000/users/loginUser", {
+
+    fetch("http://localhost:3004/users/loginUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: emailValue,
+        email: emailValue.value,
       }),
     })
       .then((res) => {
@@ -123,10 +146,16 @@ export const Autorization = ({ show, signIn, closeMenu }) => {
                 id="username"
                 name="username"
                 className={a.autorizeInput}
+                onChange={(event) => checkIfUserNameValid(event)}
               ></input>
               <label htmlFor="username" className={a.autorizeLabel}>
                 Username
               </label>
+              {userNamevalidation ? (
+                <InputValidationTrue />
+              ) : (
+                <InputValidationFalse />
+              )}
             </div>
           )}
           <div className={a.inputWrap}>
@@ -136,15 +165,21 @@ export const Autorization = ({ show, signIn, closeMenu }) => {
               id="email"
               name="email"
               className={a.autorizeInput}
+              onChange={(event) => checkIfEmailValid(event)}
             ></input>
             <label htmlFor="email" className={a.autorizeLabel}>
               Email
             </label>
-            <p>
-              By continuing you agree to our <span>Terms & Privacy</span> Policy
-              and Privy's <span>Terms.</span>
-            </p>
+            {emailvalidation ? (
+              <InputValidationTrue />
+            ) : (
+              <InputValidationFalse />
+            )}
           </div>
+          <p>
+            By continuing you agree to our <span>Terms & Privacy</span> Policy
+            and Privy's <span>Terms.</span>
+          </p>
           <button
             onClick={
               signIn
@@ -152,6 +187,11 @@ export const Autorization = ({ show, signIn, closeMenu }) => {
                 : (event) => reqForLoginIn(event)
             }
             className={a.submitAutorization}
+            style={
+              emailvalidation && userNamevalidation
+                ? { opacity: "1", pointerEvents: "unset" }
+                : { opacity: "0.4", pointerEvents: "none" }
+            }
           >
             {signIn ? "Register" : "Log In"}
           </button>

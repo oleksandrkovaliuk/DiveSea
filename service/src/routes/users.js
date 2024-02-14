@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const client = require("../../database");
 const checkAuth = (req, res, next) => {
   const { auth } = req.cookies;
   console.log(auth, " auth");
@@ -19,9 +19,9 @@ const checkAuth = (req, res, next) => {
   // res.redirect("/");
 };
 
-const generateUserPassword = (name) => {
-  return 123456;
-};
+// const generateUserPassword = (name) => {
+//   return 123456;
+// };
 
 const users = [];
 
@@ -54,32 +54,42 @@ router.post("/loginUser", checkAuth, (req, res) => {
 });
 
 router.post("/SignInUser", checkAuth, (req, res) => {
-  console.log(req.body, " body");
+  const insertQuery = `
+  INSERT INTO diveseausers (username, email)
+  VALUES ($1, $2)
+  RETURNING *;`;
+  const checkQuery = "SELECT * FROM diveseausers WHERE username = $1;";
   const { userName, email } = req.body;
-
   if (userName && email) {
-    const user = {
-      ...req.body,
-      name: userName,
-      email:email
-    };
-    users.push({
-      ...user,
-      pass: generateUserPassword(firstName),
+    const value = [userName, email];
+    client.query(checkQuery, [userName], (err, res) => {
+      if (!err) {
+        if (res.rows.length > 0) {
+          client.query(insertQuery, value, (err, res) => {
+            if (!err) {
+              console.log(res.rows, "user added");
+            } else {
+              console.error("failed with adding user");
+            }
+          });
+        } else {
+          console.log("User already exists");
+        }
+      } else {
+        console.error("faile with checking if user registreted");
+      }
+      client.end();
     });
-
-    return res.send(user);
   }
-
   res.sendStatus(401);
 });
 
-router.put("/user/:id", checkAuth, (req, res) => {
-  const { email } = req.query || null;
-  const userID = req.params.id;
+// router.put("/user/:id", checkAuth, (req, res) => {
+//   const { email } = req.query || null;
+//   const userID = req.params.id;
 
-  if (userID) {
-    res.send(`user - ${userID} - email - ${email}`);
-  }
-});
+//   if (userID) {
+//     res.send(`user - ${userID} - email - ${email}`);
+//   }
+// });
 module.exports = router;
