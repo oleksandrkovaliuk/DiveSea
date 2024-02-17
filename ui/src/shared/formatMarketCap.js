@@ -5,7 +5,7 @@ export const formatMarketCap = (cap) => {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 4,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 4,
       }) + " T"
     );
   } else if (cap >= 1e9) {
@@ -14,7 +14,7 @@ export const formatMarketCap = (cap) => {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 1,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 4,
       }) + " B"
     );
   } else if (cap >= 1e6) {
@@ -23,7 +23,7 @@ export const formatMarketCap = (cap) => {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 2,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 4,
       }) + "M"
     );
   } else if (cap >= 1e3) {
@@ -32,7 +32,7 @@ export const formatMarketCap = (cap) => {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 1,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 4,
       }) + "K"
     );
   } else {
@@ -40,7 +40,7 @@ export const formatMarketCap = (cap) => {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 1,
-      maximumFractionDigits: 3,
+      maximumFractionDigits: 4,
     });
   }
 };

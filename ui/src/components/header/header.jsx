@@ -32,13 +32,14 @@ export const Header = () => {
               <Link to="/Creators">Creators</Link>
             </li>
             <li className={s.head_nav}>
-              <Link to="/Create">Create</Link>
+              <Link to="/Create">Create nft</Link>
             </li>
           </ul>
         </div>
         <div className={s.search_connectWallet}>
+          <div className={s.login}>
           <LogInSignIn />
-          <Autorization />
+          </div>
           <button
             onClick={() => openMobileMenu()}
             className={mobileMenu ? "burger active" : "burger"}

@@ -184,7 +184,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 125%;
-    max-width:300px;
+    max-width: 300px;
     span {
       font-weight: 600;
     }
@@ -215,4 +215,44 @@
   //       text-align: center;
   //   }
   // }
+}
+@media (max-width: 768px) {
+  .autorizationForm {
+    margin-inline: 18px;
+    padding-inline: 15px;
+    width: 100%;
+    max-width:340px;
+    margin: auto;
+    .autorTopSection {
+      padding-top: 60px;
+      img {
+        width: 100px;
+        height: 100px;
+        &:nth-child(2) {
+          top: -100px;
+          left: 34px;
+        }
+        &:nth-child(3) {
+          top: -16px;
+          left: 102px;
+        }
+        &:nth-child(4) {
+          top: -100px;
+          right: 35px;
+        }
+        &:nth-child(5) {
+          top: -15px;
+          right: -35px;
+        }
+        &:nth-child(6) {
+          display: none;
+        }
+      }
+    }
+    .inputWrap {
+      svg {
+        right: -7%;
+      }
+    }
+  }
 }

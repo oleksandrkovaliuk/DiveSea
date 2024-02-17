@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../../database");
+const checkQuery = "SELECT * FROM diveseausers WHERE email = $1;";
 const checkAuth = (req, res, next) => {
   const { auth } = req.cookies;
   console.log(auth, " auth");
@@ -40,48 +41,46 @@ router.get("/user/:id", checkAuth, (req, res) => {
 });
 
 router.post("/loginUser", checkAuth, (req, res) => {
-  const { email, pass } = req.body;
-
-  if (email && pass) {
-    const user = users.find((user) => user.email === email);
-    if (user.pass === pass) {
-      delete user.pass;
-      return res.send(user);
-    }
+  const { email } = req.body;
+  console.log(email, "email");
+  if (email) {
+    client.query(checkQuery, [email], (err, res) => {
+      console.log(res.rows, "rows");
+      if (res.rows.length !== 0) {
+        console.log(res.rows, "rows if finded");
+        console.log("sucsesfull");
+      } else {
+        console.log("not registered");
+      }
+    });
   }
 
-  res.sendStatus(401);
+  res.sendStatus(200);
 });
 
 router.post("/SignInUser", checkAuth, (req, res) => {
-  const insertQuery = `
-  INSERT INTO diveseausers (username, email)
-  VALUES ($1, $2)
-  RETURNING *;`;
-  const checkQuery = "SELECT * FROM diveseausers WHERE username = $1;";
-  const { userName, email } = req.body;
+  const { email, userName } = req.body;
   if (userName && email) {
-    const value = [userName, email];
-    client.query(checkQuery, [userName], (err, res) => {
-      if (!err) {
-        if (res.rows.length > 0) {
-          client.query(insertQuery, value, (err, res) => {
-            if (!err) {
-              console.log(res.rows, "user added");
-            } else {
-              console.error("failed with adding user");
-            }
-          });
-        } else {
-          console.log("User already exists");
-        }
+    client.query(checkQuery, [email], (err, res) => {
+      if (res.rows.length === 0) {
+        const insertQuery = `
+        INSERT INTO diveseausers (username, email)
+        VALUES ($1, $2)
+        RETURNING *;`;
+        const insertValue = [userName, email];
+        client.query(insertQuery, insertValue, (err, res) => {
+          if (!err) {
+            console.log(res.rows, "added");
+          } else {
+            console.error("failed to add");
+          }
+        });
       } else {
-        console.error("faile with checking if user registreted");
+        console.log("this user already registered");
       }
-      client.end();
     });
   }
-  res.sendStatus(401);
+  res.sendStatus(200);
 });
 
 // router.put("/user/:id", checkAuth, (req, res) => {

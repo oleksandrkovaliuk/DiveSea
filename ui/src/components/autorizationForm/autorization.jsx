@@ -4,11 +4,11 @@ import { Logo } from "../../icons/Logo";
 import { Close } from "../../icons/closeBtn";
 import { InputValidationTrue } from "../../icons/inputvalidationtrue";
 import { InputValidationFalse } from "../../icons/inputvalidationfalse";
-export const Autorization = ({ show, signIn, closeMenu }) => {
+export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [emailvalidation, checkEmailValidation] = useState(null);
   const [userNamevalidation, checkUserName] = useState(null);
   const userName = document.querySelector("#username");
-const emailValue = document.querySelector("#email");
+  const emailValue = document.querySelector("#email");
   const emailValidation = (email) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
@@ -29,7 +29,8 @@ const emailValue = document.querySelector("#email");
     }
   };
   const reqForSignIn = (event) => {
-    fetch("http://localhost:3004/users/SignInUser", {
+    event.preventDefault();
+    fetch("http://localhost:3003/users/SignInUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,18 +41,17 @@ const emailValue = document.querySelector("#email");
       }),
     })
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          closeMenu(event);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-    event.preventDefault();
   };
   const reqForLoginIn = (event) => {
     event.preventDefault();
-    const emailValue = document.querySelector("#email").value;
-
-    fetch("http://localhost:3004/users/loginUser", {
+    fetch("http://localhost:3003/users/loginUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,12 +61,17 @@ const emailValue = document.querySelector("#email");
       }),
     })
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          closeMenu(event);
+          document.cookie = `userEmail=${emailValue.value};max-age=${
+            7 * 24 * 60 * 60
+          }`;
+          loginInUser();
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-    show = false;
   };
   useEffect(() => {
     const body = document.body;
@@ -188,7 +193,11 @@ const emailValue = document.querySelector("#email");
             }
             className={a.submitAutorization}
             style={
-              emailvalidation && userNamevalidation
+              signIn
+                ? emailvalidation && userNamevalidation
+                  ? { opacity: "1", pointerEvents: "unset" }
+                  : { opacity: "0.4", pointerEvents: "none" }
+                : emailvalidation
                 ? { opacity: "1", pointerEvents: "unset" }
                 : { opacity: "0.4", pointerEvents: "none" }
             }
