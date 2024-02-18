@@ -47,11 +47,11 @@ router.post("/loginUser", checkAuth, (req, res) => {
     console.log(queryRes.rows, "rows");
     if (email && queryRes.rows.length !== 0) {
       console.log(queryRes.rows, "rows if finded");
-      res.status(200);
       console.log("sucsesfull");
+      return res.status(200);
     } else {
-      res.status(401);
       console.log("not registered");
+      return res.status(401);
     }
   });
 });

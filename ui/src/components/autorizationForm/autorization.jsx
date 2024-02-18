@@ -32,7 +32,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   };
   const reqForSignIn = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/users/signInUser", {
+    fetch("http://localhost:3002/api/signInUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   };
   const reqForLoginIn = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/users/loginUser", {
+    fetch("http://localhost:3002/api/loginUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
