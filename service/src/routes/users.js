@@ -43,19 +43,17 @@ router.get("/user/:id", checkAuth, (req, res) => {
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email } = req.body;
   console.log(email, "email");
-  if (email) {
-    client.query(checkQuery, [email], (err, res) => {
-      console.log(res.rows, "rows");
-      if (res.rows.length !== 0) {
-        console.log(res.rows, "rows if finded");
-        console.log("sucsesfull");
-      } else {
-        console.log("not registered");
-      }
-    });
-  }
-
-  res.sendStatus(200);
+  client.query(checkQuery, [email], (err, queryRes) => {
+    console.log(queryRes.rows, "rows");
+    if (email && queryRes.rows.length !== 0) {
+      console.log(queryRes.rows, "rows if finded");
+      res.status(200);
+      console.log("sucsesfull");
+    } else {
+      res.status(401);
+      console.log("not registered");
+    }
+  });
 });
 
 router.post("/SignInUser", checkAuth, (req, res) => {

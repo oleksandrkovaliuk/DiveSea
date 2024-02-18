@@ -7,6 +7,7 @@ import { InputValidationFalse } from "../../icons/inputvalidationfalse";
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [emailvalidation, checkEmailValidation] = useState(null);
   const [userNamevalidation, checkUserName] = useState(null);
+  const [autrozite, checkIfUserAutorized] = useState(false);
   const userName = document.querySelector("#username");
   const emailValue = document.querySelector("#email");
   const emailValidation = (email) => {
@@ -16,6 +17,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const checkIfEmailValid = (event) => {
     if (emailValidation(event.target.value)) {
       checkEmailValidation(true);
+      checkIfUserAutorized(false);
     } else {
       checkEmailValidation(false);
     }
@@ -67,6 +69,10 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
             7 * 24 * 60 * 60
           }`;
           loginInUser();
+        }
+        if (res.status === 401) {
+          checkIfUserAutorized(true);
+          checkEmailValidation(false);
         }
       })
       .catch((error) => {
@@ -181,6 +187,9 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
               <InputValidationFalse />
             )}
           </div>
+          {autrozite && (
+            <p className={a.unAutorize}>This user is not registered yet</p>
+          )}
           <p>
             By continuing you agree to our <span>Terms & Privacy</span> Policy
             and Privy's <span>Terms.</span>

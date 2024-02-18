@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import s from "./header.module.scss";
 import "./burger.scss";
 import { Logo } from "../../icons/Logo";
-import { Button } from "../button/button";
 import { Link } from "react-router-dom";
-import { ButtonColors, ButtonSizes, ButtonVariants } from "../../shared/enums";
 import { MobileMenu } from "../mobileMenu";
 import { LogInSignIn } from "../logInandSignIn";
-import { Autorization } from "../autorizationForm";
 export const Header = () => {
   const [mobileMenu, showMobileMenu] = useState(false);
   const openMobileMenu = () => {
