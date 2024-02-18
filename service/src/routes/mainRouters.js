@@ -56,7 +56,7 @@ router.post("/loginUser", checkAuth, (req, res) => {
   });
 });
 
-router.post("/SignInUser", checkAuth, (req, res) => {
+router.post("/signInUser", checkAuth, (req, res) => {
   const { email, userName } = req.body;
   if (userName && email) {
     client.query(checkQuery, [email], (err, res) => {
