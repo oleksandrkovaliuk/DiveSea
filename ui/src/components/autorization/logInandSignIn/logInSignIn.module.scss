@@ -4,19 +4,60 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px;
+  z-index: 6;
   .user {
-    color: hsla(0, 0%, 0%, 0.6);
-    font-family: var(--font-Inter);
-    font-size: 17.829px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26.743px;
-    text-decoration: unset;
-  }
-  svg {
-    width: 25px;
-    height: 25px;
+    border: unset;
+    border-radius: 60%;
+    padding: 5px;
+    position: relative;
+    z-index: 7;
     flex-shrink: 0;
+    svg {
+      width: 35px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+  }
+  .user_info {
+    display: flex;
+    flex-direction: column;
+    padding-block: 5px 15px;
+    border-bottom: 1.5px solid #cbcbcb;
+    margin-bottom: 15px;
+    span {
+      font-family: var(--font-Inter);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+    }
+    span:nth-child(2) {
+      font-size: 15px;
+    }
+  }
+  .profileMenuNav {
+    list-style: none;
+    max-width: 150px;
+    margin-right: auto;
+    .profileNavBtn {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+
+      font-family: var(--font-Inter);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+
+      &:not(:last-of-type) {
+        margin-bottom: 5px;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+    }
   }
 }
 .logInOrSignInBtn_container {
@@ -58,13 +99,6 @@
         background-color: hsla(0, 0%, 0%, 0.6);
         transform: translateY(-50%);
       }
-    }
-  }
-}
-@media(max-width:768px){
-  .loginnedUser {
-    .user {
-      font-size: 15.829px;
     }
   }
 }

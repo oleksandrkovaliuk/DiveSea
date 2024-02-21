@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HomePage } from "../pages/home";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/header";
@@ -9,9 +9,26 @@ import { NftIndividualPage } from "../pages/nftProductIndividualPage";
 import { Discover } from "../pages/discoverProducts";
 import { Creators } from "../pages/creatorsPage";
 import { CreatorIndividualPage } from "../pages/creatorsIndividualPage";
+import Context from "../context";
+import { getCookie } from "../service/getCookie";
 export const App = () => {
+  const [userInfo, setUserInfo] = useState([]);
+
+  const setDataForUser = (userInfo) => setUserInfo(userInfo);
+
+  const getDataForUser = {
+    userInfo,
+    setDataForUser,
+  };
+  console.log(getDataForUser.userInfo , "straight from top");
+  useEffect(() => {
+    const checkCookie = getCookie("user");
+    if (checkCookie !== null) {
+      getDataForUser.setDataForUser(JSON.parse(checkCookie));
+    }
+  }, []);
   return (
-    <>
+    <Context.Provider value={getDataForUser}>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -26,6 +43,6 @@ export const App = () => {
           element={<CreatorIndividualPage />}
         />
       </Routes>
-    </>
+    </Context.Provider>
   );
 };

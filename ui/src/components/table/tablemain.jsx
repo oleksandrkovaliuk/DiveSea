@@ -19,7 +19,6 @@ import {
   showDropDownMenuSort,
   setOrderFilter,
   setCurrentPages,
-  setIsFirstRender,
 } from "./reducer/actions";
 import { Pagination } from "../pagination";
 import { LeftArrowLined } from "../../icons/leftArrowLined";

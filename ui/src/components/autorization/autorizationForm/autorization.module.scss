@@ -177,6 +177,84 @@
       }
     }
   }
+  .codeCheck {
+    .codeCheckTitle {
+      color: var(--background-white);
+      width: 100%;
+      text-align: center;
+      font-family: var(--font-Poppins);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      margin-block: 15px;
+    }
+    .codeCheckForm {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      .codeDigits {
+        max-width: 40px;
+        min-height: 50px;
+        background-color: var(--text-grayblack);
+        border: 1.5px solid var(--text-darkgray);
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+
+        color: var(--text-darkgray);
+        font-family: var(--font-Poppins);
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
+      .codeDigits:active,
+      .codeDigits:focus,
+      .codeDigits:not(:placeholder-shown) {
+        outline: none;
+      }
+      .codeDigits::-webkit-outer-spin-button,
+      .codeDigits::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    .resendCodeMessage {
+      text-align: center;
+      p {
+        color:#cc0000;
+        text-align: center;
+        margin: auto;
+        font-weight: 600;
+        margin-block: 5px;
+        span {
+          color:#cc0000;
+          font-weight: 400;
+          text-decoration: unset;
+        }
+      }
+      button {
+        background-color: unset;
+        border: none;
+        color: #cbcbcb;
+        font-family: var(--font-Inter);
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        transform: translateY(0);
+        transition: all 0.3s ease-in;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #cbcbcb;
+        cursor: pointer;
+        &:hover {
+          color: var(--background-white);
+          border-color: var(--background-white);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
   p {
     color: var(--text-gray);
     font-family: var(--font-Inter);
@@ -189,7 +267,7 @@
       font-weight: 600;
     }
   }
-  .unAutorize{
+  .unAutorize {
     color: #cc0000;
     font-family: var(--font-Inter);
     font-size: 12px;
@@ -230,7 +308,7 @@
     margin-inline: 18px;
     padding-inline: 15px;
     width: 100%;
-    max-width:340px;
+    max-width: 340px;
     margin: auto;
     .autorTopSection {
       padding-top: 60px;
