@@ -1,0 +1,173 @@
+.alertIfSuccesfullyChanged {
+    padding: 12px;
+    background-color: #f9f9f9;
+    border: 2px solid var(--text-grayblack);
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    text-align: center;
+    animation: showMessage 3s linear forwards;
+    span {
+        color: var(--text-grayblack);
+        font-family: var(--font-Poppins);
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+      }
+  }
+  
+  @keyframes showMessage {
+    0% {
+      top: -60px; 
+    }
+    10% {
+      top: 40px;
+    }
+    90% {
+      top: 40px;
+    }
+    100% {
+      top: -60px;
+    }
+  }
+
+.profilePageContainer {
+  margin-inline: 100px;
+  padding-bottom: 66px;
+  background-color: #f9f9f9;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: 2px solid var(--text-grayblack);
+  border-bottom: unset;
+  .profiletPagetopSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translate(20px, -40px);
+    .profileImg {
+      position: relative;
+      background-color: var(--text-grayblack);
+      border-radius: 50%;
+      svg {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+        background-color: #f9f9f9;
+        border: 3px solid var(--text-grayblack);
+        border-radius: 50%;
+        padding: 5px;
+        path {
+          fill: var(--text-grayblack);
+        }
+      }
+      .uploadImg {
+        background-color: unset;
+        padding: 10px;
+        border: unset;
+        position: absolute;
+        right: -25%;
+        bottom: -20%;
+        svg {
+          pointer-events: unset;
+          width: 50px;
+          height: 50px;
+          flex-shrink: 0;
+          path {
+            fill: var(--text-grayblack);
+          }
+        }
+      }
+    }
+  }
+  .changeInfoAboutUser {
+    padding-inline: 40px;
+    max-width: 500px;
+    .fieldWithInfo {
+      margin-bottom: 45px;
+      &:not(:last-of-type) {
+        margin-bottom: 15px;
+      }
+      span {
+        color: var(--text-grayblack);
+        font-family: var(--font-Poppins);
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+      }
+      .inputWithInfo {
+        position: relative;
+        margin-top: 5px;
+        .userInfo {
+          border: 2px solid var(--text-grayblack);
+          background-color: #f9f9f9;
+          border-radius: 10px;
+          padding: 10px 8px;
+          max-width: 350px;
+          width: 100%;
+
+          color: var(--text-grayblack);
+          font-family: var(--font-Poppins);
+          font-size: 17px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 120%;
+        }
+        .label {
+          color: var(--text-grayblack);
+          font-family: var(--font-Poppins);
+          font-size: 17px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 120%;
+
+          position: absolute;
+          top: 11px;
+          left: 11px;
+        }
+        .userInfo:active,
+        .userInfo:focus,
+        .userInfo:not(:placeholder-shown) {
+          outline: none;
+        }
+        .userInfo:active + .label,
+        .userInfo:focus + .label,
+        .userInfo:not(:placeholder-shown) + .label {
+          display: none;
+        }
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 45%;
+        right: 10%;
+        transform: translateY(-50%);
+        path {
+          width: 17px;
+          height: 17px;
+        }
+      }
+    }
+    .submitChanges {
+      padding: 20px;
+      width: 100%;
+      border-radius: 15px;
+      background-color: var(--text-grayblack);
+      border: unset;
+
+      color: #f9f9f9;
+      font-family: var(--font-Poppins);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+    }
+  }
+}

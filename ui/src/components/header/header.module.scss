@@ -1,3 +1,37 @@
+.mobile_menu {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  a {
+    color: #282828;
+
+    font-family: var(--font-Inter);
+    font-size: 17.829px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26.743px;
+    text-transform: uppercase;
+    text-decoration: unset;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    &:hover {
+      background-color: #282828;
+      color: #f9f9f9;
+    }
+  }
+}
+a {
+  margin-top: 8px;
+  text-decoration: unset;
+  text-align: center;
+  color: #282828;
+  font-size: 12.801px;
+  font-family: var(--font-Inter);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19.913px;
+  max-width: 354px;
+}
 .header_wrap {
   display: flex;
   align-items: center;
@@ -101,9 +135,9 @@
     }
     .search_connectWallet {
       gap: 18px;
-      .login {
-        display: none;
-      }
+      // .login {
+      //   display: none;
+      // }
       .searching {
         display: none;
         .search_input {

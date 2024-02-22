@@ -1,16 +1,7 @@
 import React from "react";
 
-export const LogOut = ({ handleLogOut }) => {
+export const LogOut = () => {
   return (
-    <button
-      style={{
-        backgroundColor: "unset",
-        border: "unset",
-        width: "25px",
-        height: "25px",
-      }}
-      onClick={handleLogOut}
-    >
       <svg
         version="1.0"
         width="512.000000pt"
@@ -54,6 +45,5 @@ export const LogOut = ({ handleLogOut }) => {
           />
         </g>
       </svg>
-    </button>
   );
 };
