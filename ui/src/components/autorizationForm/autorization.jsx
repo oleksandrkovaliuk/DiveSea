@@ -220,7 +220,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
 
                   </button>
                   <button>
-                      
+
                       </button>
               </div>
             </div> */}
