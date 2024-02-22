@@ -24,6 +24,31 @@ const generateRandomCode = () => {
 const checkAuth = (req, res, next) => {
   next();
 };
+router.post("/signInUser", checkAuth, (req, res) => {
+  const { email, userName } = req.body;
+  if (userName && email) {
+    client.query(checkQuery, [email], (err, queryRes) => {
+      if (queryRes.rows.length === 0) {
+        const insertQuery = `
+        INSERT INTO diveseausers (username, email)
+        VALUES ($1, $2)
+        RETURNING *;`;
+        const insertValue = [userName, email];
+        client.query(insertQuery, insertValue, (err, dataRes) => {
+          if (!err) {
+            console.log(dataRes.rows, "added");
+          } else {
+            console.error("failed to add");
+          }
+        });
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(401);
+        console.log("this user already registered");
+      }
+    });
+  }
+});
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email } = req.body;
   console.log(process.env.EMAIL, "my email");
@@ -56,30 +81,31 @@ router.post("/loginUser", checkAuth, (req, res) => {
     }
   });
 });
-
-router.post("/signInUser", checkAuth, (req, res) => {
-  const { email, userName } = req.body;
-  if (userName && email) {
-    client.query(checkQuery, [email], (err, queryRes) => {
-      if (queryRes.rows.length === 0) {
-        const insertQuery = `
-        INSERT INTO diveseausers (username, email)
-        VALUES ($1, $2)
-        RETURNING *;`;
-        const insertValue = [userName, email];
-        client.query(insertQuery, insertValue, (err, dataRes) => {
-          if (!err) {
-            console.log(dataRes.rows, "added");
+router.post("/ChangeUserValue", checkAuth, (req, res) => {
+  const { email, username, id } = req.body;
+  console.log(req.body, "body");
+  if (id) {
+    const changeValue = `UPDATE diveseausers
+    SET email = $1, username = $2
+    WHERE id = $3`;
+    const values = [req.body.email, req.body.username, req.body.id];
+    client.query(changeValue, values, (err, updatedUserRes) => {
+      console.log(values, "bod");
+      if (!err) {
+        client.query(checkQuery, [email], (err, queryRes) => {
+          if (!err && queryRes.rows.length !== 0) {
+            const user = queryRes.rows[0];
+            res.status(200).json({ user });
           } else {
-            console.error("failed to add");
+            res.status(500).json({ error: "failed to fetch updated user" });
           }
         });
-        res.sendStatus(200);
       } else {
-        res.sendStatus(401);
-        console.log("this user already registered");
+        res.status(404).json({ error: "fail with updating" });
       }
     });
+  } else {
+    res.status(400).json({ error: "Missing Id" });
   }
 });
 module.exports = router;

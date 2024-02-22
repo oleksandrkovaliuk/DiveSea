@@ -14,12 +14,14 @@ import {
   getCodeFromEmail,
   setCodeFromUser,
   showMessageIfInvalidCode,
+  getUser,
 } from "../reducer/actionsForAuthor";
 import Context from "../../../context";
 import {
   initialStateForAutor,
   reducerForAutor,
 } from "../reducer/reducerForauthor";
+import { emailValidation } from "../../../service/emailValidation";
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
     {
@@ -32,16 +34,13 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       codefield,
       codeFromUser,
       invalidCode,
+      user,
     },
     dispatchAction,
   ] = useReducer(reducerForAutor, initialStateForAutor);
   const getDataForUser = useContext(Context);
   const userName = document.querySelector("#username");
   const emailValue = document.querySelector("#email");
-  const emailValidation = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
   const checkIfEmailValid = (event) => {
     if (emailValidation(event.target.value)) {
       dispatchAction(checkEmailValidation(true));
@@ -112,7 +111,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
           const resultCode = parseInt(findMatch[0]);
           dispatchAction(getCodeFromEmail(resultCode));
         }
-        getDataForUser.setDataForUser(data.user);
+       dispatchAction(getUser(data.user));
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -151,9 +150,10 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     if (parseInt(codeFromUser.join("")) === codeFromEmail) {
       loginInUser(event);
       closeMenu(event);
-      document.cookie = `user=${JSON.stringify(getDataForUser.userInfo)};max-age=${
-        7 * 24 * 60 * 60
-      }`;
+      document.cookie = `user=${JSON.stringify(
+        getDataForUser.userInfo
+      )};max-age=${7 * 24 * 60 * 60}`;
+      getDataForUser.setDataForUser(user);
     } else {
       dispatchAction(checkIfcodeField(false));
       dispatchAction(showMessageIfInvalidCode(true));
@@ -203,6 +203,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     }
 
     return () => {
+      body.classList.remove("disable-scroll-page");
       if (window.innerWidth > 1080) {
         body.classList.remove("disable-scroll-page");
       }
@@ -312,12 +313,12 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
           </div>
           {autrozite && (
             <p className={a.unAutorize}>
-              {registered ? "User" : "This user"}
+              {registered ? "User " : "This user "}
               {registered ? "with this email already" : "is not"} registered
-              {registered ? "" : "not"}
+              {registered ? " " : " yet"}
             </p>
           )}
-          <p>
+          <p className={a.privacyPoliceText}>
             By continuing you agree to our <span>Terms & Privacy</span> Policy
             and Privy's <span>Terms.</span>
           </p>

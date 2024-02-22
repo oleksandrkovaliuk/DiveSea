@@ -11,6 +11,7 @@ export const initialStateForAutor = {
   codeFromUser: [],
   invalidCode: false,
   setCookie: false,
+  user: [],
 };
 
 export const reducerForAutor = (state, action) => {
@@ -66,6 +67,12 @@ export const reducerForAutor = (state, action) => {
     return {
       ...state,
       invalidCode: action.payload,
+    };
+  }
+  if (action.type === ActionsForAutor.GET_USER_AFTER_VALIDATION) {
+    return {
+      ...state,
+      user: action.payload,
     };
   }
 };

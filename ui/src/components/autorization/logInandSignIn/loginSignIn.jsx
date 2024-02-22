@@ -7,6 +7,7 @@ import Context from "../../../context";
 import { getCookie } from "../../../service/getCookie";
 import { MobileMenu } from "../../mobileMenu";
 import { Settings } from "../../../icons/settings";
+import { useNavigate } from "react-router-dom";
 
 export const LogInSignIn = () => {
   const [autorizationMenu, setMenuType] = useState(null);
@@ -14,6 +15,11 @@ export const LogInSignIn = () => {
   const [loginIn, setLoginedIn] = useState(false);
   const [userMenu, openUserMenu] = useState(false);
   const getDataForUser = useContext(Context);
+  const navigation = useNavigate();
+  const navigate = (link) => {
+    handleCloseUserMenu(true);
+    return navigation(link);
+  };
   const setLogInMenu = () => {
     setMenuType(true);
     showAutorization(true);
@@ -31,12 +37,10 @@ export const LogInSignIn = () => {
     openUserMenu(false);
   };
   const handleLogOut = () => {
-    console.log("click");
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    const checkCookie = getCookie("userEmail");
+    const checkCookie = getCookie("user");
     if (checkCookie === null) {
       setLoginedIn(false);
-      console.log("true");
     }
   };
   const handleOpeningUserMenu = (event) => {
@@ -46,8 +50,11 @@ export const LogInSignIn = () => {
     openUserMenu(false);
   };
   useEffect(() => {
-    if (getDataForUser.userInfo !== null) {
+    const checkCookie = getCookie("user");
+    if (checkCookie !== null || getDataForUser.userInfo.length > 0) {
       setLoginedIn(true);
+    } else {
+      console.log("logout");
     }
   }, []);
   return (
@@ -63,10 +70,12 @@ export const LogInSignIn = () => {
                 <span>{getDataForUser.userInfo.username}</span>
                 <span>{getDataForUser.userInfo.email}</span>
               </div>
-              <ul
-                className={l.profileMenuNav}
-              >
-                <li className={l.profileNavBtn}>
+              <ul className={l.profileMenuNav}>
+                <li
+                  type="button"
+                  onClick={() => navigate("/userProfilePage")}
+                  className={l.profileNavBtn}
+                >
                   <Settings />
                   Settings
                 </li>

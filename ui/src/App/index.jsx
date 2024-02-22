@@ -11,6 +11,7 @@ import { Creators } from "../pages/creatorsPage";
 import { CreatorIndividualPage } from "../pages/creatorsIndividualPage";
 import Context from "../context";
 import { getCookie } from "../service/getCookie";
+import { UserProfile } from "../pages/userProfilePage";
 export const App = () => {
   const [userInfo, setUserInfo] = useState([]);
 
@@ -20,7 +21,6 @@ export const App = () => {
     userInfo,
     setDataForUser,
   };
-  console.log(getDataForUser.userInfo , "straight from top");
   useEffect(() => {
     const checkCookie = getCookie("user");
     if (checkCookie !== null) {
@@ -36,12 +36,13 @@ export const App = () => {
         <Route path="/discover" element={<Discover />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/nftproductfull" element={<NftProductPage />} />
-        <Route path="/creators" element={<Creators />}></Route>
+        <Route path="/creators" element={<Creators />} />
         <Route path="/nftproductIndividual" element={<NftIndividualPage />} />
         <Route
           path="/creatorIndividualPage"
           element={<CreatorIndividualPage />}
         />
+        <Route path="/userProfilePage" element={<UserProfile />} />
       </Routes>
     </Context.Provider>
   );
