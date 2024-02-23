@@ -1,14 +1,14 @@
 const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
 
-function handleErrors(response) {
-  console.log(response, ' response');
+async function handleErrors(response) {
   if (!response.ok) {
-    throw Error(response.statusText);
+    const parsedError = await response?.json();
+    throw Error(parsedError?.errorText || response.statusText);
   }
   return response;
 }
 
-export const loginUser = ({ emailValue }) =>
+export const loginUser = async ({ emailValue }) =>
   fetch(`${MAIN_URL}/loginUser`, {
     method: "POST",
     headers: {
@@ -16,8 +16,14 @@ export const loginUser = ({ emailValue }) =>
     },
     body: JSON.stringify({
       email: emailValue,
+      sendEmail: true,
     }),
-  });
+  })
+    .then(handleErrors)
+    .then((response) => response.json())
+    .catch((error) => {
+      throw new Error(error);
+    });
 
 export const signInUser = async ({ emailValue, userName }) => {
   fetch(`${MAIN_URL}/signInUser`, {
@@ -31,15 +37,8 @@ export const signInUser = async ({ emailValue, userName }) => {
     }),
   })
     .then(handleErrors)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      console.log(response, " response");
-      throw new Error("Something went wrong");
-    })
+    .then((response) => response.json())
     .catch((error) => {
-      console.log(error);
       throw new Error(error);
     });
 };

@@ -22,9 +22,8 @@ import {
 import { emailValidation } from "../../../service/emailValidation";
 
 import cryptoJs from "crypto-js";
-import { signInUser } from "./autorization.api";
+import { loginUser, signInUser } from "./autorization.api";
 
-const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
 
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
@@ -62,11 +61,11 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForSignIn = async (event) => {
     event.preventDefault();
     try {
-     const res = await signInUser({
+      const res = await signInUser({
         emailValue: emailValue.value,
         userName: userName.value,
       });
-      console.log(res, ' res');
+      console.log(res, " res");
       closeMenu(event);
     } catch (error) {
       dispatchAction(checkIfUserAutorized(true));
@@ -74,47 +73,18 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       dispatchAction(checkIfUserAlreadyReg(true));
       console.error("Error:", error);
     }
-
-    // .then((res) => {
-    //   // if (res.status === 200) {
-    //   //   closeMenu(event);
-    //   // }
-    //   // if (res.status === 401) {
-    //   //   dispatchAction(checkIfUserAutorized(true));
-    //   //   dispatchAction(checkEmailValidation(false));
-    //   //   dispatchAction(checkIfUserAlreadyReg(true));
-    //   // }
-    // })
-    // .catch((error) => {
-    //   console.error("Error:", error);
-    // });
   };
-  const reqForLoginIn = (event) => {
+  const reqForLoginIn = async (event) => {
     event.preventDefault();
-    fetch(`${MAIN_URL}/loginUser`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
-        sendEmail:true
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          document.cookie = `user=${emailValue.value};max-age=${7 * 24 * 60 * 60}`;
-          dispatchAction(sendCodeAfterEmailCheck(true));
-          return res.json();
-        }
-        if (res.status === 401) {
-          dispatchAction(checkIfUserAutorized(true));
-          dispatchAction(checkEmailValidation(false));
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      await loginUser(emailValue.value);
+      document.cookie = `user=${emailValue.value};max-age=${7 * 24 * 60 * 60}`;
+      dispatchAction(sendCodeAfterEmailCheck(true));
+    } catch (error) {
+      console.error("Login Error:", error);
+      dispatchAction(checkIfUserAutorized(true));
+      dispatchAction(checkEmailValidation(false));
+    }
   };
   const getInputCodeValue = (event, Inputindex) => {
     const inputElement = event.target;
@@ -173,32 +143,19 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
             data.user.email,
             process.env.REACT_APP_PASSWORD_FOR_DECRYPT
           ).toString();
-          console.log(cypherEmail , "email");
-          document.cookie = `user=${cypherEmail};max-age=${
-            7 * 24 * 60 * 60
-          }`;
+          console.log(cypherEmail, "email");
+          document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
           getDataForUser.setDataForUser(data.user);
         }
       });
   };
-  const handleResendEmail = (event) => {
+  const handleResendEmail = async (event) => {
     event.preventDefault();
-    fetch(`${MAIN_URL}/loginUser`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
-        sendEmail: true
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      await loginUser(emailValue.value);
+    } catch (error) {
+      console.error("Login Error:", error);
+    }
     const firstInput = document.getElementById("1codedidgit");
     const secondInput = document.getElementById("2codedidgit");
     const thirdInput = document.getElementById("3codedidgit");

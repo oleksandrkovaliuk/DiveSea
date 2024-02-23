@@ -44,33 +44,24 @@ router.post("/signInUser", checkAuth, (req, res) => {
         client.query(insertQuery, insertValue, (err, dataRes) => {
           if (!err) {
             console.log(dataRes.rows, "added");
-            res.sendStatus(200);
+            return res.sendStatus(200);
           } else {
             console.error("failed to add");
+            return res.status(401).json({ errorText: "failed to add" });
           }
         });
       }
     });
-  } else {
-    res.sendStatus(401);
   }
+  return res.sendStatus(401);
 });
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email, sendEmail } = req.body;
-  console.log(process.env.EMAIL, "my email");
-  console.log(email, "user email");
   client.query(checkQuery, [email], (err, queryRes) => {
-    console.log(queryRes.rows, "rows");
     if (email && queryRes.rows.length !== 0) {
-      console.log(queryRes.rows, "rows if finded");
-      console.log("sucsesfull");
       userCode = generateRandomCode();
-      console.log(userCode, "code");
-      const user = queryRes.rows[0];
-      console.log(user , "user");
       if (sendEmail) {
         const mailInfo = mailOptions({ email: email, code: userCode });
-        res.status(200).json({ user });
         transporter.sendMail(mailInfo, (err, info) => {
           if (!err) {
             console.log(info.response, "email succsesful delivered");
@@ -78,17 +69,17 @@ router.post("/loginUser", checkAuth, (req, res) => {
             console.error(err, "failed with delivering email");
           }
         });
+        return res.sendStatus(200);
       } else {
         console.log("user loginned without email verification");
-        res.status(200).json({ user });
+        return res.sendStatus(200);
       }
     } else {
       console.log("not registered");
-      res.status(401).json({ error: "not registered" });
+      return res.status(401).json({ errorText: "not registered" });
     }
   });
 });
-console.log(userCode, "logInCode");
 router.post("/ChangeUserValue", checkAuth, (req, res) => {
   const { email, username, id } = req.body;
   console.log(req.body, "body");
@@ -105,15 +96,15 @@ router.post("/ChangeUserValue", checkAuth, (req, res) => {
             const user = queryRes.rows[0];
             res.status(200).json({ user });
           } else {
-            res.status(500).json({ error: "failed to fetch updated user" });
+            res.status(500).json({ errorText: "failed to fetch updated user" });
           }
         });
       } else {
-        res.status(404).json({ error: "fail with updating" });
+        res.status(404).json({ errorText: "fail with updating" });
       }
     });
   } else {
-    res.status(400).json({ error: "Missing Id" });
+    res.status(400).json({ errorText: "Missing Id" });
   }
 });
 router.post("/CheckCodeFromUser", checkAuth, (req, res) => {
@@ -124,11 +115,11 @@ router.post("/CheckCodeFromUser", checkAuth, (req, res) => {
         const user = queryRes.rows[0];
         res.status(200).json({ user });
       } else {
-        res.sendStatus(401);
+        res.status(401).json({ errorText: "Code not valid" });
       }
     });
   } else {
-    res.sendStatus(401);
+    res.status(401).json({ errorText: "Code not valid" });
   }
 });
 module.exports = router;
