@@ -7,6 +7,8 @@ import { UploadImg } from "../../icons/uploadImg";
 import { emailValidation } from "../../service/emailValidation";
 import { InputValidationTrue } from "../../icons/inputvalidationtrue";
 import { getCookie } from "../../service/getCookie";
+const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
+
 export const UserProfile = () => {
   const getDataForUser = useContext(Context);
   const [newUserName, setUpNewUserName] = useState("");
@@ -38,7 +40,7 @@ export const UserProfile = () => {
   const sendRequestForUpdatingUserInfo = (event) => {
     event.preventDefault();
     if (checkEmail || checkUserName) {
-      fetch("http://localhost:3003/api/ChangeUserValue", {
+      fetch(`${MAIN_URL}/ChangeUserValue`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

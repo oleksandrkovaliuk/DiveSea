@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import a from "./autorization.module.scss";
 import { Logo } from "../../../icons/Logo";
 import { Close } from "../../../icons/closeBtn";
@@ -20,7 +20,11 @@ import {
   reducerForAutor,
 } from "../reducer/reducerForauthor";
 import { emailValidation } from "../../../service/emailValidation";
+
 import cryptoJs from "crypto-js";
+import { loginUser, signInUser } from "./autorization.api";
+
+
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
     {
@@ -54,57 +58,33 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       dispatchAction(checkUserName(false));
     }
   };
-  const reqForSignIn = (event) => {
+  const reqForSignIn = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/signInUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
+    try {
+      const res = await signInUser({
+        emailValue: emailValue.value,
         userName: userName.value,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          closeMenu(event);
-        }
-        if (res.status === 401) {
-          dispatchAction(checkIfUserAutorized(true));
-          dispatchAction(checkEmailValidation(false));
-          dispatchAction(checkIfUserAlreadyReg(true));
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
+      console.log(res, " res");
+      closeMenu(event);
+    } catch (error) {
+      dispatchAction(checkIfUserAutorized(true));
+      dispatchAction(checkEmailValidation(false));
+      dispatchAction(checkIfUserAlreadyReg(true));
+      console.error("Error:", error);
+    }
   };
-  const reqForLoginIn = (event) => {
+  const reqForLoginIn = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/loginUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
-        sendEmail:true
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          dispatchAction(sendCodeAfterEmailCheck(true));
-          return res.json();
-        }
-        if (res.status === 401) {
-          dispatchAction(checkIfUserAutorized(true));
-          dispatchAction(checkEmailValidation(false));
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      await loginUser(emailValue.value);
+      document.cookie = `user=${emailValue.value};max-age=${7 * 24 * 60 * 60}`;
+      dispatchAction(sendCodeAfterEmailCheck(true));
+    } catch (error) {
+      console.error("Login Error:", error);
+      dispatchAction(checkIfUserAutorized(true));
+      dispatchAction(checkEmailValidation(false));
+    }
   };
   const getInputCodeValue = (event, Inputindex) => {
     const inputElement = event.target;
@@ -163,32 +143,19 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
             data.user.email,
             process.env.REACT_APP_PASSWORD_FOR_DECRYPT
           ).toString();
-          console.log(cypherEmail , "email");
-          document.cookie = `user=${cypherEmail};max-age=${
-            7 * 24 * 60 * 60
-          }`;
+          console.log(cypherEmail, "email");
+          document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
           getDataForUser.setDataForUser(data.user);
         }
       });
   };
-  const handleResendEmail = (event) => {
+  const handleResendEmail = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/loginUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
-        sendEmail: true
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      await loginUser(emailValue.value);
+    } catch (error) {
+      console.error("Login Error:", error);
+    }
     const firstInput = document.getElementById("1codedidgit");
     const secondInput = document.getElementById("2codedidgit");
     const thirdInput = document.getElementById("3codedidgit");

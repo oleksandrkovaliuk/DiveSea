@@ -54,7 +54,7 @@ export const App = () => {
           console.error("Error:", error);
         });
     }
-  }, []);
+  }, [getDataForUser]);
   return (
     <Context.Provider value={getDataForUser}>
       <Header />
