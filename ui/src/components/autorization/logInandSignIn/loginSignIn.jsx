@@ -36,11 +36,12 @@ export const LogInSignIn = () => {
     setLoginedIn(true);
     openUserMenu(false);
   };
-  const handleLogOut = () => {
+  const handleLogOut = (link) => {
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     const checkCookie = getCookie("user");
     if (checkCookie === null) {
       setLoginedIn(false);
+      navigate(link);
     }
   };
   const handleOpeningUserMenu = (event) => {
@@ -81,7 +82,7 @@ export const LogInSignIn = () => {
                 </li>
                 <li
                   type="button"
-                  onClick={handleLogOut}
+                  onClick={() => handleLogOut("/")}
                   className={l.profileNavBtn}
                 >
                   <LogOut />

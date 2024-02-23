@@ -11,10 +11,8 @@ import {
   checkIfUserAlreadyReg,
   checkIfcodeField,
   sendCodeAfterEmailCheck,
-  getCodeFromEmail,
   setCodeFromUser,
   showMessageIfInvalidCode,
-  getUser,
 } from "../reducer/actionsForAuthor";
 import Context from "../../../context";
 import {
@@ -22,6 +20,7 @@ import {
   reducerForAutor,
 } from "../reducer/reducerForauthor";
 import { emailValidation } from "../../../service/emailValidation";
+import cryptoJs from "crypto-js";
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
     {
@@ -30,11 +29,9 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       autrozite,
       registered,
       codeCheck,
-      codeFromEmail,
       codefield,
       codeFromUser,
       invalidCode,
-      user,
     },
     dispatchAction,
   ] = useReducer(reducerForAutor, initialStateForAutor);
@@ -92,6 +89,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       },
       body: JSON.stringify({
         email: emailValue.value,
+        sendEmail:true
       }),
     })
       .then((res) => {
@@ -103,15 +101,6 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
           dispatchAction(checkIfUserAutorized(true));
           dispatchAction(checkEmailValidation(false));
         }
-      })
-      .then((data) => {
-        const code = data.mailOptions.text;
-        const findMatch = code.match(/\d+/);
-        if (findMatch) {
-          const resultCode = parseInt(findMatch[0]);
-          dispatchAction(getCodeFromEmail(resultCode));
-        }
-       dispatchAction(getUser(data.user));
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -147,17 +136,40 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   };
   const checkCodeValidation = (event) => {
     event.preventDefault();
-    if (parseInt(codeFromUser.join("")) === codeFromEmail) {
-      loginInUser(event);
-      closeMenu(event);
-      document.cookie = `user=${JSON.stringify(
-        getDataForUser.userInfo
-      )};max-age=${7 * 24 * 60 * 60}`;
-      getDataForUser.setDataForUser(user);
-    } else {
-      dispatchAction(checkIfcodeField(false));
-      dispatchAction(showMessageIfInvalidCode(true));
-    }
+    fetch("http://localhost:3003/api/CheckCodeFromUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        codeFromUser: codeFromUser.join(""),
+        email: emailValue.value,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          dispatchAction(checkIfcodeField(false));
+          dispatchAction(showMessageIfInvalidCode(true));
+          console.error("error with validation user");
+        }
+      })
+      .then((data) => {
+        if (data) {
+          loginInUser(event);
+          closeMenu(event);
+          const cypherEmail = cryptoJs.AES.encrypt(
+            data.user.email,
+            process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+          ).toString();
+          console.log(cypherEmail , "email");
+          document.cookie = `user=${cypherEmail};max-age=${
+            7 * 24 * 60 * 60
+          }`;
+          getDataForUser.setDataForUser(data.user);
+        }
+      });
   };
   const handleResendEmail = (event) => {
     event.preventDefault();
@@ -168,18 +180,11 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       },
       body: JSON.stringify({
         email: emailValue.value,
+        sendEmail: true
       }),
     })
       .then((res) => {
         return res.json();
-      })
-      .then((data) => {
-        const code = data.mailOptions.text;
-        const findMatch = code.match(/\d+/);
-        if (findMatch) {
-          const resultCode = parseInt(findMatch[0]);
-          dispatchAction(getCodeFromEmail(resultCode));
-        }
       })
       .catch((error) => {
         console.error("Error:", error);

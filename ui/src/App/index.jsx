@@ -12,6 +12,7 @@ import { CreatorIndividualPage } from "../pages/creatorsIndividualPage";
 import Context from "../context";
 import { getCookie } from "../service/getCookie";
 import { UserProfile } from "../pages/userProfilePage";
+import cryptoJs from "crypto-js";
 export const App = () => {
   const [userInfo, setUserInfo] = useState([]);
 
@@ -24,7 +25,34 @@ export const App = () => {
   useEffect(() => {
     const checkCookie = getCookie("user");
     if (checkCookie !== null) {
-      getDataForUser.setDataForUser(JSON.parse(checkCookie));
+      const emailFromCookie = cryptoJs.AES.decrypt(
+        checkCookie,
+        process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+      ).toString(cryptoJs.enc.Utf8);
+      fetch("http://localhost:3003/api/loginUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailFromCookie,
+          sendEmail: false,
+        }),
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          }
+          if (res.status === 401) {
+            console.error("failed with getting infoAbout user on loading");
+          }
+        })
+        .then((data) => {
+          getDataForUser.setDataForUser(data.user);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   }, []);
   return (
