@@ -41,7 +41,6 @@ export const LogInSignIn = () => {
     const checkCookie = getCookie("user");
     if (checkCookie === null) {
       setLoginedIn(false);
-      // dsdds
       navigate(link);
     }
   };
