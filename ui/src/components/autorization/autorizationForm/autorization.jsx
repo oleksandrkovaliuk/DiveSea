@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import a from "./autorization.module.scss";
 import { Logo } from "../../../icons/Logo";
 import { Close } from "../../../icons/closeBtn";
@@ -22,6 +22,11 @@ import {
   reducerForAutor,
 } from "../reducer/reducerForauthor";
 import { emailValidation } from "../../../service/emailValidation";
+
+import { signInUser } from "./autorization.api";
+
+const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
+
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
     {
@@ -57,35 +62,39 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       dispatchAction(checkUserName(false));
     }
   };
-  const reqForSignIn = (event) => {
+  const reqForSignIn = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/signInUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailValue.value,
+    try {
+     const res = await signInUser({
+        emailValue: emailValue.value,
         userName: userName.value,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          closeMenu(event);
-        }
-        if (res.status === 401) {
-          dispatchAction(checkIfUserAutorized(true));
-          dispatchAction(checkEmailValidation(false));
-          dispatchAction(checkIfUserAlreadyReg(true));
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
+      console.log(res, ' res');
+      closeMenu(event);
+    } catch (error) {
+      dispatchAction(checkIfUserAutorized(true));
+      dispatchAction(checkEmailValidation(false));
+      dispatchAction(checkIfUserAlreadyReg(true));
+      console.error("Error:", error);
+    }
+
+    // .then((res) => {
+    //   // if (res.status === 200) {
+    //   //   closeMenu(event);
+    //   // }
+    //   // if (res.status === 401) {
+    //   //   dispatchAction(checkIfUserAutorized(true));
+    //   //   dispatchAction(checkEmailValidation(false));
+    //   //   dispatchAction(checkIfUserAlreadyReg(true));
+    //   // }
+    // })
+    // .catch((error) => {
+    //   console.error("Error:", error);
+    // });
   };
   const reqForLoginIn = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/loginUser", {
+    fetch(`${MAIN_URL}/loginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,6 +105,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     })
       .then((res) => {
         if (res.status === 200) {
+          document.cookie = `user=${emailValue.value};max-age=${7 * 24 * 60 * 60}`;
           dispatchAction(sendCodeAfterEmailCheck(true));
           return res.json();
         }
@@ -111,7 +121,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
           const resultCode = parseInt(findMatch[0]);
           dispatchAction(getCodeFromEmail(resultCode));
         }
-       dispatchAction(getUser(data.user));
+        dispatchAction(getUser(data.user));
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -150,9 +160,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     if (parseInt(codeFromUser.join("")) === codeFromEmail) {
       loginInUser(event);
       closeMenu(event);
-      document.cookie = `user=${JSON.stringify(
-        getDataForUser.userInfo
-      )};max-age=${7 * 24 * 60 * 60}`;
+      document.cookie = `user=${getDataForUser.userInfo.email};max-age=${7 * 24 * 60 * 60}`;
       getDataForUser.setDataForUser(user);
     } else {
       dispatchAction(checkIfcodeField(false));
@@ -161,7 +169,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   };
   const handleResendEmail = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/loginUser", {
+    fetch(`${MAIN_URL}/loginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

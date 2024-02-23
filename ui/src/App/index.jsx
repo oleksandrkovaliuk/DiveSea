@@ -24,9 +24,9 @@ export const App = () => {
   useEffect(() => {
     const checkCookie = getCookie("user");
     if (checkCookie !== null) {
-      getDataForUser.setDataForUser(JSON.parse(checkCookie));
+      getDataForUser.setDataForUser(checkCookie);
     }
-  }, []);
+  }, [getDataForUser]);
   return (
     <Context.Provider value={getDataForUser}>
       <Header />
