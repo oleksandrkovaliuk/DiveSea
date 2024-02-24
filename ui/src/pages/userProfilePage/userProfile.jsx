@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Context from "../../context";
 import { Footer } from "../../components/footer";
 import p from "./profilePage.module.scss";
@@ -6,8 +6,9 @@ import { ProfileUser } from "../../icons/profileUser";
 import { UploadImg } from "../../icons/uploadImg";
 import { emailValidation } from "../../service/emailValidation";
 import { InputValidationTrue } from "../../icons/inputvalidationtrue";
-import { getCookie } from "../../service/getCookie";
-const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
+import CryptoJS from "crypto-js";
+import { changeUserValue } from "../../service/autorization.api";
+import { SuccesfullyChanged } from "../../components/succesfullNotification";
 
 export const UserProfile = () => {
   const getDataForUser = useContext(Context);
@@ -37,50 +38,38 @@ export const UserProfile = () => {
       checkIfNewEmailNotValid(false);
     }
   };
-  const sendRequestForUpdatingUserInfo = (event) => {
+  const sendRequestForUpdatingUserInfo = async (event) => {
     event.preventDefault();
     if (checkEmail || checkUserName) {
-      fetch(`${MAIN_URL}/ChangeUserValue`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: checkEmail ? newUserEmail : getDataForUser.userInfo.email,
-          username: checkUserName
+      try {
+        const res = await changeUserValue({
+          emailValue: checkEmail ? newUserEmail : getDataForUser.userInfo.email,
+          userName: checkUserName
             ? newUserName
             : getDataForUser.userInfo.username,
           id: getDataForUser.userInfo.id,
-        }),
-      })
-        .then((res) => {
-          console.log(res, "respons");
-          return res.json();
-        })
-        .then((data) => {
-          if (data) {
-            getDataForUser.setDataForUser(data.user);
-            setTimeout(() => {
-              document.cookie = `user=${JSON.stringify(data.user)};max-age=${
-                7 * 24 * 60 * 60
-              }`;
-            }, 10);
-            checkIfSuccesfullyChanged(true);
-            console.log(succesfullyChanged);
-          }
-        })
-        .catch((err) => {
-          console.error(err, "error with updating user info");
         });
+        if (await res) {
+          getDataForUser.setDataForUser(res.user);
+          const cypherEmail = CryptoJS.AES.encrypt(
+            res.user.email,
+            process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+          ).toString();
+          setTimeout(() => {
+            document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
+          }, 10);
+          checkIfSuccesfullyChanged(true);
+        }
+      } catch (error) {
+        console.error(error, "error with updating user info");
+      }
     }
   };
   return (
     <>
-      {succesfullyChanged && (
-        <div className={p.alertIfSuccesfullyChanged}>
-          <span>You succesfully changed your information</span>
-        </div>
-      )}
+      <SuccesfullyChanged showMessage={succesfullyChanged}>
+        <span>You succesfully changed your information</span>
+      </SuccesfullyChanged>
       <div className={p.profilePageContainer}>
         <div className={p.profiletPagetopSection}>
           <div className={p.profileImg}>

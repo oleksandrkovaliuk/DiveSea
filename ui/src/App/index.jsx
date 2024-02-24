@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { HomePage } from "../pages/home";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/header";
@@ -13,6 +13,7 @@ import Context from "../context";
 import { getCookie } from "../service/getCookie";
 import { UserProfile } from "../pages/userProfilePage";
 import cryptoJs from "crypto-js";
+import { loginUser } from "../service/autorization.api";
 export const App = () => {
   const [userInfo, setUserInfo] = useState([]);
 
@@ -22,39 +23,29 @@ export const App = () => {
     userInfo,
     setDataForUser,
   };
-  useEffect(() => {
-    const checkCookie = getCookie("user");
-    if (checkCookie !== null) {
-      const emailFromCookie = cryptoJs.AES.decrypt(
-        checkCookie,
-        process.env.REACT_APP_PASSWORD_FOR_DECRYPT
-      ).toString(cryptoJs.enc.Utf8);
-      fetch("http://localhost:3003/api/loginUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: emailFromCookie,
+  const checkUserLoginned = useCallback(async () => {
+    try {
+      const checkCookie = getCookie("user");
+      if (checkCookie !== null) {
+        const emailFromCookie = cryptoJs.AES.decrypt(
+          checkCookie,
+          process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+        ).toString(cryptoJs.enc.Utf8);
+        const res = await loginUser({
           sendEmail: false,
-        }),
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            return res.json();
-          }
-          if (res.status === 401) {
-            console.error("failed with getting infoAbout user on loading");
-          }
-        })
-        .then((data) => {
-          getDataForUser.setDataForUser(data.user);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+          emailValue: emailFromCookie,
         });
+        if (await res) {
+          getDataForUser.setDataForUser(res.data);
+        }
+      }
+    } catch (error) {
+      console.error("failed with getting infoAbout user on loading");
     }
-  }, [getDataForUser]);
+  }, []);
+  useEffect(() => {
+    checkUserLoginned();
+  }, []);
   return (
     <Context.Provider value={getDataForUser}>
       <Header />

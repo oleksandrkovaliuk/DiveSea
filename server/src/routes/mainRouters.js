@@ -33,8 +33,10 @@ const mailOptions = ({ email, code }) => ({
 });
 router.post("/signInUser", checkAuth, (req, res) => {
   const { email, userName } = req.body;
+  console.log(req.body, " fddsfs");
   if (userName && email) {
     client.query(checkQuery, [email], (err, queryRes) => {
+      console.log(queryRes.rows, "rows");
       if (queryRes.rows.length === 0) {
         const insertQuery = `
         INSERT INTO diveseausers (username, email)
@@ -44,19 +46,20 @@ router.post("/signInUser", checkAuth, (req, res) => {
         client.query(insertQuery, insertValue, (err, dataRes) => {
           if (!err) {
             console.log(dataRes.rows, "added");
-            return res.sendStatus(200);
-          } else {
-            console.error("failed to add");
-            return res.status(401).json({ errorText: "failed to add" });
+            return res.json({ data: dataRes.rows[0] });
           }
         });
+      } else {
+        return res
+          .status(401)
+          .json({ errorText: "User with this email already registered" });
       }
     });
   }
-  return res.sendStatus(401);
 });
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email, sendEmail } = req.body;
+  console.log(sendEmail, "email");
   client.query(checkQuery, [email], (err, queryRes) => {
     if (email && queryRes.rows.length !== 0) {
       userCode = generateRandomCode();
@@ -65,22 +68,21 @@ router.post("/loginUser", checkAuth, (req, res) => {
         transporter.sendMail(mailInfo, (err, info) => {
           if (!err) {
             console.log(info.response, "email succsesful delivered");
+            return res.status(200).json("delivered");
           } else {
             console.error(err, "failed with delivering email");
           }
         });
-        return res.sendStatus(200);
       } else {
-        console.log("user loginned without email verification");
-        return res.sendStatus(200);
+        return res.status(200).json({ data: queryRes.rows[0] });
       }
     } else {
       console.log("not registered");
-      return res.status(401).json({ errorText: "not registered" });
+      return res.status(401).json({ errorText: "This user is not registered yet" });
     }
   });
 });
-router.post("/ChangeUserValue", checkAuth, (req, res) => {
+router.post("/changeUserValue", checkAuth, (req, res) => {
   const { email, username, id } = req.body;
   console.log(req.body, "body");
   if (id) {
@@ -96,7 +98,7 @@ router.post("/ChangeUserValue", checkAuth, (req, res) => {
             const user = queryRes.rows[0];
             res.status(200).json({ user });
           } else {
-            res.status(500).json({ errorText: "failed to fetch updated user" });
+            res.status(401).json({ errorText: "failed to fetch updated user" });
           }
         });
       } else {
@@ -107,7 +109,7 @@ router.post("/ChangeUserValue", checkAuth, (req, res) => {
     res.status(400).json({ errorText: "Missing Id" });
   }
 });
-router.post("/CheckCodeFromUser", checkAuth, (req, res) => {
+router.post("/checkCodeFromUser", checkAuth, (req, res) => {
   const { codeFromUser, email } = req.body;
   if (email && codeFromUser === userCode.toString()) {
     client.query(checkQuery, [email], (err, queryRes) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import a from "./autorization.module.scss";
 import { Logo } from "../../../icons/Logo";
 import { Close } from "../../../icons/closeBtn";
@@ -22,8 +22,12 @@ import {
 import { emailValidation } from "../../../service/emailValidation";
 
 import cryptoJs from "crypto-js";
-import { loginUser, signInUser } from "./autorization.api";
-
+import {
+  checkCodeFromUser,
+  loginUser,
+  signInUser,
+} from "../../../service/autorization.api";
+import { SuccesfullyChanged } from "../../succesfullNotification";
 
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
@@ -31,7 +35,6 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       emailvalidation,
       userNamevalidation,
       autrozite,
-      registered,
       codeCheck,
       codefield,
       codeFromUser,
@@ -40,6 +43,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     dispatchAction,
   ] = useReducer(reducerForAutor, initialStateForAutor);
   const getDataForUser = useContext(Context);
+  const [errors, setError] = useState(null);
   const userName = document.querySelector("#username");
   const emailValue = document.querySelector("#email");
   const checkIfEmailValid = (event) => {
@@ -49,6 +53,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     } else {
       dispatchAction(checkEmailValidation(false));
     }
+    dispatchAction(sendCodeAfterEmailCheck(false));
   };
   const checkIfUserNameValid = (event) => {
     console.log(event.target.value.length > 3);
@@ -65,23 +70,28 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
         emailValue: emailValue.value,
         userName: userName.value,
       });
-      console.log(res, " res");
-      closeMenu(event);
+      if (await res) {
+        closeMenu(event);
+      }
     } catch (error) {
+      setError(error.toString().split(":").pop());
       dispatchAction(checkIfUserAutorized(true));
       dispatchAction(checkEmailValidation(false));
       dispatchAction(checkIfUserAlreadyReg(true));
-      console.error("Error:", error);
     }
   };
   const reqForLoginIn = async (event) => {
     event.preventDefault();
     try {
-      await loginUser(emailValue.value);
-      document.cookie = `user=${emailValue.value};max-age=${7 * 24 * 60 * 60}`;
-      dispatchAction(sendCodeAfterEmailCheck(true));
+      const res = await loginUser({
+        emailValue: emailValue.value,
+        sendEmail: true,
+      });
+      if (await res) {
+        dispatchAction(sendCodeAfterEmailCheck(true));
+      }
     } catch (error) {
-      console.error("Login Error:", error);
+      setError(error.toString().split(":").pop());
       dispatchAction(checkIfUserAutorized(true));
       dispatchAction(checkEmailValidation(false));
     }
@@ -114,45 +124,33 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
       inputElement.value = "";
     }
   };
-  const checkCodeValidation = (event) => {
+  const checkCodeValidation = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3003/api/CheckCodeFromUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      const res = await checkCodeFromUser({
         codeFromUser: codeFromUser.join(""),
         email: emailValue.value,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          dispatchAction(checkIfcodeField(false));
-          dispatchAction(showMessageIfInvalidCode(true));
-          console.error("error with validation user");
-        }
-      })
-      .then((data) => {
-        if (data) {
-          loginInUser(event);
-          closeMenu(event);
-          const cypherEmail = cryptoJs.AES.encrypt(
-            data.user.email,
-            process.env.REACT_APP_PASSWORD_FOR_DECRYPT
-          ).toString();
-          console.log(cypherEmail, "email");
-          document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
-          getDataForUser.setDataForUser(data.user);
-        }
       });
+      if (await res) {
+        loginInUser(event);
+        closeMenu(event);
+        const cypherEmail = cryptoJs.AES.encrypt(
+          res.user.email,
+          process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+        ).toString();
+        document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
+        getDataForUser.setDataForUser(res.user);
+      }
+    } catch (error) {
+      dispatchAction(checkIfcodeField(false));
+      dispatchAction(showMessageIfInvalidCode(true));
+      console.error("error with validation user");
+    }
   };
   const handleResendEmail = async (event) => {
     event.preventDefault();
     try {
-      await loginUser(emailValue.value);
+      await loginUser({ sendEmail: true, emailValue: emailValue.value });
     } catch (error) {
       console.error("Login Error:", error);
     }
@@ -186,7 +184,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     };
   }, [show]);
   return (
-    <div
+      <div
       style={show ? { display: "block" } : { display: "none" }}
       className={a.formAutorizationContainer}
     >
@@ -283,13 +281,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
               <InputValidationFalse />
             )}
           </div>
-          {autrozite && (
-            <p className={a.unAutorize}>
-              {registered ? "User " : "This user "}
-              {registered ? "with this email already" : "is not"} registered
-              {registered ? " " : " yet"}
-            </p>
-          )}
+          {autrozite && <p className={a.unAutorize}>{errors}</p>}
           <p className={a.privacyPoliceText}>
             By continuing you agree to our <span>Terms & Privacy</span> Policy
             and Privy's <span>Terms.</span>

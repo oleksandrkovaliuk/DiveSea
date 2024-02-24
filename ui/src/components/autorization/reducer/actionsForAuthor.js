@@ -36,11 +36,3 @@ export const showMessageIfInvalidCode = (value) => ({
   type: ActionsForAutor.SHOW_MESSAGE_IF_INVALID_CODE,
   payload: value,
 });
-export const checkIfCodeSentet = (value) => ({
-  type: ActionsForAutor.SHOW_MESSAGE_IF_INVALID_CODE,
-  payload: value,
-});
-export const getUser = (value) => ({
-  type: ActionsForAutor.GET_USER_AFTER_VALIDATION,
-  payload: value,
-})

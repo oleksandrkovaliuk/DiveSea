@@ -1,0 +1,37 @@
+.alertIfSuccesfullyChanged {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border: 2px solid var(--text-grayblack);
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+  text-align: center;
+  animation: showMessage 3s linear forwards;
+  span {
+    color: var(--text-grayblack);
+    font-family: var(--font-Poppins);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+  }
+}
+
+@keyframes showMessage {
+  0% {
+    top: -60px;
+  }
+  10% {
+    top: 40px;
+  }
+  90% {
+    top: 40px;
+  }
+  100% {
+    top: -60px;
+  }
+}
