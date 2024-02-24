@@ -83,13 +83,11 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForLoginIn = async (event) => {
     event.preventDefault();
     try {
-      const res = await loginUser({
+      await loginUser({
         emailValue: emailValue.value,
         sendEmail: true,
       });
-      if (await res) {
-        dispatchAction(sendCodeAfterEmailCheck(true));
-      }
+      dispatchAction(sendCodeAfterEmailCheck(true));
     } catch (error) {
       setError(error.toString().split(":").pop());
       dispatchAction(checkIfUserAutorized(true));
@@ -131,16 +129,14 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
         codeFromUser: codeFromUser.join(""),
         email: emailValue.value,
       });
-      if (await res) {
-        loginInUser(event);
-        closeMenu(event);
-        const cypherEmail = cryptoJs.AES.encrypt(
-          res.user.email,
-          process.env.REACT_APP_PASSWORD_FOR_DECRYPT
-        ).toString();
-        document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
-        getDataForUser.setDataForUser(res.user);
-      }
+      loginInUser(event);
+      closeMenu(event);
+      const cypherEmail = cryptoJs.AES.encrypt(
+        res.user.email,
+        process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+      ).toString();
+      document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
+      getDataForUser.setDataForUser(res.user);
     } catch (error) {
       dispatchAction(checkIfcodeField(false));
       dispatchAction(showMessageIfInvalidCode(true));
@@ -184,7 +180,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     };
   }, [show]);
   return (
-      <div
+    <div
       style={show ? { display: "block" } : { display: "none" }}
       className={a.formAutorizationContainer}
     >

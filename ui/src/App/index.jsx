@@ -35,9 +35,7 @@ export const App = () => {
           sendEmail: false,
           emailValue: emailFromCookie,
         });
-        if (await res) {
-          getDataForUser.setDataForUser(res.data);
-        }
+        getDataForUser.setDataForUser(res.data);
       }
     } catch (error) {
       console.error("failed with getting infoAbout user on loading");
