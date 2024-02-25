@@ -41,8 +41,9 @@ export const App = () => {
         // });
         const res = await loginUser({
           sendEmail: false,
-          emailValue: emailFromCookie,
+          email: emailFromCookie,
         });
+        console.log(res, " res");
         setUserInfo(res.data);
       }
     } catch (error) {

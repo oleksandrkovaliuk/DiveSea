@@ -56,7 +56,9 @@ router.post("/signInUser", checkAuth, (req, res) => {
 });
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email, sendEmail } = req.body;
+  console.log(email, ' email');
   client.query(checkQuery, [email], (err, queryRes) => {
+    console.log(queryRes.rows, ' queryRes.rows');
     if (email && queryRes.rows.length !== 0) {
       if (sendEmail) {
         userCode = generateRandomCode();

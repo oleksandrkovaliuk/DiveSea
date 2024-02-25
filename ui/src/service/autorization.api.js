@@ -36,8 +36,8 @@ export const getRequest = async (url) =>
       throw Error(err);
     });
 
-export const loginUser = async ({ sendEmail, emailValue }) =>
-  postRequest("loginUser", { sendEmail, emailValue });
+export const loginUser = async ({ sendEmail, email }) =>
+  postRequest("loginUser", { sendEmail, email });
 
 export const getItems = async ({ param1, param2 }) => {
   const searchParams = new URLSearchParams();
