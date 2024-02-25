@@ -22,12 +22,7 @@ import {
 import { emailValidation } from "../../../service/emailValidation";
 
 import cryptoJs from "crypto-js";
-import {
-  checkCodeFromUser,
-  loginUser,
-  signInUser,
-} from "../../../service/autorization.api";
-import { SuccesfullyChanged } from "../../succesfullNotification";
+import { workWithAutorization } from "../../../service/autorization.api";
 
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
@@ -66,13 +61,12 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForSignIn = async (event) => {
     event.preventDefault();
     try {
-      const res = await signInUser({
+      await workWithAutorization({
+        reqType: "/signInUser",
         emailValue: emailValue.value,
         userName: userName.value,
       });
-      if (await res) {
-        closeMenu(event);
-      }
+      closeMenu(event);
     } catch (error) {
       setError(error.toString().split(":").pop());
       dispatchAction(checkIfUserAutorized(true));
@@ -83,7 +77,8 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForLoginIn = async (event) => {
     event.preventDefault();
     try {
-      await loginUser({
+      await workWithAutorization({
+        reqType: "/loginUser",
         emailValue: emailValue.value,
         sendEmail: true,
       });
@@ -125,9 +120,14 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const checkCodeValidation = async (event) => {
     event.preventDefault();
     try {
-      const res = await checkCodeFromUser({
+      // const res = await checkCodeFromUser({
+      //   codeFromUser: codeFromUser.join(""),
+      //   email: emailValue.value,
+      // });
+      const res = await workWithAutorization({
+        reqType: "/checkCodeFromUser",
         codeFromUser: codeFromUser.join(""),
-        email: emailValue.value,
+        emailValue: emailValue.value,
       });
       loginInUser(event);
       closeMenu(event);
@@ -146,7 +146,11 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const handleResendEmail = async (event) => {
     event.preventDefault();
     try {
-      await loginUser({ sendEmail: true, emailValue: emailValue.value });
+      await workWithAutorization({
+        reqType: "/loginUser",
+        emailValue: emailValue.value,
+        sendEmail: true,
+      });
     } catch (error) {
       console.error("Login Error:", error);
     }

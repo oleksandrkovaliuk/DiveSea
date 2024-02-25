@@ -7,7 +7,10 @@ import { UploadImg } from "../../icons/uploadImg";
 import { emailValidation } from "../../service/emailValidation";
 import { InputValidationTrue } from "../../icons/inputvalidationtrue";
 import CryptoJS from "crypto-js";
-import { changeUserValue } from "../../service/autorization.api";
+import {
+  changeUserValue,
+  workWithAutorization,
+} from "../../service/autorization.api";
 import { SuccesfullyChanged } from "../../components/succesfullNotification";
 
 export const UserProfile = () => {
@@ -42,24 +45,23 @@ export const UserProfile = () => {
     event.preventDefault();
     if (checkEmail || checkUserName) {
       try {
-        const res = await changeUserValue({
+        const res = await workWithAutorization({
+          reqType: "/changeUserValue",
           emailValue: checkEmail ? newUserEmail : getDataForUser.userInfo.email,
           userName: checkUserName
             ? newUserName
             : getDataForUser.userInfo.username,
           id: getDataForUser.userInfo.id,
         });
-        if (await res) {
-          getDataForUser.setDataForUser(res.user);
-          const cypherEmail = CryptoJS.AES.encrypt(
-            res.user.email,
-            process.env.REACT_APP_PASSWORD_FOR_DECRYPT
-          ).toString();
-          setTimeout(() => {
-            document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
-          }, 10);
-          checkIfSuccesfullyChanged(true);
-        }
+        getDataForUser.setDataForUser(res.user);
+        const cypherEmail = CryptoJS.AES.encrypt(
+          res.user.email,
+          process.env.REACT_APP_PASSWORD_FOR_DECRYPT
+        ).toString();
+        setTimeout(() => {
+          document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
+        }, 10);
+        checkIfSuccesfullyChanged(true);
       } catch (error) {
         console.error(error, "error with updating user info");
       }

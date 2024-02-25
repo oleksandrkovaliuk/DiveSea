@@ -68,7 +68,7 @@ router.post("/loginUser", checkAuth, (req, res) => {
         transporter.sendMail(mailInfo, (err, info) => {
           if (!err) {
             console.log(info.response, "email succsesful delivered");
-            return res.status(200).json("delivered");
+            return res.status(200).json({ res: info.response });
           } else {
             console.error(err, "failed with delivering email");
           }
@@ -78,18 +78,20 @@ router.post("/loginUser", checkAuth, (req, res) => {
       }
     } else {
       console.log("not registered");
-      return res.status(401).json({ errorText: "This user is not registered yet" });
+      return res
+        .status(401)
+        .json({ errorText: "This user is not registered yet" });
     }
   });
 });
 router.post("/changeUserValue", checkAuth, (req, res) => {
-  const { email, username, id } = req.body;
+  const { email, id } = req.body;
   console.log(req.body, "body");
   if (id) {
     const changeValue = `UPDATE diveseausers
     SET email = $1, username = $2
     WHERE id = $3`;
-    const values = [req.body.email, req.body.username, req.body.id];
+    const values = [req.body.email, req.body.userName, req.body.id];
     client.query(changeValue, values, (err, updatedUserRes) => {
       console.log(values, "bod");
       if (!err) {

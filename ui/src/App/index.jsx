@@ -13,7 +13,7 @@ import Context from "../context";
 import { getCookie } from "../service/getCookie";
 import { UserProfile } from "../pages/userProfilePage";
 import cryptoJs from "crypto-js";
-import { loginUser } from "../service/autorization.api";
+import { workWithAutorization } from "../service/autorization.api";
 export const App = () => {
   const [userInfo, setUserInfo] = useState([]);
 
@@ -31,7 +31,8 @@ export const App = () => {
           checkCookie,
           process.env.REACT_APP_PASSWORD_FOR_DECRYPT
         ).toString(cryptoJs.enc.Utf8);
-        const res = await loginUser({
+        const res = await workWithAutorization({
+          reqType: "/loginUser",
           sendEmail: false,
           emailValue: emailFromCookie,
         });
