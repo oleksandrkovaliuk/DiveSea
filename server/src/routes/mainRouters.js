@@ -33,11 +33,13 @@ const mailOptions = ({ email, code }) => ({
 });
 router.post("/signInUser", checkAuth, (req, res) => {
   const { email, userName } = req.body;
-  console.log(req.body, " fddsfs");
   if (userName && email) {
     client.query(checkQuery, [email], (err, queryRes) => {
-      console.log(queryRes.rows, "rows");
-      if (queryRes.rows.length === 0) {
+      if (queryRes.rows.length) {
+        return res
+          .status(401)
+          .json({ errorText: "User with this email already registered" });
+      } else {
         const insertQuery = `
         INSERT INTO diveseausers (username, email)
         VALUES ($1, $2)
@@ -45,25 +47,19 @@ router.post("/signInUser", checkAuth, (req, res) => {
         const insertValue = [userName, email];
         client.query(insertQuery, insertValue, (err, dataRes) => {
           if (!err) {
-            console.log(dataRes.rows, "added");
             return res.json({ data: dataRes.rows[0] });
           }
         });
-      } else {
-        return res
-          .status(401)
-          .json({ errorText: "User with this email already registered" });
       }
     });
   }
 });
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email, sendEmail } = req.body;
-  console.log(sendEmail, "email");
   client.query(checkQuery, [email], (err, queryRes) => {
     if (email && queryRes.rows.length !== 0) {
-      userCode = generateRandomCode();
       if (sendEmail) {
+        userCode = generateRandomCode();
         const mailInfo = mailOptions({ email: email, code: userCode });
         transporter.sendMail(mailInfo, (err, info) => {
           if (!err) {
@@ -86,14 +82,12 @@ router.post("/loginUser", checkAuth, (req, res) => {
 });
 router.post("/changeUserValue", checkAuth, (req, res) => {
   const { email, id } = req.body;
-  console.log(req.body, "body");
   if (id) {
     const changeValue = `UPDATE diveseausers
     SET email = $1, username = $2
     WHERE id = $3`;
     const values = [req.body.email, req.body.userName, req.body.id];
     client.query(changeValue, values, (err, updatedUserRes) => {
-      console.log(values, "bod");
       if (!err) {
         client.query(checkQuery, [email], (err, queryRes) => {
           if (!err && queryRes.rows.length !== 0) {

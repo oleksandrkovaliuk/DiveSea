@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import Context from "../../context";
 import { Footer } from "../../components/footer";
 import p from "./profilePage.module.scss";
 import { ProfileUser } from "../../icons/profileUser";
@@ -7,14 +6,12 @@ import { UploadImg } from "../../icons/uploadImg";
 import { emailValidation } from "../../service/emailValidation";
 import { InputValidationTrue } from "../../icons/inputvalidationtrue";
 import CryptoJS from "crypto-js";
-import {
-  changeUserValue,
-  workWithAutorization,
-} from "../../service/autorization.api";
+import { workWithAutorization } from "../../service/autorization.api";
 import { SuccesfullyChanged } from "../../components/succesfullNotification";
+import { UserContext } from "../../context/UserContext";
 
 export const UserProfile = () => {
-  const getDataForUser = useContext(Context);
+  const { userInfo, setDataForUser } = useContext(UserContext);
   const [newUserName, setUpNewUserName] = useState("");
   const [newUserEmail, setUpNewUserEmail] = useState("");
   const [checkEmail, checkIfNewEmailNotValid] = useState(false);
@@ -22,7 +19,7 @@ export const UserProfile = () => {
   const [succesfullyChanged, checkIfSuccesfullyChanged] = useState(false);
   const setUpNewUserValue = (event) => {
     const newValue = event.target.value;
-    if (newValue !== getDataForUser.userInfo.username && newValue.length > 4) {
+    if (newValue !== userInfo.username && newValue.length > 4) {
       setUpNewUserName(newValue);
       checkIfUserNaveValid(true);
       checkIfSuccesfullyChanged(false);
@@ -47,13 +44,11 @@ export const UserProfile = () => {
       try {
         const res = await workWithAutorization({
           reqType: "/changeUserValue",
-          emailValue: checkEmail ? newUserEmail : getDataForUser.userInfo.email,
-          userName: checkUserName
-            ? newUserName
-            : getDataForUser.userInfo.username,
-          id: getDataForUser.userInfo.id,
+          emailValue: checkEmail ? newUserEmail : userInfo.email,
+          userName: checkUserName ? newUserName : userInfo.username,
+          id: userInfo.id,
         });
-        getDataForUser.setDataForUser(res.user);
+        setDataForUser(res.user);
         const cypherEmail = CryptoJS.AES.encrypt(
           res.user.email,
           process.env.REACT_APP_PASSWORD_FOR_DECRYPT
@@ -94,7 +89,7 @@ export const UserProfile = () => {
                 onChange={(event) => setUpNewUserValue(event)}
               ></input>
               <label htmlFor="username" className={p.label}>
-                {getDataForUser.userInfo.username}
+                {userInfo.username}
               </label>
               {checkUserName && <InputValidationTrue />}
             </div>
@@ -111,7 +106,7 @@ export const UserProfile = () => {
                 onChange={(event) => setUpNewEmail(event)}
               ></input>
               <label htmlFor="email" className={p.label}>
-                {getDataForUser.userInfo.email}
+                {userInfo.email}
               </label>
               {checkEmail && <InputValidationTrue />}
             </div>

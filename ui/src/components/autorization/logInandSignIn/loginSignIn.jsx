@@ -3,12 +3,12 @@ import l from "./logInSignIn.module.scss";
 import { Autorization } from "../autorizationForm/autorization";
 import { ProfileUser } from "../../../icons/profileUser";
 import { LogOut } from "../../../icons/logOut";
-import Context from "../../../context";
 import { getCookie } from "../../../service/getCookie";
 import { MobileMenu } from "../../mobileMenu";
 import { Settings } from "../../../icons/settings";
 import { useNavigate } from "react-router-dom";
 import { SuccesfullyChanged } from "../../succesfullNotification";
+import { UserContext } from "../../../context/UserContext";
 
 export const LogInSignIn = () => {
   const [autorizationMenu, setMenuType] = useState(null);
@@ -16,7 +16,7 @@ export const LogInSignIn = () => {
   const [loginIn, setLoginedIn] = useState(false);
   const [userMenu, openUserMenu] = useState(false);
   const [loginedSuccesfully, checkIfLoginedSuccesfully] = useState(false);
-  const getDataForUser = useContext(Context);
+  const { userInfo } = useContext(UserContext);
   const navigation = useNavigate();
   const navigate = (link) => {
     handleCloseUserMenu(true);
@@ -41,8 +41,8 @@ export const LogInSignIn = () => {
   };
   const handleLogOut = (link) => {
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    const checkCookie = getCookie("user");
-    if (checkCookie === null) {
+    const userCookie = getCookie("user");
+    if (userCookie === null) {
       setLoginedIn(false);
       checkIfLoginedSuccesfully(false);
       navigate(link);
@@ -55,13 +55,13 @@ export const LogInSignIn = () => {
     openUserMenu(false);
   };
   useEffect(() => {
-    const checkCookie = getCookie("user");
-    if (checkCookie !== null || getDataForUser.userInfo.length > 0) {
+    const userCookie = getCookie("user");
+    if (userCookie !== null || userInfo) {
       setLoginedIn(true);
     } else {
       console.log("logout");
     }
-  }, []);
+  }, [userInfo]);
   return (
     <>
       <SuccesfullyChanged showMessage={loginedSuccesfully}>
@@ -76,8 +76,8 @@ export const LogInSignIn = () => {
             {userMenu && (
               <MobileMenu userMenu closeMobileMenu={handleCloseUserMenu}>
                 <div className={l.user_info}>
-                  <span>{getDataForUser.userInfo.username}</span>
-                  <span>{getDataForUser.userInfo.email}</span>
+                  <span>{userInfo.username}</span>
+                  <span>{userInfo.email}</span>
                 </div>
                 <ul className={l.profileMenuNav}>
                   <li

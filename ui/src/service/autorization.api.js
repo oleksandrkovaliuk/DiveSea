@@ -7,6 +7,52 @@ async function handleErrors(response) {
   }
   return response;
 }
+
+const headers = {
+  "Content-Type": "application/json",
+};
+
+export const postRequest = async (url, data = {}) =>
+  fetch(`${MAIN_URL}/${url}`, {
+    method: "POST",
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(data),
+  })
+    .then(handleErrors)
+    .then((res) => res.json())
+    .catch((err) => {
+      throw Error(err);
+    });
+
+export const getRequest = async (url) =>
+  fetch(`${MAIN_URL}/${url}`, {
+    method: "GET",
+  })
+    .then(handleErrors)
+    .then((res) => res.json())
+    .catch((err) => {
+      throw Error(err);
+    });
+
+export const loginUser = async ({ sendEmail, emailValue }) =>
+  postRequest("loginUser", { sendEmail, emailValue });
+
+export const getItems = async ({ param1, param2 }) => {
+  const searchParams = new URLSearchParams();
+
+  if (param1) {
+    searchParams.append("param1", param1);
+  }
+
+  if (param2) {
+    searchParams.append("param2", param2);
+  }
+
+  return getRequest(`getitems?${searchParams.toString()}`);
+};
+
 export const workWithAutorization = async ({
   reqType,
   emailValue,
@@ -18,7 +64,7 @@ export const workWithAutorization = async ({
   fetch(`${MAIN_URL}${reqType}`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      ...headers,
     },
     body: JSON.stringify({
       id: id,

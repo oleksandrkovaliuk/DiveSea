@@ -14,7 +14,6 @@ import {
   setCodeFromUser,
   showMessageIfInvalidCode,
 } from "../reducer/actionsForAuthor";
-import Context from "../../../context";
 import {
   initialStateForAutor,
   reducerForAutor,
@@ -23,6 +22,7 @@ import { emailValidation } from "../../../service/emailValidation";
 
 import cryptoJs from "crypto-js";
 import { workWithAutorization } from "../../../service/autorization.api";
+import { UserContext } from "../../../context/UserContext";
 
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const [
@@ -37,7 +37,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     },
     dispatchAction,
   ] = useReducer(reducerForAutor, initialStateForAutor);
-  const getDataForUser = useContext(Context);
+  const getDataForUser = useContext(UserContext);
   const [errors, setError] = useState(null);
   const userName = document.querySelector("#username");
   const emailValue = document.querySelector("#email");

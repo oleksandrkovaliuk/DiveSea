@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { HomePage } from "../pages/home";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/header";
@@ -9,44 +9,53 @@ import { NftIndividualPage } from "../pages/nftProductIndividualPage";
 import { Discover } from "../pages/discoverProducts";
 import { Creators } from "../pages/creatorsPage";
 import { CreatorIndividualPage } from "../pages/creatorsIndividualPage";
-import Context from "../context";
+import { UserContext } from "../context/UserContext";
 import { getCookie } from "../service/getCookie";
 import { UserProfile } from "../pages/userProfilePage";
 import cryptoJs from "crypto-js";
-import { workWithAutorization } from "../service/autorization.api";
+import { loginUser } from "../service/autorization.api";
+
 export const App = () => {
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const setDataForUser = (userInfo) => setUserInfo(userInfo);
+  const userContextValue = useMemo(
+    () => ({
+      userInfo,
+      setDataForUser: (data) => setUserInfo(data),
+    }),
+    [userInfo]
+  );
 
-  const getDataForUser = {
-    userInfo,
-    setDataForUser,
-  };
   const checkUserLoginned = useCallback(async () => {
     try {
-      const checkCookie = getCookie("user");
-      if (checkCookie !== null) {
+      const userCookie = getCookie("user");
+      if (userCookie) {
         const emailFromCookie = cryptoJs.AES.decrypt(
-          checkCookie,
+          userCookie,
           process.env.REACT_APP_PASSWORD_FOR_DECRYPT
         ).toString(cryptoJs.enc.Utf8);
-        const res = await workWithAutorization({
-          reqType: "/loginUser",
+        // const res = await workWithAutorization({
+        //   reqType: "/loginUser",
+        //   sendEmail: false,
+        //   emailValue: emailFromCookie,
+        // });
+        const res = await loginUser({
           sendEmail: false,
           emailValue: emailFromCookie,
         });
-        getDataForUser.setDataForUser(res.data);
+        setUserInfo(res.data);
       }
     } catch (error) {
       console.error("failed with getting infoAbout user on loading");
     }
   }, []);
+
   useEffect(() => {
     checkUserLoginned();
-  }, []);
+  }, [checkUserLoginned]);
+
   return (
-    <Context.Provider value={getDataForUser}>
+    <UserContext.Provider value={userContextValue}>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -62,6 +71,6 @@ export const App = () => {
         />
         <Route path="/userProfilePage" element={<UserProfile />} />
       </Routes>
-    </Context.Provider>
+    </UserContext.Provider>
   );
 };
