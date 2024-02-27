@@ -1,0 +1,1 @@
+export { UploadImgMenu } from "./uploadImage";

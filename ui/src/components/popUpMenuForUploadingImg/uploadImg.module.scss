@@ -1,0 +1,105 @@
+.bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #0000000f;
+  z-index: 3;
+  cursor: pointer;
+}
+.uploadImgContainer {
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 2px solid #000;
+  max-width: 450px;
+  width: 100%;
+  z-index: 10;
+  padding: 15px;
+  padding-top: 30px;
+  .uploadImgInputWrap {
+    position: relative;
+    .close {
+      background-color: unset;
+      border: unset;
+      padding: 4px;
+      position: absolute;
+      right: -5px;
+      top: -20px;
+      svg {
+        width: 35px;
+        height: 25px;
+        flex-shrink: 0;
+        pointer-events: none;
+      }
+    }
+    .main_text {
+      color: var(--text-grayblack);
+      font-family: var(--font-Poppins);
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .prewie {
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #000;
+      margin-bottom: 20px;
+    }
+    .uploadBtn {
+      margin-bottom: 30px;
+      input[type="file"] {
+        display: none;
+      }
+      .inputForUploadingImgs {
+        padding: 5px 15px;
+        background-color: unset;
+        border: 2px solid #000;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease-in;
+
+        color: var(--text-grayblack);
+        font-family: var(--font-Poppins);
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+
+        &:hover {
+          background-color: #000;
+          color: #f9f9f9;
+          border-color: #f9f9f9;
+        }
+      }
+    }
+    .submitBtn {
+      padding: 10px;
+      width: 100%;
+      background-color: #000;
+      color: #f9f9f9;
+      font-family: var(--font-Poppins);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+      border: unset;
+      border-radius: 10px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .uploadImgContainer {
+    max-width: 340px;
+  }
+}

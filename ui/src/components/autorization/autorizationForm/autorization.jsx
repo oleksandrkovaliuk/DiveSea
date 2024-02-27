@@ -21,7 +21,11 @@ import {
 import { emailValidation } from "../../../service/emailValidation";
 
 import cryptoJs from "crypto-js";
-import { workWithAutorization } from "../../../service/autorization.api";
+import {
+  checkCodeFromUser,
+  loginUser,
+  signInUser,
+} from "../../../service/autorization.api";
 import { UserContext } from "../../../context/UserContext";
 
 export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
@@ -37,7 +41,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
     },
     dispatchAction,
   ] = useReducer(reducerForAutor, initialStateForAutor);
-  const getDataForUser = useContext(UserContext);
+  const { setDataForUser } = useContext(UserContext);
   const [errors, setError] = useState(null);
   const userName = document.querySelector("#username");
   const emailValue = document.querySelector("#email");
@@ -61,11 +65,11 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForSignIn = async (event) => {
     event.preventDefault();
     try {
-      await workWithAutorization({
-        reqType: "/signInUser",
-        emailValue: emailValue.value,
+      await signInUser({
+        email: emailValue.value,
         userName: userName.value,
       });
+      console.log("ddsd");
       closeMenu(event);
     } catch (error) {
       setError(error.toString().split(":").pop());
@@ -77,11 +81,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const reqForLoginIn = async (event) => {
     event.preventDefault();
     try {
-      await workWithAutorization({
-        reqType: "/loginUser",
-        emailValue: emailValue.value,
-        sendEmail: true,
-      });
+      await loginUser({ email: emailValue.value, sendEmail: true });
       dispatchAction(sendCodeAfterEmailCheck(true));
     } catch (error) {
       setError(error.toString().split(":").pop());
@@ -120,14 +120,9 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const checkCodeValidation = async (event) => {
     event.preventDefault();
     try {
-      // const res = await checkCodeFromUser({
-      //   codeFromUser: codeFromUser.join(""),
-      //   email: emailValue.value,
-      // });
-      const res = await workWithAutorization({
-        reqType: "/checkCodeFromUser",
+      const res = await checkCodeFromUser({
         codeFromUser: codeFromUser.join(""),
-        emailValue: emailValue.value,
+        email: emailValue.value,
       });
       loginInUser(event);
       closeMenu(event);
@@ -136,7 +131,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
         process.env.REACT_APP_PASSWORD_FOR_DECRYPT
       ).toString();
       document.cookie = `user=${cypherEmail};max-age=${7 * 24 * 60 * 60}`;
-      getDataForUser.setDataForUser(res.user);
+      setDataForUser(res.user);
     } catch (error) {
       dispatchAction(checkIfcodeField(false));
       dispatchAction(showMessageIfInvalidCode(true));
@@ -146,11 +141,7 @@ export const Autorization = ({ show, signIn, closeMenu, loginInUser }) => {
   const handleResendEmail = async (event) => {
     event.preventDefault();
     try {
-      await workWithAutorization({
-        reqType: "/loginUser",
-        emailValue: emailValue.value,
-        sendEmail: true,
-      });
+      await loginUser({ email: emailValue.value, sendEmail: true , });
     } catch (error) {
       console.error("Login Error:", error);
     }

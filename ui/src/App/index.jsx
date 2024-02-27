@@ -34,16 +34,10 @@ export const App = () => {
           userCookie,
           process.env.REACT_APP_PASSWORD_FOR_DECRYPT
         ).toString(cryptoJs.enc.Utf8);
-        // const res = await workWithAutorization({
-        //   reqType: "/loginUser",
-        //   sendEmail: false,
-        //   emailValue: emailFromCookie,
-        // });
         const res = await loginUser({
           sendEmail: false,
           email: emailFromCookie,
         });
-        console.log(res, " res");
         setUserInfo(res.data);
       }
     } catch (error) {

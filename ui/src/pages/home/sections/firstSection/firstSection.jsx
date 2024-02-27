@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import m from "./firstSection.module.scss";
 import { Button } from "../../../../components/button/button";
 import { SliderComponent } from "../../../../components/firstSectionSlider";

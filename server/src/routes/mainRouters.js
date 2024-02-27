@@ -3,7 +3,7 @@ const router = express.Router();
 const client = require("../../database");
 const checkQuery = "SELECT * FROM diveseausers WHERE email = $1;";
 const nodemailer = require("nodemailer");
-
+const generateRandomCode = require("../generateOtpCode");
 const transporter = nodemailer.createTransport({
   service: process.env.SERVICE,
   auth: {
@@ -12,16 +12,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 let userCode = "";
-const generateRandomCode = () => {
-  let randomCode = "";
-  while (randomCode.length < 4) {
-    randomCode = "";
-    for (let i = 0; i < 4; i++) {
-      randomCode += Math.floor(Math.random() * 10);
-    }
-  }
-  return randomCode;
-};
 const checkAuth = (req, res, next) => {
   next();
 };
@@ -56,9 +46,9 @@ router.post("/signInUser", checkAuth, (req, res) => {
 });
 router.post("/loginUser", checkAuth, (req, res) => {
   const { email, sendEmail } = req.body;
-  console.log(email, ' email');
+  console.log(email, " email");
   client.query(checkQuery, [email], (err, queryRes) => {
-    console.log(queryRes.rows, ' queryRes.rows');
+    console.log(queryRes.rows, " queryRes.rows");
     if (email && queryRes.rows.length !== 0) {
       if (sendEmail) {
         userCode = generateRandomCode();
@@ -82,18 +72,27 @@ router.post("/loginUser", checkAuth, (req, res) => {
     }
   });
 });
-router.post("/changeUserValue", checkAuth, (req, res) => {
+
+router.post("/updateUserValue", checkAuth, (req, res) => {
   const { email, id } = req.body;
+  console.log(req.body.url);
   if (id) {
     const changeValue = `UPDATE diveseausers
-    SET email = $1, username = $2
-    WHERE id = $3`;
-    const values = [req.body.email, req.body.userName, req.body.id];
+    SET email = $1, username = $2 , url = $3
+    WHERE id = $4`;
+    const values = [
+      req.body.email,
+      req.body.userName,
+      req.body.url,
+      req.body.id,
+    ];
     client.query(changeValue, values, (err, updatedUserRes) => {
+      console.log(values, "values");
       if (!err) {
         client.query(checkQuery, [email], (err, queryRes) => {
           if (!err && queryRes.rows.length !== 0) {
             const user = queryRes.rows[0];
+            console.log(user, "updated");
             res.status(200).json({ user });
           } else {
             res.status(401).json({ errorText: "failed to fetch updated user" });
@@ -109,10 +108,14 @@ router.post("/changeUserValue", checkAuth, (req, res) => {
 });
 router.post("/checkCodeFromUser", checkAuth, (req, res) => {
   const { codeFromUser, email } = req.body;
+  console.log(codeFromUser === userCode.toString(), "check");
+  console.log(email, "email from user");
   if (email && codeFromUser === userCode.toString()) {
     client.query(checkQuery, [email], (err, queryRes) => {
+      console.log("true");
       if (!err && queryRes.rows.length !== 0) {
         const user = queryRes.rows[0];
+        console.log(user, "user true");
         res.status(200).json({ user });
       } else {
         res.status(401).json({ errorText: "Code not valid" });

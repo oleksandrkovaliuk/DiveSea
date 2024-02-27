@@ -58,6 +58,7 @@ export const LogInSignIn = () => {
     const userCookie = getCookie("user");
     if (userCookie !== null || userInfo) {
       setLoginedIn(true);
+      console.log(userInfo , "info");
     } else {
       console.log("logout");
     }
@@ -71,7 +72,11 @@ export const LogInSignIn = () => {
         {loginIn ? (
           <div className={l.loginnedUser}>
             <button onClick={handleOpeningUserMenu} className={l.user}>
+            {userInfo?.url ? (
+              <img src={userInfo.url} alt="userProfileImg"/>
+            ) : (
               <ProfileUser />
+            )}
             </button>
             {userMenu && (
               <MobileMenu userMenu closeMobileMenu={handleCloseUserMenu}>
