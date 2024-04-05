@@ -15,7 +15,7 @@ export const NftIndividualPage = () => {
     (item) => item.id === parseInt(currentItemId)
   );
   const currencyInfo = JSON.parse(localStorage.getItem("cryptoHistoryFull"));
-  const currentEthPrice = currencyInfo.find(
+  const currentEthPrice = currencyInfo?.find(
     (item) => item.name === "Ethereum"
   ).rate;
   const convertedValue =
