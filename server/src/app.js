@@ -86,14 +86,14 @@ const setupMiddlewares = () => {
   // });
 };
 
-// const setupDB = async () => await dbClient.connect();
+const setupDB = async () => await dbClient.connect();
 
 async function init() {
   try {
     setupMiddlewares();
-    // await setupDB();
+    await setupDB();
     setupRoutes();
-    console.log(PORT, ' PORT PORT PORTPORT');
+    console.log(PORT, " PORT PORT PORTPORT");
     app.listen(PORT, () => {
       return console.log(`Express is listening on PORT:${PORT}`);
     });
