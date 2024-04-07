@@ -7,6 +7,9 @@ const dbClient = new Client({
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = dbClient;

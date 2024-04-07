@@ -1,4 +1,4 @@
-const MAIN_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`;
+const MAIN_URL = `${process.env.REACT_APP_SERVER_PORT}`;
 
 async function handleErrors(response) {
   if (!response.ok) {
