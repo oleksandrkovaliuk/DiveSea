@@ -26,7 +26,7 @@
           line-height: 54.4px;
           text-transform: capitalize;
           margin-bottom: 45px;
-          display:flex;
+          display: flex;
           flex-direction: column;
           span {
             color: #c5c5c5;
@@ -146,9 +146,8 @@
         .eclipse {
           position: relative;
           animation: eclipseAnim linear 0.7s;
-          animation-timeline: view();
+          animation-timeline: view() !important;
           transform: rotate(360deg);
-
           img {
             width: unset;
           }
@@ -418,7 +417,7 @@
     }
     .exploreMore_wrap {
       .joinCommunity_container {
-        max-width:375px;
+        max-width: 375px;
         .joinCommunity_title {
           font-size: 27px;
           line-height: 26.61px;
