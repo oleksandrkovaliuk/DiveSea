@@ -198,7 +198,7 @@
         .eclipse {
           position: relative;
           animation: eclipseAnimBig linear 0.7s;
-          animation-timeline: view();
+          animation-timeline: view() !important;
           transform: rotate(0deg);
 
           img {
