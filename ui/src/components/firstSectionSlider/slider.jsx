@@ -11,7 +11,6 @@ import "./custom-styles-slider.scss";
 import { SliderArrow } from "../../icons/sliderArrow";
 import { SliderDots } from "../../icons/sliderDots";
 import { useNavigate } from "react-router-dom";
-
 export const SliderComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
@@ -23,7 +22,6 @@ export const SliderComponent = () => {
   const previous = () => {
     sliderRef.current.slickPrev();
   };
-
   const handleBeforeChange = (newIndex) => {
     setCurrentSlide(newIndex);
   };
