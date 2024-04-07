@@ -1,4 +1,4 @@
-const MAIN_URL = `${process.env.REACT_APP_SERVER_PORT}`;
+const MAIN_URL = process.env.REACT_APP_SERVER_PORT;
 
 async function handleErrors(response) {
   if (!response.ok) {
