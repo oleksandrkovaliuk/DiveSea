@@ -33,6 +33,8 @@ export const SliderComponent = () => {
     slidesToShow: 1.15,
     slidesToScroll: 1,
     arrows: false,
+    autoplay: window.innerWidth < 578 && true,
+    autoplaySpeed: window.innerWidth < 578 && 3000,
     beforeChange: handleBeforeChange,
   };
   const navigateToProduct = (link) => navigation(link);

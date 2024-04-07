@@ -51,14 +51,14 @@
   .slider_container {
     max-width: 375px;
     .switcher_wrap {
-      left: 19%;
+      display: none;
     }
     .arrow {
       right: 12%;
       max-height: 58px;
       max-width: 58px;
     }
-    .slider_dots{
+    .slider_dots {
       display: none;
     }
   }
