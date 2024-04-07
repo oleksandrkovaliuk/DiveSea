@@ -25,9 +25,6 @@ export const Header = () => {
               <li onClick={closeMobileMenu}>
                 <Link to="/Creators">Creators</Link>
               </li>
-              <li onClick={closeMobileMenu}>
-                <Link to="/Create">Create NFT</Link>
-              </li>
             </ul>
           </>
         </MobileMenu>
@@ -44,25 +41,22 @@ export const Header = () => {
             <li className={s.head_nav}>
               <Link to="/Creators">Creators</Link>
             </li>
-            <li className={s.head_nav}>
-              <Link to="/Create">Create nft</Link>
-            </li>
           </ul>
         </div>
-          <div className={s.search_connectWallet}>
+        <div className={s.search_connectWallet}>
           {!mobileMenu && (
             <div className={s.login}>
               <LogInSignIn />
             </div>
           )}
-            <button
-              onClick={() => openMobileMenu()}
-              className={mobileMenu ? "burger active" : "burger"}
-            >
-              <span className="burger_line"></span>
-            </button>
-          </div>
+          <button
+            onClick={() => openMobileMenu()}
+            className={mobileMenu ? "burger active" : "burger"}
+          >
+            <span className="burger_line"></span>
+          </button>
         </div>
+      </div>
     </>
   );
 };

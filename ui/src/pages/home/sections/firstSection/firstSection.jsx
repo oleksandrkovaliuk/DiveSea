@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import m from "./firstSection.module.scss";
 import { Button } from "../../../../components/button/button";
 import { SliderComponent } from "../../../../components/firstSectionSlider";
@@ -10,7 +11,8 @@ import {
 import { TrustPilot } from "../../../../icons/trustPillot";
 import { Stars } from "../../../../icons/strars";
 export const FirstSectione = () => {
-
+  const navigate = useNavigate();
+  const navigateTo = (link) => navigate(link);
   return (
     <div className={m.homepage_wrap}>
       <div className={m.firstsection_wrap}>
@@ -29,16 +31,9 @@ export const FirstSectione = () => {
               colors={ButtonColors.primary}
               size={ButtonSizes.medium}
               variants={ButtonVariants.contained}
+              onClick={() => navigateTo("/discover")}
             >
-              Explore More
-            </Button>
-
-            <Button
-              colors={ButtonColors.secondary}
-              variants={ButtonVariants.outlined}
-              size={ButtonSizes.medium}
-            >
-              create NFT
+              Discover
             </Button>
           </div>
           <div className={m.achivments}>
